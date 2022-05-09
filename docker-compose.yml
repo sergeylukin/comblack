@@ -1,0 +1,28 @@
+version: "3.9"
+    
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./tmp/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Pa$$w0rd!
+      MYSQL_DATABASE: comblack
+      MYSQL_USER: comblack
+      MYSQL_PASSWORD: comblack
+    
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./wordpress:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: comblack
+      WORDPRESS_DB_PASSWORD: comblack
+      WORDPRESS_DB_NAME: comblack
