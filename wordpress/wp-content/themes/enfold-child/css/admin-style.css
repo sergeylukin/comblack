@@ -1,0 +1,5 @@
+.avia-style .wp-picker-holder {
+    position: absolute;
+    z-index: 1001;
+    top: 60px !important;
+}
