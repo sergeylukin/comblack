@@ -1,0 +1,13 @@
+drwxr-xr-x  10 ftp      ftp           182 Oct 13  2020 .
+drwxr-xr-x   3 ftp      ftp          4096 Oct 13  2020 ..
+-rw-r--r--   1 ftp      ftp         20353 Jan 26 05:05 _admin.scss
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 blue
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 coffee
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 ectoplasm
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 light
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 midnight
+-rw-r--r--   1 ftp      ftp           825 Oct 13  2020 _mixins.scss
+drwxr-xr-x   2 ftp      ftp           113 Oct 13  2020 modern
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 ocean
+drwxr-xr-x   2 ftp      ftp           113 Nov 26  2018 sunrise
+-rw-r--r--   1 ftp      ftp          2192 Jan 26 05:05 _variables.scss
