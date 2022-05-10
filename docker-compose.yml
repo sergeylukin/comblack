@@ -3,6 +3,7 @@ version: "3.9"
 services:
   db:
     image: mysql:5.7
+    container_name: mysql
     volumes:
       - ./tmp/mysql:/var/lib/mysql
     restart: always
@@ -16,6 +17,7 @@ services:
     depends_on:
       - db
     image: wordpress:latest
+    container_name: wp
     volumes:
       - ./wordpress:/var/www/html
     ports:
