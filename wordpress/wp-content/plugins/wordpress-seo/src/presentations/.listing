@@ -1,0 +1,15 @@
+drwxr-xr-x   2 ftp      ftp          4096 Mar  9 04:13 .
+drwxr-xr-x  28 ftp      ftp          4096 Mar  9 04:13 ..
+-rw-r--r--   1 ftp      ftp          2338 Mar  9 04:13 abstract-presentation.php
+-rw-r--r--   1 ftp      ftp          1778 Mar  9 04:13 archive-adjacent-trait.php
+-rw-r--r--   1 ftp      ftp          4333 Mar  9 04:13 indexable-author-archive-presentation.php
+-rw-r--r--   1 ftp      ftp          2890 Mar  9 04:13 indexable-date-archive-presentation.php
+-rw-r--r--   1 ftp      ftp           693 Mar  9 04:13 indexable-error-page-presentation.php
+-rw-r--r--   1 ftp      ftp          1238 Mar  9 04:13 indexable-home-page-presentation.php
+-rw-r--r--   1 ftp      ftp          1491 Mar  9 04:13 indexable-post-type-archive-presentation.php
+-rw-r--r--   1 ftp      ftp         10668 Mar  9 04:13 indexable-post-type-presentation.php
+-rw-r--r--   1 ftp      ftp         19646 Mar  9 04:13 indexable-presentation.php
+-rw-r--r--   1 ftp      ftp          1437 Mar  9 04:13 indexable-search-result-page-presentation.php
+-rw-r--r--   1 ftp      ftp           777 Mar  9 04:13 indexable-static-home-page-presentation.php
+-rw-r--r--   1 ftp      ftp          1013 Mar  9 04:13 indexable-static-posts-page-presentation.php
+-rw-r--r--   1 ftp      ftp          4994 Mar  9 04:13 indexable-term-archive-presentation.php

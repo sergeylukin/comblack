@@ -1,0 +1,5 @@
+drwxrwxr-x   4 ftp      ftp            76 Oct 20  2021 .
+drwxrwxr-x  23 ftp      ftp          4096 Nov  2  2021 ..
+drwxrwxr-x  67 ftp      ftp          4096 Oct 20  2021 avia-shortcodes
+drwxrwxr-x   6 ftp      ftp            87 Oct 20  2021 avia-template-builder
+-rw-rw-r--   1 ftp      ftp          2296 Oct 20  2021 config.php

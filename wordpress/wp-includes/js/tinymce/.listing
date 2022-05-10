@@ -1,0 +1,12 @@
+drwxr-xr-x   7 ftp      ftp           183 Mar 21  2019 .
+drwxr-xr-x  13 ftp      ftp          4096 Oct 13  2020 ..
+drwxr-xr-x   2 ftp      ftp            28 Nov 26  2018 langs
+-rw-r--r--   1 ftp      ftp         26441 Nov 26  2018 license.txt
+drwxr-xr-x  24 ftp      ftp          4096 Nov 26  2018 plugins
+drwxr-xr-x   4 ftp      ftp            40 Nov 26  2018 skins
+drwxr-xr-x   4 ftp      ftp            34 Nov 26  2018 themes
+-rw-r--r--   1 ftp      ftp        365570 Dec  9  2020 tinymce.min.js
+-rw-r--r--   1 ftp      ftp         15988 Nov 26  2018 tiny_mce_popup.js
+drwxr-xr-x   2 ftp      ftp            90 Nov 26  2018 utils
+-rw-r--r--   1 ftp      ftp        671350 Jul 21  2021 wp-tinymce.js
+-rw-r--r--   1 ftp      ftp          1042 Oct 13  2020 wp-tinymce.php

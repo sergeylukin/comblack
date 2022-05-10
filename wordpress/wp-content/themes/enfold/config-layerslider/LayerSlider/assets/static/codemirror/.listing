@@ -1,0 +1,12 @@
+drwxrwxr-x   7 ftp      ftp           156 Jul 15  2021 .
+drwxrwxr-x  14 ftp      ftp           240 Jul 15  2021 ..
+drwxrwxr-x  17 ftp      ftp           224 Jul 15  2021 addon
+-rw-rw-r--   1 ftp      ftp          7747 May 23  2020 AUTHORS
+-rw-rw-r--   1 ftp      ftp          3689 May 23  2020 CONTRIBUTING.md
+-rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
+drwxrwxr-x   2 ftp      ftp            71 Jul 15  2021 keymap
+drwxrwxr-x   2 ftp      ftp            66 Jul 15  2021 lib
+-rw-rw-r--   1 ftp      ftp          1094 May 23  2020 LICENSE
+drwxrwxr-x  10 ftp      ftp           149 Jul 15  2021 mode
+-rw-rw-r--   1 ftp      ftp          1409 May 23  2020 README.md
+drwxrwxr-x   2 ftp      ftp            66 Jul 15  2021 theme

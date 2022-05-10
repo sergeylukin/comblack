@@ -1,0 +1,8 @@
+drwxr-xr-x   2 ftp      ftp           212 Mar  9 04:13 .
+drwxr-xr-x  23 ftp      ftp          4096 Mar  9 04:13 ..
+-rw-r--r--   1 ftp      ftp          3463 Mar  9 04:13 class-abstract-role-manager.php
+-rw-r--r--   1 ftp      ftp           610 Mar  9 04:13 class-register-roles.php
+-rw-r--r--   1 ftp      ftp           546 Mar  9 04:13 class-role-manager-factory.php
+-rw-r--r--   1 ftp      ftp           769 Mar  9 04:13 class-role-manager.php
+-rw-r--r--   1 ftp      ftp          1195 Mar  9 04:13 class-role-manager-vip.php
+-rw-r--r--   1 ftp      ftp          1455 Mar  9 04:13 class-role-manager-wp.php

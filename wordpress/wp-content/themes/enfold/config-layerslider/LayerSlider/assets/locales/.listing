@@ -1,0 +1,10 @@
+drwxrwxr-x   2 ftp      ftp           214 Jul 15  2021 .
+drwxrwxr-x  13 ftp      ftp           175 Jul 15  2021 ..
+-rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
+-rw-rw-r--   1 ftp      ftp        254623 Aug  9  2020 LayerSlider-en_US.pot
+-rw-rw-r--   1 ftp      ftp        175109 Aug  9  2020 LayerSlider-fr_FR.mo
+-rw-rw-r--   1 ftp      ftp        393347 Aug  9  2020 LayerSlider-fr_FR.po
+-rw-rw-r--   1 ftp      ftp         55556 Aug  9  2020 LayerSlider-hu_HU.mo
+-rw-rw-r--   1 ftp      ftp        293956 Aug  9  2020 LayerSlider-hu_HU.po
+-rw-rw-r--   1 ftp      ftp        310563 Aug  9  2020 LayerSlider-uk.mo
+-rw-rw-r--   1 ftp      ftp        464289 Aug  9  2020 LayerSlider-uk.po

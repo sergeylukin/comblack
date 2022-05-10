@@ -1,0 +1,8 @@
+drwxr-xr-x   2 ftp      ftp           161 Apr  6 09:36 .
+drwxr-xr-x   6 ftp      ftp            88 Apr  6 09:36 ..
+-rw-r--r--   1 ftp      ftp           869 Apr  6 09:36 enc-base64-min.js
+-rw-r--r--   1 ftp      ftp           711 Apr  6 09:36 enc-base64-min.min.js
+-rw-r--r--   1 ftp      ftp          8348 Apr  6 09:36 gfwebapi_settings.js
+-rw-r--r--   1 ftp      ftp          4824 Apr  6 09:36 gfwebapi_settings.min.js
+-rw-r--r--   1 ftp      ftp          4733 Apr  6 09:36 hmac-sha1.min.js
+-rw-r--r--   1 ftp      ftp            27 Apr  6 09:36 index.php

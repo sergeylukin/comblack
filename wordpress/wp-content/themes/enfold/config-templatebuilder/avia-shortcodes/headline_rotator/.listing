@@ -1,0 +1,5 @@
+drwxrwxr-x   2 ftp      ftp            89 Oct 20  2021 .
+drwxrwxr-x  67 ftp      ftp          4096 Oct 20  2021 ..
+-rw-rw-r--   1 ftp      ftp          1920 May 23  2020 headline_rotator.css
+-rw-rw-r--   1 ftp      ftp          4842 Oct 20  2021 headline_rotator.js
+-rw-rw-r--   1 ftp      ftp         25945 Oct 20  2021 headline_rotator.php

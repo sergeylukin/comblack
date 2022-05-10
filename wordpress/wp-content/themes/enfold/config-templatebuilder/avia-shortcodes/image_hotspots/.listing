@@ -1,0 +1,5 @@
+drwxrwxr-x   2 ftp      ftp            83 Oct 20  2021 .
+drwxrwxr-x  67 ftp      ftp          4096 Oct 20  2021 ..
+-rw-rw-r--   1 ftp      ftp          4444 May 23  2020 image_hotspots.css
+-rw-rw-r--   1 ftp      ftp           789 Oct 20  2021 image_hotspots.js
+-rw-rw-r--   1 ftp      ftp         35499 Oct 20  2021 image_hotspots.php

@@ -1,0 +1,6 @@
+drwxr-xr-x   2 ftp      ftp            76 Nov 26  2018 .
+drwxr-xr-x   4 ftp      ftp            56 Nov 26  2018 ..
+-rw-r--r--   1 ftp      ftp         15888 Nov 26  2018 native.php
+-rw-r--r--   1 ftp      ftp          5210 Oct 13  2020 shell.php
+-rw-r--r--   1 ftp      ftp          8354 Nov 26  2018 string.php
+-rw-r--r--   1 ftp      ftp          2210 Nov 26  2018 xdiff.php

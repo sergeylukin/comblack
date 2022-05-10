@@ -1,0 +1,10 @@
+drwxr-xr-x   3 ftp      ftp           262 Apr  6 09:36 .
+drwxr-xr-x  22 ftp      ftp          4096 Apr  6 09:36 ..
+drwxr-xr-x   2 ftp      ftp           107 Apr  6 09:36 batch-processing
+-rw-r--r--   1 ftp      ftp          3147 Apr  6 09:36 class-gf-query-call.php
+-rw-r--r--   1 ftp      ftp          3057 Apr  6 09:36 class-gf-query-column.php
+-rw-r--r--   1 ftp      ftp         15599 Apr  6 09:36 class-gf-query-condition.php
+-rw-r--r--   1 ftp      ftp          1018 Apr  6 09:36 class-gf-query-json-literal.php
+-rw-r--r--   1 ftp      ftp          1174 Apr  6 09:36 class-gf-query-literal.php
+-rw-r--r--   1 ftp      ftp         44018 Apr  6 09:36 class-gf-query.php
+-rw-r--r--   1 ftp      ftp          1166 Apr  6 09:36 class-gf-query-series.php

@@ -1,0 +1,6 @@
+drwxrwxr-x   2 ftp      ftp           113 Oct 20  2021 .
+drwxrwxr-x   7 ftp      ftp          4096 Nov  2  2021 ..
+-rw-rw-r--   1 ftp      ftp          8648 Oct 20  2021 avia-export-class.php
+-rw-rw-r--   1 ftp      ftp         20641 Oct 20  2021 avia-import-class.php
+-rw-rw-r--   1 ftp      ftp         23070 Oct 20  2021 parsers.php
+-rw-rw-r--   1 ftp      ftp         42151 Oct 20  2021 wordpress-importer.php

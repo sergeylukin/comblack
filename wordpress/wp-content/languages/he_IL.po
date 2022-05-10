@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.9.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-07 09:41:12+0000\n"
+"PO-Revision-Date: 2022-05-08 18:32:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1264,6 +1264,11 @@ msgctxt "Font size name"
 msgid "Extra Large"
 msgstr "גדול מאוד"
 
+#: wp-includes/blocks/post-navigation-link/block.json
+msgctxt "block title"
+msgid "Post Navigation Link"
+msgstr "קישור ניווט בפוסטים"
+
 #: wp-signup.php:210 wp-admin/includes/class-wp-debug-data.php:102
 #: wp-admin/includes/class-wp-debug-data.php:107
 #: wp-admin/includes/class-wp-debug-data.php:112
@@ -1842,6 +1847,10 @@ msgstr "מילת מפתח"
 #: wp-admin/network/sites.php:209
 msgid "Confirm"
 msgstr "אישור"
+
+#: wp-login.php:795
+msgid "<strong>Error</strong>: Your password reset link has expired. Please request a new link below."
+msgstr "<strong>שגיאה</strong>: פג תוקף הקישור לאיפוס הסיסמה. ניתן לקבל קישור חדש בהמשך."
 
 #: wp-includes/revision.php:34 wp-includes/js/dist/block-library.js:17777
 #: wp-includes/js/dist/edit-post.js:5393 wp-includes/js/dist/edit-post.js:7388
@@ -6294,6 +6303,68 @@ msgstr "הקצה מונח אב כדי ליצור היררכיה. המונח יו
 #: wp-includes/taxonomy.php:665
 msgid "The description is not prominent by default; however, some themes may show it."
 msgstr "התיאור אינו מוצג כברירת מחדל, אבל תבניות מסוימות עשויות להציג אותו."
+
+#: wp-includes/wp-db.php:2040
+msgid "WordPress database error: Could not perform query because it contains invalid data."
+msgstr "שגיאה במסד הנתונים של וורדפרס: לא ניתן לבצע את השאילתא מכיוון שהיא מכילה מידע לא תקין."
+
+#: wp-includes/script-loader.php:1226 wp-includes/js/dist/edit-site.js:2966
+msgid "https://wordpress.org/support/article/site-editor/"
+msgstr "https://wordpress.org/support/article/site-editor/"
+
+#: wp-includes/script-loader.php:902
+msgid "This image cannot be processed by the web server. Convert it to JPEG or PNG before uploading."
+msgstr "השרת לא יכול לעבד תמונה. יש להמיר ל-JPEG או PNG לפני העלאה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1543
+msgid "Sort collection by user attribute."
+msgstr "מיין קבוצות לפי התכונות של המשתמש."
+
+#. translators: %s: HTML meta tag.
+#: wp-includes/rest-api/endpoints/class-wp-rest-url-details-controller.php:101
+msgid "The content of the %s element from the URL."
+msgstr "התוכן של האלמנט %s מכתובת ה-URL."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:839
+msgid "HTML title for the template, transformed for display."
+msgstr "כותרת HTML של התבנית, ששונתה לצורך תצוגה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-templates-controller.php:834
+msgid "Title for the template, as it exists in the database."
+msgstr "הכותרת של התבנית, כפי שהוא מופיע במסד הנתונים."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:681
+msgid "The ID for the author of the revision."
+msgstr "ה-ID של מחבר הגרסה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:102
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:703
+msgid "Unique identifier for the revision."
+msgstr "מזהה ייחודי של הגרסה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:3081
+msgid "Whether items must be assigned all or any of the specified terms."
+msgstr "האם לשייך רכיבים למונחים האלו."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2805
+msgid "Sort collection by post attribute."
+msgstr "מיון אוסף לפי תכונות פוסט."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2465
+msgid "The order of the post in relation to other posts."
+msgstr "מיקום הפוסט ביחס לפוסטים אחרים."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:371
+msgid "Whether to make the post type is available for selection in navigation menus."
+msgstr "האם לאפשר את בחירת סוג התוכן בתפריטי הניווט."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:367
+msgid "Whether to generate a default UI for managing this post type."
+msgstr "האם ליצור ממשק ברירת מחדל לניהול סוג התוכן הזה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:361
+msgid "The visibility settings for the post type."
+msgstr "הגדרות הניראות של סוג התוכן."
 
 #: wp-includes/post.php:1968 wp-includes/js/dist/block-library.js:17903
 msgid "No posts found."
@@ -11064,6 +11135,38 @@ msgstr "האם להוסיף עמודים עליונים בצורה אוטומט�
 #: wp-includes/rest-api/endpoints/class-wp-rest-autosaves-controller.php:115
 msgid "The ID for the parent of the autosave."
 msgstr "ה-ID של ההורשה של השמירה האוטומטית."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:454
+msgid "The url is required when using a custom menu item type."
+msgstr "חובה להזין כתובת כאשר משתמשים ברכיב תפריט מותאם."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-menu-items-controller.php:451
+msgid "The title is required when using a custom menu item type."
+msgstr "חובה להזין כותרת כאשר משתמשים ברכיב תפריט מותאם."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:615
+msgid "The list of scopes where the variation is applicable. When not provided, it assumes all available scopes."
+msgstr "רשימת הדומיינים שעליה חלה הווריאציה. אם לא מסופקת רשימה, הווריאציה תחול על כל הדומיינים."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:609
+msgid "The initial values for attributes."
+msgstr "הערכים ההתחלתיים של התכונות."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:603
+msgid "Indicates whether the current variation is the default one."
+msgstr "מעיד על כך שהווריאציה הנוכחית היא וריאציית ברירת המחדל."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:596
+msgid "A detailed variation description."
+msgstr "תיאור וריאציה מפורט."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:591
+msgid "A human-readable variation title."
+msgstr "כותרת של הווריאציה."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-block-types-controller.php:586
+msgid "The unique and machine-readable name."
+msgstr "השם היחודי שמאפשר למכונה לקרוא אותו."
 
 #: wp-includes/class-wp-editor.php:1205 wp-includes/media-template.php:484
 #: wp-includes/media-template.php:713 wp-includes/revision.php:32
@@ -18370,3 +18473,9 @@ msgstr "תבנית המשמשת להצגת תוצאות חיפוש."
 #: wp-includes/block-template-utils.php:126
 msgid "Displays as the site's home page."
 msgstr "מוצג כעמוד הבית של האתר."
+
+#. translators: 1: Block type, 2: Typography supports key, e.g: fontSize,
+#. lineHeight, etc. 3: block.json, 4: Old metadata key, 5: New metadata key.
+#: wp-includes/blocks.php:1049
+msgid "Block \"%1$s\" is declaring %2$s support in %3$s file under %4$s. %2$s support is now declared under %5$s."
+msgstr "בלוק \"%1$s\" מצהיר %2$s תמיכה בקובץ %3$s תחת %4$s. %2$s נתמך עכשיו תחת %5$s."

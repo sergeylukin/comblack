@@ -1,0 +1,14 @@
+drwxr-xr-x   2 ftp      ftp          4096 Mar  9 04:13 .
+drwxr-xr-x   8 ftp      ftp          4096 Mar  9 04:13 ..
+-rw-r--r--   1 ftp      ftp          1729 Mar  9 04:13 backwards-compatibility.php
+-rw-r--r--   1 ftp      ftp          1308 Mar  9 04:13 category-term-description.php
+-rw-r--r--   1 ftp      ftp          3667 Mar  9 04:13 comment-link-fixer.php
+-rw-r--r--   1 ftp      ftp          4504 Mar  9 04:13 force-rewrite-title.php
+-rw-r--r--   1 ftp      ftp          2647 Mar  9 04:13 handle-404.php
+-rw-r--r--   1 ftp      ftp          2731 Mar  9 04:13 indexing-controls.php
+-rw-r--r--   1 ftp      ftp          3149 Mar  9 04:13 open-graph-oembed.php
+-rw-r--r--   1 ftp      ftp          4299 Mar  9 04:13 redirects.php
+-rw-r--r--   1 ftp      ftp          5340 Mar  9 04:13 rss-footer-embed.php
+-rw-r--r--   1 ftp      ftp          2354 Mar  9 04:13 schema-accessibility-feature.php
+-rw-r--r--   1 ftp      ftp          1210 Mar  9 04:13 theme-titles.php
+-rw-r--r--   1 ftp      ftp          5640 Mar  9 04:13 wp-robots-integration.php

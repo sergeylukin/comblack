@@ -1,0 +1,41 @@
+<?php
+add_shortcode(
+    'print_jobs', function () {
+        $array = apiRequest(
+            'https://minisites.mida.co.il/services/MidaService.asmx/GetOrdersDetails',
+            [
+                'orderID' => ''
+            ]
+        );
+        if (!$array) {
+            return __('אירעה שגיאה', 'jax-comblack-general');
+        }
+
+    
+        $string = '<div class="cb-job-block-area">';
+        foreach ($array['o'] as $job_raw) {
+            $job = $job_raw['@attributes'];
+            $string .= '<div class="cb-job-block">';
+          	  $string .= '<div class="jax-accordion">';
+          		$string .= '<div class="cb-job-block_item cb-job-block_title">משרה: '.$job['d'].'</div>';
+                $string .= '<div class="cb-job-block_item cb-job-block_category">'.getCategoryNameByID($job['order_def_prof1']).'</div>';
+          		$string .= '<div style="display: flex; justify-content: space-between;">';
+                	$string .= '<div class="cb-job-block_item cb-job-block_desc">'.$job['n'].'</div>';
+          			$string .= '<div><button class="cb-job-block_button">פרטי המשרה</button></div>';
+          		$string .= '</div>';
+          
+          	    $string .= '<div class="cb-job-block_details jax-panel">';
+                  $string .= '<div class="cb-job-block_item cb-job-block_area"><span>אזור: '.$job['area1'].'</span></div>';
+                  $string .= '<div class="cd-job-block_form_wrapper cd-job-block_form_wrapper_'.$job['i'].'" data-job="'.$job['i'].'">';
+                  $string .= do_shortcode('[elementor-template id="843"]');
+                  $string .= '</div>';
+          		  $string .= '<span class="cd-job-block_form__feedback_'.$job['i'].'"></span>';
+          	    $string .= '</div>';
+          	  $string .= '</div>';
+          	$string .= '</div>';
+        }
+        $string .= '</div>';
+
+        return $string;
+    }
+);

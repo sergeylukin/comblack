@@ -1,0 +1,13 @@
+drwxr-xr-x   6 ftp      ftp           204 Apr 13 12:53 .
+drwxr-xr-x   6 ftp      ftp           100 May 10 11:57 ..
+-rw-r--r--   1 ftp      ftp          3481 Apr 13 12:53 archiveORG.php
+-rw-r--r--   1 ftp      ftp          3739 Apr 13 12:53 archive.php
+drwxr-xr-x   2 ftp      ftp            44 Nov 26  2018 css
+-rw-r--r--   1 ftp      ftp          9248 Apr 17 18:55 footer.php
+-rw-r--r--   1 ftp      ftp          6092 Apr 25 12:08 functions.php
+drwxr-xr-x   2 ftp      ftp            47 Apr 17 15:51 img
+drwxr-xr-x   2 ftp      ftp            69 Apr 13 11:43 includes
+drwxr-xr-x   2 ftp      ftp            23 Nov 26  2018 js
+-rw-r--r--   1 ftp      ftp         23551 Nov 26  2018 screenshot.png
+-rw-r--r--   1 ftp      ftp         21378 May  9 10:12 style.css
+-rw-r--r--   1 ftp      ftp          6612 Apr 20 10:42 taxonomy-categories.php

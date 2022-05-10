@@ -747,6 +747,16 @@ body .home11 h1 {
 .mobileonlyselect , .mobileonlyselect2 {
 	display:none;
 }
+#top .blackwhiteimage img {
+	 filter: gray !important;  
+  -webkit-filter: grayscale(1) !important;    
+  filter: grayscale(1) !important;    
+}
+#top .blackwhiteimage img:hover {
+	-webkit-filter: grayscale(0) !important;  
+     filter: none !important;  
+}
+
 @media (max-width: 1150px) and (min-width: 300px) {
 .mobileonlyselect , .mobileonlyselect2 {
 	display:flex;

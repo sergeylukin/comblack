@@ -1,0 +1,12 @@
+drwxrwxr-x  10 ftp      ftp           149 Jul 15  2021 .
+drwxrwxr-x   7 ftp      ftp           156 Jul 15  2021 ..
+drwxrwxr-x   2 ftp      ftp            91 Jul 15  2021 css
+drwxrwxr-x   2 ftp      ftp            46 Jul 15  2021 htmlembedded
+drwxrwxr-x   2 ftp      ftp            43 Jul 15  2021 htmlmixed
+-rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
+drwxrwxr-x   2 ftp      ftp            59 Jul 15  2021 javascript
+-rw-rw-r--   1 ftp      ftp         14551 May 23  2020 meta.js
+drwxrwxr-x   2 ftp      ftp            52 Jul 15  2021 php
+drwxrwxr-x   2 ftp      ftp            38 Jul 15  2021 sass
+drwxrwxr-x   2 ftp      ftp            37 Jul 15  2021 sql
+drwxrwxr-x   2 ftp      ftp            52 Jul 15  2021 xml

@@ -1,0 +1,11 @@
+drwxr-xr-x   2 ftp      ftp           196 Jan 26 05:05 .
+drwxr-xr-x  74 ftp      ftp          4096 Jan 26 05:05 ..
+-rw-r--r--   1 ftp      ftp           542 Jan 26 05:05 block.json
+-rw-r--r--   1 ftp      ftp          3895 Jan 26 05:05 editor.css
+-rw-r--r--   1 ftp      ftp          2244 Jan 26 05:05 editor.min.css
+-rw-r--r--   1 ftp      ftp          3897 Jan 26 05:05 editor-rtl.css
+-rw-r--r--   1 ftp      ftp          2246 Jan 26 05:05 editor-rtl.min.css
+-rw-r--r--   1 ftp      ftp          1576 Jan 26 05:05 theme.css
+-rw-r--r--   1 ftp      ftp            91 Jan 26 05:05 theme.min.css
+-rw-r--r--   1 ftp      ftp          1576 Jan 26 05:05 theme-rtl.css
+-rw-r--r--   1 ftp      ftp            91 Jan 26 05:05 theme-rtl.min.css

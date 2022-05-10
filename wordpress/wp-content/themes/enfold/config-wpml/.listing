@@ -1,0 +1,8 @@
+drwxrwxr-x   2 ftp      ftp           142 Oct 20  2021 .
+drwxrwxr-x  23 ftp      ftp          4096 Nov  2  2021 ..
+-rw-rw-r--   1 ftp      ftp         35970 Oct 20  2021 class-avia-wpml.php
+-rw-rw-r--   1 ftp      ftp          3533 Oct 20  2021 config_legacy.php
+-rw-rw-r--   1 ftp      ftp         30941 Oct 20  2021 config.php
+-rw-rw-r--   1 ftp      ftp         23594 May 23  2020 FacebookLocales.xml
+-rw-rw-r--   1 ftp      ftp           807 Oct 20  2021 wpml-mod.css
+-rw-rw-r--   1 ftp      ftp           593 Oct 20  2021 wpml-mod.js

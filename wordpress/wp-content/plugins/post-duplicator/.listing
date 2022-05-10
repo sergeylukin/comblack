@@ -1,0 +1,10 @@
+drwxr-xr-x   6 ftp      ftp           166 Jan 30 04:02 .
+drwxr-xr-x  18 ftp      ftp          4096 May 10 11:57 ..
+drwxr-xr-x   3 ftp      ftp            16 Jan 30 04:02 assets
+drwxr-xr-x   2 ftp      ftp           136 Jan 30 04:02 includes
+drwxr-xr-x   2 ftp      ftp          4096 Jan 30 04:02 languages
+-rw-r--r--   1 ftp      ftp          2408 Jan 30 04:02 m4c-postduplicator.php
+drwxr-xr-x   2 ftp      ftp            48 Jan 30 04:02 metaboxer
+-rw-r--r--   1 ftp      ftp          4307 Jan 30 04:02 readme.txt
+-rw-r--r--   1 ftp      ftp         13105 Jan 30 04:02 screenshot-1.png
+-rw-r--r--   1 ftp      ftp         39131 Jan 30 04:02 screenshot-2.png

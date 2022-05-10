@@ -1,0 +1,15 @@
+drwxr-xr-x   2 ftp      ftp           278 Jan 26 05:05 .
+drwxr-xr-x  74 ftp      ftp          4096 Jan 26 05:05 ..
+-rw-r--r--   1 ftp      ftp          2437 Jan 26 05:05 block.json
+-rw-r--r--   1 ftp      ftp         12711 Jan 26 05:05 editor.css
+-rw-r--r--   1 ftp      ftp          9730 Jan 26 05:05 editor.min.css
+-rw-r--r--   1 ftp      ftp         12714 Jan 26 05:05 editor-rtl.css
+-rw-r--r--   1 ftp      ftp          9733 Jan 26 05:05 editor-rtl.min.css
+-rw-r--r--   1 ftp      ftp         16601 Jan 26 05:05 style.css
+-rw-r--r--   1 ftp      ftp         13574 Jan 26 05:05 style.min.css
+-rw-r--r--   1 ftp      ftp         16608 Jan 26 05:05 style-rtl.css
+-rw-r--r--   1 ftp      ftp         13581 Jan 26 05:05 style-rtl.min.css
+-rw-r--r--   1 ftp      ftp            95 Jan 26 05:05 view.asset.php
+-rw-r--r--   1 ftp      ftp         13740 Jan 26 05:05 view.js
+-rw-r--r--   1 ftp      ftp            95 Jan 26 05:05 view.min.asset.php
+-rw-r--r--   1 ftp      ftp          9265 Jan 26 05:05 view.min.js

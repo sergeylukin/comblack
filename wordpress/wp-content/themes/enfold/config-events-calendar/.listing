@@ -1,0 +1,6 @@
+drwxrwxr-x   3 ftp      ftp            91 Oct 20  2021 .
+drwxrwxr-x  23 ftp      ftp          4096 Nov  2  2021 ..
+-rw-rw-r--   1 ftp      ftp         12486 Oct 20  2021 config.php
+-rw-rw-r--   1 ftp      ftp         20866 Sep 22  2021 event-mod.css
+-rw-rw-r--   1 ftp      ftp         10510 Oct 20  2021 event-mod-css-dynamic.php
+drwxrwxr-x   4 ftp      ftp           113 Jul 20  2021 views

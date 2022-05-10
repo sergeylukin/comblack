@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.9.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-07 09:15:57+0000\n"
+"PO-Revision-Date: 2022-05-08 18:18:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4618,6 +4618,15 @@ msgstr "עורך קבצי תבנית"
 msgid "Plugin File Editor"
 msgstr "עורך קבצי תוסף"
 
+#. translators: 1: wp-config.php, 2: Documentation URL.
+#: wp-admin/setup-config.php:454
+msgid "You need to make the file %1$s writable before you can save your changes. See <a href=\"%2$s\">Changing File Permissions</a> for more information."
+msgstr "כדי לערוך קובץ %1$s, צריכות להיות לו הרשאות כתיבה מתאימות. למידע נוסף ראו <a href=\"%2$s\">שינוי הרשאות קובץ</a>."
+
+#: wp-admin/includes/user.php:642
+msgid "The application ID must be a UUID."
+msgstr "ה-ID של האפליקציה חייב להיות UUID."
+
 #: wp-admin/includes/media.php:2821 wp-admin/includes/nav-menu.php:462
 #: wp-admin/includes/nav-menu.php:758
 msgid "&laquo;"
@@ -8800,6 +8809,19 @@ msgstr "עריכת סגנונות"
 #: wp-admin/includes/dashboard.php:2044
 msgid "Learn about block themes"
 msgstr "למידע נוסף על תבניות מבוססות בלוקים"
+
+#: wp-admin/includes/dashboard.php:2042
+msgid "Discover a new way to build your site."
+msgstr "גלה את הדרך החדשה לבנות את האתר שלך."
+
+#: wp-admin/includes/dashboard.php:2024
+msgid "Open site editor"
+msgstr "פתח את עורך האתר"
+
+#. translators: %s: Current WordPress version.
+#: wp-admin/includes/dashboard.php:2004
+msgid "Learn more about the %s version."
+msgstr "למידע נוסף על גרסת %s."
 
 #. translators: %d: Comment ID.
 #: wp-admin/includes/ajax-actions.php:959
@@ -13526,6 +13548,14 @@ msgstr "לא ניתן להפעיל"
 msgid "Visit plugin site for %s"
 msgstr "בקר באתר תוסף %s"
 
+#: wp-admin/freedoms.php:35
+msgid "WordPress is free and open source software"
+msgstr "וורדפרס היא תוכנה חינמית המפותחת בקוד פתוח"
+
+#: wp-admin/export-personal-data.php:105
+msgid "This tool helps site owners comply with local laws and regulations by exporting known data for a given user in a .zip file."
+msgstr "כלי זה מסייע לבעלי אתרים לעמוד בחוקים ותקנות מקומיות באמצעות יצוא של נתונים ידועים עבור משתמש מסוים לקובץ zip."
+
 #: wp-admin/admin.php:262
 msgid "Invalid plugin page."
 msgstr "עמוד התוסף שגוי."
@@ -15082,3 +15112,11 @@ msgstr "וורדפרס %s עבור מפתחים"
 #: wp-admin/about.php:217
 msgid "Better block controls"
 msgstr "שליטה טובה יותר בבלוקים"
+
+#: wp-admin/authorize-application.php:94
+msgid "Your website appears to use Basic Authentication, which is not currently compatible with application passwords."
+msgstr "נראה שהאתר שלך עושה שימוש באימות פשוט (Basic Authentication). בשלב זה אימות מסוג זה אינו מאפשר שימוש בסיסמאות אפליקציות."
+
+#: wp-admin/customize.php:238
+msgid "The Customizer allows you to preview changes to your site before publishing them. You can navigate to different pages on your site within the preview. Edit shortcuts are shown for some editable elements. The Customizer is intended for use with non-block themes."
+msgstr "במסך ההתאמה האישית ניתן לראות תצוגה מקדימה של השינויים באתר, לפני שמחילים את השינויים בפועל. ניתן לנווט לעמודים שונים באתר בתצוגה המקדימה. ברכיבים שניתנים לעריכה, מוצגים קיצורים לעריכה. הכלי משמש תבניות שאינן תומכות בבלוקים."

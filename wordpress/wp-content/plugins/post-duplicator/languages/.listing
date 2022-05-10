@@ -1,0 +1,13 @@
+drwxr-xr-x   2 ftp      ftp          4096 Jan 30 04:02 .
+drwxr-xr-x   6 ftp      ftp           166 Jan 30 04:02 ..
+-rw-r--r--   1 ftp      ftp          2322 Jan 30 04:02 post-duplicator-de_DE.mo
+-rw-r--r--   1 ftp      ftp          3713 Jan 30 04:02 post-duplicator-de_DE.po
+-rw-r--r--   1 ftp      ftp           282 Jan 30 04:02 post-duplicator-en_US.mo
+-rw-r--r--   1 ftp      ftp          2817 Jan 30 04:02 post-duplicator-en_US.po
+-rw-r--r--   1 ftp      ftp          2265 Jan 30 04:02 post-duplicator-fr_FR.mo
+-rw-r--r--   1 ftp      ftp          3650 Jan 30 04:02 post-duplicator-fr_FR.po
+-rw-r--r--   1 ftp      ftp          2262 Jan 30 04:02 post-duplicator-fr.mo
+-rw-r--r--   1 ftp      ftp          3647 Jan 30 04:02 post-duplicator-fr.po
+-rw-r--r--   1 ftp      ftp          1545 Jan 30 04:02 post-duplicator-ja.mo
+-rw-r--r--   1 ftp      ftp          2377 Jan 30 04:02 post-duplicator-ja.po
+-rw-r--r--   1 ftp      ftp          2138 Jan 30 04:02 post-duplicator.pot

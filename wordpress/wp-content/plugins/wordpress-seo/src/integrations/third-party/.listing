@@ -1,0 +1,17 @@
+drwxr-xr-x   2 ftp      ftp          4096 Mar  9 04:13 .
+drwxr-xr-x   8 ftp      ftp          4096 Mar  9 04:13 ..
+-rw-r--r--   1 ftp      ftp          1491 Mar  9 04:13 amp.php
+-rw-r--r--   1 ftp      ftp          1449 Mar  9 04:13 bbpress.php
+-rw-r--r--   1 ftp      ftp         23837 Mar  9 04:13 elementor.php
+-rw-r--r--   1 ftp      ftp          1009 Mar  9 04:13 exclude-elementor-post-types.php
+-rw-r--r--   1 ftp      ftp           980 Mar  9 04:13 exclude-woocommerce-post-types.php
+-rw-r--r--   1 ftp      ftp           836 Mar  9 04:13 jetpack.php
+-rw-r--r--   1 ftp      ftp          1319 Mar  9 04:13 the-events-calendar.php
+-rw-r--r--   1 ftp      ftp           828 Mar  9 04:13 w3-total-cache.php
+-rw-r--r--   1 ftp      ftp          2895 Mar  9 04:13 web-stories.php
+-rw-r--r--   1 ftp      ftp          2181 Mar  9 04:13 wincher.php
+-rw-r--r--   1 ftp      ftp          4579 Mar  9 04:13 wincher-publish.php
+-rw-r--r--   1 ftp      ftp          2942 Mar  9 04:13 woocommerce-permalinks.php
+-rw-r--r--   1 ftp      ftp          9545 Mar  9 04:13 woocommerce.php
+-rw-r--r--   1 ftp      ftp          1878 Mar  9 04:13 wpml.php
+-rw-r--r--   1 ftp      ftp          3454 Mar  9 04:13 wpml-wpseo-notification.php

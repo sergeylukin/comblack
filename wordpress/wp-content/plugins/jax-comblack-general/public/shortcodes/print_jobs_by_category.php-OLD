@@ -1,0 +1,142 @@
+<?php
+function cb_add_query_vars_filter( $vars ){
+    /*
+     * Adds the ability for wordpress to get
+     * the job category
+     */
+
+    $vars[] = "job_category";
+    return $vars;
+}
+  
+add_filter( 'query_vars', 'cb_add_query_vars_filter' );
+
+add_shortcode(
+    'print_jobs_by_category', function () {
+        $job_category = intval(get_query_var('job_category'));
+        if(empty($job_category)) {
+            return __('עשית משהו לא נכון.', 'jax-comblack-general');
+        }
+
+        $array = apiRequest(
+            'https://minisites.mida.co.il/services/MidaService.asmx/GetOrdersList',
+            [
+                // profID=4&profSpec=&areasID=&freeText=&orderType=&branch=&rakaz=&isHot=
+                'profID' => $job_category,
+                'profSpec' => '',
+                'areasID' => '',
+                'freeText' => '',
+                'orderType' => '',
+                'branch' => '',
+                'rakaz' => '',
+                'isHot' => ''
+            ]
+        );
+        if (!$array) {
+            return __('לא נמצאו משרות בהתאם לפרמטרים.', 'jax-comblack-general');
+        }
+
+        $jobIDs = [];
+        foreach ($array['o'] as $job_raw) {
+            /**
+             * Returns only ID and name
+             */
+
+            if (isset($job_raw['@attributes'])) {
+                /**
+                 * Appearently sometimes '@attributes' is there and sometimes it isn't...
+                 */
+                $job = $job_raw['@attributes'];
+            } else {
+                $job = $job_raw;
+            }
+            $jobIDs[] = $job['i'];
+        }
+    
+        $string = '<div class="cd-job-block-area">';
+        foreach ($jobIDs as $jobID) {
+            $job_raw = apiRequest(
+                'https://minisites.mida.co.il/services/MidaService.asmx/GetOrdersDetails',
+                [
+                    'orderID' => $jobID
+                ]
+            );
+            if (!$job_raw) {
+                return __('אירעה שגיאה', 'jax-comblack-general');
+            }
+          
+            $cvForm = '<form method="post" name="Job Application Form" class="cb-job-block_form">';
+            $cvForm .= '<label for="form-field-name">שם</label><input type="text" class="cd-job-block_form__name_'.$job['i'].'" name="cb-your_name" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-phone">טלפון</label><input type="tel" name="cb-your_phone_'.$job['i'].'" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-email">דוא"ל</label><input type="email" class="cd-job-block_form__email_'.$job['i'].'" name="cb-your_email" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-cv">קורות חיים</label><input type="file" name="cb-your_cv" class="cd-job-block_form__phone_'.$job['i'].'" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<button type="submit" class="cd-job-block_form__submit" data-job="'.$job['i'].'">שליחה</button>';
+            $cvForm .= '<br />';
+            $cvForm .= '</form>';
+
+            $job = $job_raw['o']['@attributes'];
+            /*$string .= '<div class="cd-job-block jax-accordion">';
+            $string .= '<div class="cb-job-block_item cb-job-block_title">משרה: '.$job['d'].'</div>';
+            // order_def_subprof1="2
+            $string .= '<div class="cb-job-block_item cb-job-block_category">קטגוריה: '.getCategoryNameByID($job['order_def_prof1']).'</div>';
+            $string .= '<div class="cb-job-block_item cb-job-block_area"><span>אזור: '.$job['area1'].'</span><button class="cb-job-block_button">פרטי המשרה</button></div>';
+            $string .= '</div>';
+            $string .= '<div class="cb-job-block_details jax-panel">';
+            $string .= '<div class="cb-job-block_item cb-job-block_desc">'.$job['n'].'</div>';
+
+            $cvForm = '<form method="post" name="Job Application Form" class="cb-job-block_form">';
+            $cvForm .= '<label for="form-field-name">שם</label><input type="text" class="cd-job-block_form__name_'.$job['i'].'" name="cb-your_name" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-phone">טלפון</label><input type="tel" name="cb-your_phone_'.$job['i'].'" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-email">דוא"ל</label><input type="email" class="cd-job-block_form__email_'.$job['i'].'" name="cb-your_email" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<label for="form-field-cv">קורות חיים</label><input type="file" name="cb-your_cv" class="cd-job-block_form__phone_'.$job['i'].'" required="required" aria-required="true">';
+            $cvForm .= '<br />';
+            $cvForm .= '<button type="submit" class="cd-job-block_form__submit" data-job="'.$job['i'].'">שליחה</button>';
+            $cvForm .= '<br />';
+            $cvForm .= '</form>';
+
+            $cvForm = ''; // temporary removal
+
+            $string .= '<div class="cd-job-block_form_wrapper cd-job-block_form_wrapper_'.$job['i'].'" data-job="'.$job['i'].'">';
+            $string .= do_shortcode('[elementor-template id="843"]');
+            $string .= '</div>';
+
+            $string .= $cvForm;
+            $string .= '<span class="cd-job-block_form__feedback_'.$job['i'].'"></span>';
+            $string .= '<div></div>';
+            $string .= '</div>';*/
+          
+            $job = $job_raw['o']['@attributes'];
+            $string .= '<div class="cb-job-block">';
+          	  $string .= '<div class="jax-accordion">';
+          		$string .= '<div class="cb-job-block_item cb-job-block_title">משרה: '.$job['d'].'</div>';
+                $string .= '<div class="cb-job-block_item cb-job-block_category">'.getCategoryNameByID($job['order_def_prof1']).'</div>';
+          		$string .= '<div style="display: flex; justify-content: space-between;">';
+                	$string .= '<div class="cb-job-block_item cb-job-block_desc">'.$job['n'].'</div>';
+          			
+            $string .= '<div class="cb-job-block_item cb-job-block_area"><span>אזור: '.$job['area1'].'</span></div>';
+            
+            $string .= '<div><button class="cb-job-block_button">פרטי המשרה</button></div>';
+          		$string .= '</div>';
+          
+          	    $string .= '<div class="cb-job-block_details jax-panel">';
+                  
+                  $string .= '<div class="cd-job-block_form_wrapper cd-job-block_form_wrapper_'.$job['i'].'" data-job="'.$job['i'].'">';
+                  $string .= do_shortcode('[elementor-template id="843"]');
+                  $string .= '</div>';
+          		  $string .= '<span class="cd-job-block_form__feedback_'.$job['i'].'"></span>';
+          	    $string .= '</div>';
+          	  $string .= '</div>';
+          	$string .= '</div>';
+        }
+        $string .= '</div>';
+
+        return $string;
+    }
+);

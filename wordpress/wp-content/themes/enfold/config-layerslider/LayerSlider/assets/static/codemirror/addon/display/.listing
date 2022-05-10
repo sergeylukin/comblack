@@ -1,0 +1,9 @@
+drwxrwxr-x   2 ftp      ftp           143 Jul 15  2021 .
+drwxrwxr-x  17 ftp      ftp           224 Jul 15  2021 ..
+-rw-rw-r--   1 ftp      ftp          1543 May 23  2020 autorefresh.js
+-rw-rw-r--   1 ftp      ftp           116 May 23  2020 fullscreen.css
+-rw-rw-r--   1 ftp      ftp          1494 May 23  2020 fullscreen.js
+-rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
+-rw-rw-r--   1 ftp      ftp          3844 May 23  2020 panel.js
+-rw-rw-r--   1 ftp      ftp          2139 May 23  2020 placeholder.js
+-rw-rw-r--   1 ftp      ftp          1890 May 23  2020 rulers.js

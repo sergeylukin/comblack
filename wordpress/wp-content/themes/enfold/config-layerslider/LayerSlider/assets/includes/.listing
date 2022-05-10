@@ -1,0 +1,8 @@
+drwxrwxr-x   2 ftp      ftp           170 Jul 15  2021 .
+drwxrwxr-x  13 ftp      ftp           175 Jul 15  2021 ..
+-rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
+-rw-rw-r--   1 ftp      ftp          5941 May 23  2020 slider_markup_export.php
+-rw-rw-r--   1 ftp      ftp         20559 Mar  2  2021 slider_markup_html.php
+-rw-rw-r--   1 ftp      ftp          1578 May 23  2020 slider_markup_init.php
+-rw-rw-r--   1 ftp      ftp          6559 May 23  2020 slider_markup_setup.php
+-rw-rw-r--   1 ftp      ftp           820 Mar  2  2021 slider_utils.php

@@ -1,0 +1,5 @@
+drwxr-xr-x   3 ftp      ftp            55 Nov 26  2018 .
+drwxr-xr-x  24 ftp      ftp          4096 Nov 26  2018 ..
+drwxr-xr-x   2 ftp      ftp            24 Nov 26  2018 css
+-rw-r--r--   1 ftp      ftp          9450 Nov 26  2018 plugin.js
+-rw-r--r--   1 ftp      ftp          4129 Nov 26  2018 plugin.min.js

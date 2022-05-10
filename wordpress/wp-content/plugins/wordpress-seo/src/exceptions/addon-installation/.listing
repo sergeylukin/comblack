@@ -1,0 +1,7 @@
+drwxr-xr-x   2 ftp      ftp           240 Mar  9 04:13 .
+drwxr-xr-x   5 ftp      ftp            88 Mar  9 04:13 ..
+-rw-r--r--   1 ftp      ftp           326 Mar  9 04:13 addon-activation-error-exception.php
+-rw-r--r--   1 ftp      ftp           328 Mar  9 04:13 addon-already-installed-exception.php
+-rw-r--r--   1 ftp      ftp           320 Mar  9 04:13 addon-installation-error-exception.php
+-rw-r--r--   1 ftp      ftp           328 Mar  9 04:13 user-cannot-activate-plugins-exception.php
+-rw-r--r--   1 ftp      ftp           336 Mar  9 04:13 user-cannot-install-plugins-exception.php

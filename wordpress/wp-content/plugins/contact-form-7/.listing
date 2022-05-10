@@ -1,0 +1,12 @@
+drwxr-xr-x   7 ftp      ftp           184 Feb 24 04:10 .
+drwxr-xr-x  18 ftp      ftp          4096 May 10 11:57 ..
+drwxr-xr-x   5 ftp      ftp            89 Feb 24 04:10 admin
+drwxr-xr-x   2 ftp      ftp            38 Feb 24 04:10 assets
+drwxr-xr-x   5 ftp      ftp          4096 Feb 24 04:10 includes
+drwxr-xr-x   2 ftp      ftp            24 Feb 24 04:10 languages
+-rw-r--r--   1 ftp      ftp         19147 Feb 24 04:10 license.txt
+-rw-r--r--   1 ftp      ftp          5463 Feb 24 04:10 load.php
+drwxr-xr-x   6 ftp      ftp          4096 Feb 24 04:10 modules
+-rw-r--r--   1 ftp      ftp          4945 Feb 24 04:10 readme.txt
+-rw-r--r--   1 ftp      ftp           503 Feb 24 04:10 uninstall.php
+-rw-r--r--   1 ftp      ftp          1797 Feb 24 04:10 wp-contact-form-7.php
