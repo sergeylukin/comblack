@@ -55,6 +55,7 @@ class Comblack_Jobs{
         // add_action( 'rest_api_init', array( $this , 'comblack_apis' ));
         
         add_action('pull_jobs_categories_after_a_day', array($this, 'run_crons'), 11);
+        add_action('wp_ajax_pull_jobs_categories_after_a_day', array($this, 'run_crons'), 11);
         // add_action('pull_jobs_categories_after_a_day', array($this, 'insert_subcategory'), 11);
         // add_action('pull_jobs_categories_after_a_day', array($this, 'insert_job'), 99);
 
@@ -89,6 +90,9 @@ class Comblack_Jobs{
         
         $categories = getJobCategoriesFromAPI();
         // $this->log($categories);
+        echo "========START CATEGORIES0============";
+        print_r($categories);
+        echo "========END CATEGORIES0============";
         
         $category_ids_exists = $this->wcgs_get_linked_category_ids();
 
@@ -126,8 +130,9 @@ class Comblack_Jobs{
 
         $jobs = $this->get_jobs();
         // $this->log($jobs);
-
-        // setting all jobs to draft
+        echo "========START JOBS============";
+        print_r($jobs);
+        echo "========END JOBS============"; // setting all jobs to draft
         $this->wcgs_set_job_status_draft();
 
         $jobs_ids_exists = $this->wcgs_get_linked_job_ids();
@@ -247,12 +252,7 @@ class Comblack_Jobs{
     
     function get_jobs() {
         
-        $array = apiRequest(
-            'https://minisites.mida.co.il/services/MidaService.asmx/GetOrdersDetails',
-            [
-                'orderID' => ''
-            ]
-        );
+        $array = apiRequest('https://services.adamtotal.co.il/api/Career/GetOrdersDetails');
         
         return $array;
     }

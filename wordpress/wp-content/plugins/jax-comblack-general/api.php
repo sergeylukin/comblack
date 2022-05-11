@@ -3,6 +3,9 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 
+
+define('TOKEN', 'ecb8e17c-2acd-413d-a977-12a41b68480a');
+
 function getCategoryNameByID($id) {
     $array = getJobCategoriesFromAPI();
     if (!$array) {
@@ -21,19 +24,18 @@ function getCategoryNameByID($id) {
 function apiRequest($url, $params) {
     $client = HttpClient::create();
 
-    $query = [
-        'clientID' => CLIENT_ID,
-        'username' => CLIENT_USERNAME,
-        'password' => CLIENT_PASSWORD
-    ];
     foreach($params as $param => $paramVal) {
         $query[$param] = $paramVal;
     }
     $response = $client->request(
-        'GET',
+        'POST',
         $url,
         [
-        'query' => $query
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Accept' => 'application/json',
+			],
+			 'body' => json_encode(['token' => TOKEN]),
         ]
     );
     $statusCode = $response->getStatusCode();
@@ -41,10 +43,9 @@ function apiRequest($url, $params) {
         return false;
     }
 
-    $xml = simplexml_load_string($response->getContent());
-    $json = json_encode($xml);
+    $json = $response->getContent();
     $array = json_decode($json, true);
-    
+
     return $array;
 }
 
@@ -52,8 +53,8 @@ function getJobCategoriesFromAPI() {
     global $jobCategories;
     if (empty($jobCategories)) {
         $array = apiRequest(
-			
-            'https://minisites.mida.co.il/services/MidaService.asmx/GetProf',
+
+            'https://services.adamtotal.co.il/api/Career/GetProfession',
            // 'https://services.adamtotal.co.il/api/Career/GetCategories',
             [
                 'par' => ''
