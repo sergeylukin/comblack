@@ -5,7 +5,7 @@ services:
     image: mysql:5.7
     container_name: mysql
     volumes:
-      - ./tmp/mysql:/var/lib/mysql
+      - .tmp/mysql:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Pa$$w0rd!
@@ -24,13 +24,16 @@ services:
   wordpress:
     depends_on:
       - db
-    image: wordpress:latest
+    image: wordpress:5.9.3-php7.4-apache
     container_name: wp
     volumes:
-      - ./wordpress:/var/www/html
+      - .tmp/wordpress:/var/www/html
+      - ./:/usr/original_src
+      - ./wordpress/wp-content:/var/www/html/wp-content
     ports:
       - "8000:80"
     restart: always
+    command: /usr/original_src/docker-entrypoint.sh /var/www/html
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: comblack
