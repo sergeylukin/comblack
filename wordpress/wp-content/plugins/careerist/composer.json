@@ -1,0 +1,17 @@
+{
+    "name": "sergeylukin/wordpress-plugin-careerist",
+    "description": "Careers management software",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Careerist",
+            "email": "contact@sergeylukin.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}
