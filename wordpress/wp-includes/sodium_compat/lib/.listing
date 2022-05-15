@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           178 Jul 21  2021 .
-drwxr-xr-x   5 ftp      ftp           127 Dec  9  2020 ..
--rw-r--r--   1 ftp      ftp          4161 Oct 13  2020 constants.php
--rw-r--r--   1 ftp      ftp          1345 Oct 13  2020 namespaced.php
--rw-r--r--   1 ftp      ftp          4597 Jul 21  2021 php72compat_const.php
--rw-r--r--   1 ftp      ftp         41709 Jul 21  2021 php72compat.php
--rw-r--r--   1 ftp      ftp          7210 Jul 21  2021 ristretto255.php
--rw-r--r--   1 ftp      ftp         24536 Jul 21  2021 sodium_compat.php
--rw-r--r--   1 ftp      ftp          1287 Jul 21  2021 stream-xchacha20.php

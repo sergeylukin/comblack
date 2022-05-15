@@ -1,9 +1,0 @@
-drwxr-xr-x   3 ftp      ftp           241 Oct 13  2020 .
-drwxr-xr-x  26 ftp      ftp         12288 Jan 26 05:05 ..
--rw-r--r--   1 ftp      ftp          1985 Oct 13  2020 class-wp-sitemaps-index.php
--rw-r--r--   1 ftp      ftp          6290 Oct 13  2020 class-wp-sitemaps.php
--rw-r--r--   1 ftp      ftp          4377 Jan 26 05:05 class-wp-sitemaps-provider.php
--rw-r--r--   1 ftp      ftp          1884 Oct 13  2020 class-wp-sitemaps-registry.php
--rw-r--r--   1 ftp      ftp          6797 Oct 13  2020 class-wp-sitemaps-renderer.php
--rw-r--r--   1 ftp      ftp          8600 Jul 21  2021 class-wp-sitemaps-stylesheet.php
-drwxr-xr-x   2 ftp      ftp           116 Oct 13  2020 providers

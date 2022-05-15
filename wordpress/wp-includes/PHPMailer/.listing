@@ -1,5 +1,0 @@
-drwxr-xr-x   2 ftp      ftp            64 Oct 13  2020 .
-drwxr-xr-x  26 ftp      ftp         12288 Jan 26 05:05 ..
--rw-r--r--   1 ftp      ftp          1240 Jan 26 05:05 Exception.php
--rw-r--r--   1 ftp      ftp        176260 Jan 26 05:05 PHPMailer.php
--rw-r--r--   1 ftp      ftp         47253 Jan 26 05:05 SMTP.php

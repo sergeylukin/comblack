@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           127 Oct 13  2020 .
-drwxr-xr-x   9 ftp      ftp          4096 Nov 26  2018 ..
--rw-r--r--   1 ftp      ftp          3419 Oct 13  2020 Base.php
--rw-r--r--   1 ftp      ftp          4693 Oct 13  2020 DB.php
--rw-r--r--   1 ftp      ftp          4277 Oct 13  2020 File.php
--rw-r--r--   1 ftp      ftp          5386 Oct 13  2020 Memcached.php
--rw-r--r--   1 ftp      ftp          4915 Oct 13  2020 Memcache.php
--rw-r--r--   1 ftp      ftp         12840 Oct 13  2020 MySQL.php
--rw-r--r--   1 ftp      ftp          4077 Jan 26 05:05 Redis.php

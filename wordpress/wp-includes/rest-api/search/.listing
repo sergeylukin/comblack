@@ -1,6 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           188 Dec  9  2020 .
-drwxr-xr-x   5 ftp      ftp           150 Mar 21  2019 ..
--rw-r--r--   1 ftp      ftp          3608 Mar 10  2021 class-wp-rest-post-format-search-handler.php
--rw-r--r--   1 ftp      ftp          5329 Mar 10  2021 class-wp-rest-post-search-handler.php
--rw-r--r--   1 ftp      ftp          2263 Dec  9  2020 class-wp-rest-search-handler.php
--rw-r--r--   1 ftp      ftp          3980 Mar 10  2021 class-wp-rest-term-search-handler.php

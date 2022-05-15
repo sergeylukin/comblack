@@ -1,8 +1,0 @@
-drwxr-xr-x   5 ftp      ftp           150 Mar 21  2019 .
-drwxr-xr-x  26 ftp      ftp         12288 Jan 26 05:05 ..
--rw-r--r--   1 ftp      ftp         26096 Jan 26 05:05 class-wp-rest-request.php
--rw-r--r--   1 ftp      ftp          7355 Dec  9  2020 class-wp-rest-response.php
--rw-r--r--   1 ftp      ftp         51996 Jan 26 05:05 class-wp-rest-server.php
-drwxr-xr-x   2 ftp      ftp          4096 Jan 26 05:05 endpoints
-drwxr-xr-x   2 ftp      ftp           214 Nov 26  2018 fields
-drwxr-xr-x   2 ftp      ftp           188 Dec  9  2020 search

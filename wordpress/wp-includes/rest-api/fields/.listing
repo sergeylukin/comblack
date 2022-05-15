@@ -1,7 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           214 Nov 26  2018 .
-drwxr-xr-x   5 ftp      ftp           150 Mar 21  2019 ..
--rw-r--r--   1 ftp      ftp           895 Jul 21  2021 class-wp-rest-comment-meta-fields.php
--rw-r--r--   1 ftp      ftp         18078 Jul 21  2021 class-wp-rest-meta-fields.php
--rw-r--r--   1 ftp      ftp          1244 Jul 21  2021 class-wp-rest-post-meta-fields.php
--rw-r--r--   1 ftp      ftp          1241 Jul 21  2021 class-wp-rest-term-meta-fields.php
--rw-r--r--   1 ftp      ftp           856 Jul 21  2021 class-wp-rest-user-meta-fields.php

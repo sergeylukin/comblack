@@ -1,9 +1,0 @@
-drwxr-xr-x   5 ftp      ftp           127 Dec  9  2020 .
-drwxr-xr-x  26 ftp      ftp         12288 Jan 26 05:05 ..
--rw-r--r--   1 ftp      ftp          2731 Jul 21  2021 autoload.php
--rw-r--r--   1 ftp      ftp           890 Dec  9  2020 autoload-php7.php
--rw-r--r--   1 ftp      ftp          1608 Jul 21  2021 composer.json
-drwxr-xr-x   2 ftp      ftp           178 Jul 21  2021 lib
--rw-r--r--   1 ftp      ftp           860 Jul 21  2021 LICENSE
-drwxr-xr-x   3 ftp      ftp            70 Oct 13  2020 namespaced
-drwxr-xr-x   5 ftp      ftp           144 Oct 13  2020 src

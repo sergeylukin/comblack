@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           238 Jul 21  2021 .
-drwxr-xr-x  26 ftp      ftp         12288 Jan 26 05:05 ..
--rw-r--r--   1 ftp      ftp          1001 Jul 21  2021 query-grid-posts.php
--rw-r--r--   1 ftp      ftp          2016 Jul 21  2021 query-large-title-posts.php
--rw-r--r--   1 ftp      ftp          1082 Jan 26 05:05 query-medium-posts.php
--rw-r--r--   1 ftp      ftp          2062 Jul 21  2021 query-offset-posts.php
--rw-r--r--   1 ftp      ftp          1205 Jan 26 05:05 query-small-posts.php
--rw-r--r--   1 ftp      ftp           837 Jan 26 05:05 query-standard-posts.php
--rw-r--r--   1 ftp      ftp           843 Jul 21  2021 social-links-shared-background-color.php

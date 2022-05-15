@@ -1,6 +1,0 @@
-drwxr-xr-x   3 ftp      ftp            70 Oct 13  2020 .
-drwxr-xr-x   5 ftp      ftp           127 Dec  9  2020 ..
--rw-r--r--   1 ftp      ftp            86 Oct 13  2020 Compat.php
-drwxr-xr-x   5 ftp      ftp           310 Oct 13  2020 Core
--rw-r--r--   1 ftp      ftp            86 Oct 13  2020 Crypto.php
--rw-r--r--   1 ftp      ftp            82 Oct 13  2020 File.php
