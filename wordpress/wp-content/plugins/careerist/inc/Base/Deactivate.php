@@ -1,6 +1,6 @@
 <?php
 /**
- * @package  Careerist
+ * @package  CareeristPlugin
  */
 namespace Inc\Base;
 

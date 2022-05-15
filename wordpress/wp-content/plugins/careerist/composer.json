@@ -1,12 +1,12 @@
 {
-    "name": "sergeylukin/wordpress-plugin-careerist",
-    "description": "Careers management software",
+    "name": "careerist/careerist-plugin",
+    "description": "Awesome starter plugin example",
     "type": "project",
-    "license": "GPL",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Careerist",
-            "email": "contact@sergeylukin.com"
+            "email": "castellani.ale@gmail.com"
         }
     ],
     "minimum-stability": "dev",
