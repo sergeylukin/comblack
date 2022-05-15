@@ -19,7 +19,8 @@ define('COMBLACK_URL', $url);
 define('COMBLACK_PATH', $path);
 define('COMBLACK_LOG', false);
 
-define('COMBLACK_TAXONOMY','categories');
+define('CATEGORY_TAXONOMY','categories');
+define('AREA_TAXONOMY','area');
 // Includes
 // include_once $path . '/functions.php';
 
@@ -85,6 +86,32 @@ class Comblack_Jobs{
         ));
     }
 
+    static function searchCategoryById($array, $id) {
+        foreach ($array as $key => $val) {
+            if ($val['adam_api_id'] === $id) {
+                return $val;
+            }
+        }
+        return null;
+    }
+
+    function get_term_by_meta_key($key, $value, $taxonomy) {
+        $args = array(
+            'hide_empty' => false, // also retrieve terms which are not used yet
+            'meta_query' => array(
+                array(
+                    'key'       => $key,
+                    'value'     => $value,
+                    'compare'   => '='
+                )
+            ),
+            'taxonomy'  => $taxonomy,
+        );
+        $terms = get_terms( $args );
+        if (count($terms) > 0) return $terms[0]->to_array();
+        return null;
+    }
+
 
     function insert_category() {
         
@@ -94,37 +121,34 @@ class Comblack_Jobs{
         print_r($categories);
         echo "========END CATEGORIES0============";
         
-        $category_ids_exists = $this->wcgs_get_linked_category_ids();
+        // $category_ids_exists = $this->wcgs_get_linked_category_ids();
 
-        foreach($categories['p'] as $category){
+        foreach($categories as $category) {
+            print_r($category);
+            echo "<p></p><br/>";
+            echo "<p></p><br/>";
 
-            $category_id = $category['@attributes']['i'];
-            if( in_array($category_id, $category_ids_exists) ) continue;
+            $parent_term = null;
+            if ($category['parent_adam_api_id'] !== 0) {
+                $parent_term = $this->get_term_by_meta_key('adam_api_id',  $category['parent_adam_api_id'], CATEGORY_TAXONOMY);
+            }
+            if (!$parent_term) $parent_term = ['term_id' => 0];
 
-            $term = wp_insert_term($category['@attributes']['n'],COMBLACK_TAXONOMY);
-            $update_res = update_term_meta($term['term_id'], 'careers_category_id', $category_id);
-            // var_dump($category_id, $term_id, $update_res);
+            $term = $this->get_term_by_meta_key('adam_api_id',  $category['adam_api_id'], CATEGORY_TAXONOMY);
+            if ($term && isset($term['term_id'])) {
+                echo "<p>Updating term{$term['term_id']} with parent {$parent_term['term_id']}</p>";
+                $this->pa($category);
+                $this->pa($parent_category);
+                $this->pa($parent_term);
+                wp_update_term($term['term_id'], CATEGORY_TAXONOMY, [
+                    'parent'      => $parent_term['term_id'],
+                ]);
+            } else {
+                echo "<p>Sorry, category {$category['name']} is still unassigned</p>";
+            }
         }
     }
 
-    function insert_subcategory() {
-        
-        $categories = getJobCategoriesFromAPI();
-        // $this->log($categories);
-        
-        $category_ids_exists = $this->wcgs_get_linked_subcategory_ids();
-
-        foreach($categories['p'] as $category){
-
-            $category_id = $category['@attributes']['i'];
-            if( in_array($category_id, $category_ids_exists) ) continue;
-
-            $term = wp_insert_term($category['@attributes']['n'],COMBLACK_TAXONOMY);
-            $update_res = update_term_meta($term['term_id'], 'careers_category_id', $category_id);
-            // var_dump($category_id, $term_id, $update_res);
-        }
-    }
-    
     function insert_job() {
 
 
@@ -132,6 +156,7 @@ class Comblack_Jobs{
         // $this->log($jobs);
         echo "========START JOBS============";
         print_r($jobs);
+        exit();
         echo "========END JOBS============"; // setting all jobs to draft
         $this->wcgs_set_job_status_draft();
 
@@ -141,7 +166,7 @@ class Comblack_Jobs{
 
         // $subcategories_ids = $this->wcgs_get_linked_subcategory_id_vs_id();
         
-        foreach($jobs['o'] as $job){
+        foreach($jobs as $job){
             
             $job_id = $job['@attributes']['i'];
             $category_id = $job['@attributes']['order_def_prof1'];

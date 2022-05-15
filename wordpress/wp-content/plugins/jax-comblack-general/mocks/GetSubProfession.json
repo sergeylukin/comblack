@@ -1,0 +1,52 @@
+[
+    {
+        "SubProfessionID": 1,
+        "SubProfessionName": " BI developer",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 2,
+        "SubProfessionName": " BI implementer",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 3,
+        "SubProfessionName": " BI Project  Manger",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 17,
+        "SubProfessionName": "BI System Analyst",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 10,
+        "SubProfessionName": "BIG DATA",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 6,
+        "SubProfessionName": "Data Analyst",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 9,
+        "SubProfessionName": "Data Scientist",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 11,
+        "SubProfessionName": "DBA",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 5,
+        "SubProfessionName": "ETL developer",
+        "ProfessionID": 10
+    },
+    {
+        "SubProfessionID": 16,
+        "SubProfessionName": "QA BI",
+        "ProfessionID": 10
+    }
+]

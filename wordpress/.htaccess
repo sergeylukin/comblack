@@ -9,7 +9,6 @@ RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/wp-content/plugins/comblack-jobs/comblack-jobs.php
 RewriteRule . /index.php [L]
 </IfModule>
 

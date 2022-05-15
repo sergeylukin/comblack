@@ -1,0 +1,62 @@
+[
+	{
+		"ProfessionID": 4,
+		"ProfessionName": " IT  , devops , system"
+	},
+	{
+		"ProfessionID": 2,
+		"ProfessionName": "Cobol MF"
+	},
+	{
+		"ProfessionID": 5,
+		"ProfessionName": "CRM"
+	},
+	{
+		"ProfessionID": 10,
+		"ProfessionName": "data & BI"
+	},
+	{
+		"ProfessionID": 15,
+		"ProfessionName": "pc support / help desk"
+	},
+	{
+		"ProfessionID": 8,
+		"ProfessionName": "SAP"
+	},
+	{
+		"ProfessionID": 14,
+		"ProfessionName": "sharepoint"
+	},
+	{
+		"ProfessionID": 13,
+		"ProfessionName": "UI/UX /עיצוב"
+	},
+	{
+		"ProfessionID": 6,
+		"ProfessionName": "אבטחת מידע וסייבר"
+	},
+	{
+		"ProfessionID": 3,
+		"ProfessionName": "בדיקות ואוטומציה"
+	},
+	{
+		"ProfessionID": 7,
+		"ProfessionName": "חומרה"
+	},
+	{
+		"ProfessionID": 12,
+		"ProfessionName": "מוצר / פרויקט"
+	},
+	{
+		"ProfessionID": 9,
+		"ProfessionName": "מטה"
+	},
+	{
+		"ProfessionID": 11,
+		"ProfessionName": "מערכות מידע"
+	},
+	{
+		"ProfessionID": 1,
+		"ProfessionName": "פיתוח"
+	}
+]
