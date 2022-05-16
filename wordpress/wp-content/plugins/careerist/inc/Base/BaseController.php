@@ -29,7 +29,7 @@ class BaseController
 
 	public function activated( string $key )
 	{
-		$option = get_option( 'careerist_plugin_settings' );
+		$option = get_option( 'careerist_plugin' );
 
 		return isset( $option[ $key ] ) ? $option[ $key ] : false;
 	}
