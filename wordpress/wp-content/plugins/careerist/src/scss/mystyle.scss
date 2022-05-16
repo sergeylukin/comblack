@@ -3,17 +3,28 @@
 @import 'modules/table';
 @import 'modules/form';
 
+@import 'modules/utilities';
+
 @import 'modules/buttons/cta';
 @import 'modules/buttons/modern';
 @import 'modules/buttons/knit';
+@import 'modules/paper-clip';
+@import 'modules/layout';
 
 .u-relative {
     position: relative;
 }
+.u-absolute {
+    position: absolute !important;
+}
+.u-right {
+    right: -106px;
+    top: -27px;
+}
 .u-absolute-right {
   position: absolute;
-  top: 0;
-  right: 10px;
+  top: 15px;
+  right: 0px;
 }
 
 #careerist-sync-trigger-form {

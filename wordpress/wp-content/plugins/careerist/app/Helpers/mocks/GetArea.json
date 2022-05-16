@@ -1,0 +1,30 @@
+[
+    {
+        "AreaId": 40,
+        "AreaName": "גוש דן"
+    },
+    {
+        "AreaId": 70,
+        "AreaName": "דרום"
+    },
+    {
+        "AreaId": 50,
+        "AreaName": "השפלה"
+    },
+    {
+        "AreaId": 30,
+        "AreaName": "השרון"
+    },
+    {
+        "AreaId": 20,
+        "AreaName": "חיפה והקריות"
+    },
+    {
+        "AreaId": 60,
+        "AreaName": "ירושלים יו\"ש"
+    },
+    {
+        "AreaId": 10,
+        "AreaName": "צפון"
+    }
+]

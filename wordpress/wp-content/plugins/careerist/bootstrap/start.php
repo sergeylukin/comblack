@@ -140,6 +140,8 @@ Bench::mark('Load core providers');
 
 $App->registerProviders(array(
 
+
+  'AdamAPIProvider',
   /*
    | Reads configuration, and registers `Config` alias
    |

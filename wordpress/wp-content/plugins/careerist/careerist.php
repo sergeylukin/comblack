@@ -25,8 +25,28 @@ register_deactivation_hook( __FILE__, array($App['Plugin'], 'deactivate') );
 add_action("wp_ajax_careerist_sync_trigger", "myFunc");
 
 function myFunc() {
+  global $App;
+
+	global $wpdb;
+
     header("Content-Type: application/json");
 
+    $areas = $App->AdamAPI->getAreas();
+    foreach($areas as $area) {
+
+			$table_name = $App['table.areas'];;
+			$episode_title = sanitize_text_field($_POST['episode_title']);
+			$episode_desc = sanitize_text_field($_POST['episode_desc']);
+			$air_date = sanitize_text_field($_POST['air_date']);
+
+			$wpdb->insert(
+				$table_name,
+				array(
+					'name' => $area['name'],
+					'adam_id' => $area['adam_id'],
+				)
+			);
+    }
     $result = [
         'success' => (!$insert ? false : true)
     ];
@@ -34,8 +54,8 @@ function myFunc() {
     die();
 }
 
-$App->shutdown(function($App) {
-  if (Bench::duration() > 3) {
-    Bench::dump2file(Path::logs() . '/slow.log');
-  }
-});
+// $App->shutdown(function($App) {
+//   if (Bench::duration() > 3) {
+//     Bench::dump2file(Path::logs() . '/slow.log');
+//   }
+// });

@@ -1,6 +1,7 @@
 // Load Gulp...of course
 var gulp         = require( 'gulp' );
 
+var bourbon = require("node-bourbon").includePaths;
 // CSS related plugins
 var sass         = require( 'gulp-sass' );
 var autoprefixer = require( 'gulp-autoprefixer' );
@@ -58,6 +59,7 @@ gulp.task( 'styles', function() {
 	gulp.src( styleSRC )
 		.pipe( sourcemaps.init() )
 		.pipe( sass({
+			includePaths: bourbon,
 			errLogToConsole: true,
 			outputStyle: 'compressed'
 		}) )
