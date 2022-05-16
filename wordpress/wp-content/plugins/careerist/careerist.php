@@ -30,9 +30,11 @@ function myFunc() {
 	global $wpdb;
 
     header("Content-Type: application/json");
+		$existing_ids = $wpdb->get_col("SELECT adam_id FROM {$App['table.areas']}");
 
     $areas = $App->AdamAPI->getAreas();
     foreach($areas as $area) {
+			if (in_array($area['AreaId'], $existing_ids)) continue;
 
 			$table_name = $App['table.areas'];;
 			$episode_title = sanitize_text_field($_POST['episode_title']);
@@ -42,8 +44,8 @@ function myFunc() {
 			$wpdb->insert(
 				$table_name,
 				array(
-					'name' => $area['name'],
-					'adam_id' => $area['adam_id'],
+					'name' => $area['AreaName'],
+					'adam_id' => $area['AreaId'],
 				)
 			);
     }

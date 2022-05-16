@@ -1,5 +1,11 @@
+<div class="word">
+	<span>A</span>
+	<span>R</span>
+	<span>E</span>
+	<span>A</span>
+	<span>S</span>
+</div>
 <div class="wrap">
-	<h1>Areas</h1>
 	<?php settings_errors(); ?>
 
 <div class="tabs">
@@ -60,7 +66,7 @@
 			$DB = $App['Database'];
 			$areas = $DB->getAllAreas();
 
-			echo '<table cellpadding="0" cellspacing="0" border="0" class="display" id="example"><thead><tr>';
+			echo '<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>';
 
 			foreach ($areas[0] as $k => $v) {
 				echo "<td>".$k."</td>";

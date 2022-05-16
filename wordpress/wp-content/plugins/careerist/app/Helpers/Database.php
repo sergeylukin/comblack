@@ -69,7 +69,9 @@ class Database {
 			created timestamp NOT NULL default CURRENT_TIMESTAMP,
 			name tinytext NULL,
 			adam_id mediumint(9) NULL,
-			UNIQUE KEY id (id)
+      local_taxonomy_id mediumint(9) NULL,
+			UNIQUE KEY id (id),
+			UNIQUE KEY adam_id (adam_id)
 		) $charset_collate;";
 		dbDelta( $sql );
 
@@ -79,7 +81,9 @@ class Database {
 			name tinytext NULL,
 			adam_id mediumint(9) NULL,
 			adam_parent_id mediumint(9) default 0 NOT NULL,
-			UNIQUE KEY id (id)
+      local_taxonomy_id mediumint(9) NULL,
+			UNIQUE KEY id (id),
+			UNIQUE KEY adam_id (adam_id)
 		) $charset_collate;";
 		dbDelta( $sql );
 
