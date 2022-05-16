@@ -16,30 +16,13 @@ Text Domain: careerist-plugin
 // If this file is called firectly, abort!!!
 defined( 'ABSPATH' ) or die( 'Hey, what are you doing here? You silly human!' );
 
-// Require once the Composer Autoload
-if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
-}
+$App = require __DIR__ . '/bootstrap/start.php';
 
-/**
- * The code that runs during plugin activation
- */
-function activate_careerist() {
-	Inc\Base\Activate::activate();
-}
-register_activation_hook( __FILE__, 'activate_careerist' );
+register_activation_hook( __FILE__, array($App['Plugin'], 'activate') );
+register_deactivation_hook( __FILE__, array($App['Plugin'], 'deactivate') );
 
-/**
- * The code that runs during plugin deactivation
- */
-function deactivate_careerist() {
-	Inc\Base\Deactivate::deactivate();
-}
-register_deactivation_hook( __FILE__, 'deactivate_careerist' );
-
-/**
- * Initialize all the core classes of the plugin
- */
-if ( class_exists( 'Inc\\Init' ) ) {
-	Inc\Init::register_services();
-}
+$App->shutdown(function($App) {
+  if (Bench::duration() > 3) {
+    Bench::dump2file(Path::logs() . '/slow.log');
+  }
+});
