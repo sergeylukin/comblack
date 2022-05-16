@@ -10,11 +10,8 @@ class AdminDashboardProvider extends Provider {
 
     $root = dirname(__DIR__, 2);
 
-		$instance = new Dashboard;
-    $instance->register();
-
     // Register IOC records
-    $this->App->singleton('AdminDashboard', $instance);
+    $this->App->singleton('AdminDashboard', new Dashboard);
 
 
     // Register shortcut Alias
