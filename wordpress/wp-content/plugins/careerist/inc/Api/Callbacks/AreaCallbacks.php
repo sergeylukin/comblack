@@ -4,17 +4,17 @@
  */
 namespace Inc\Api\Callbacks;
 
-class CptCallbacks
+class AreaCallbacks
 {
 
-	public function cptSectionManager()
+	public function areaSectionManager()
 	{
-		echo 'Create as many Custom Post Types as you want.';
+		echo 'Create as many areas as you need.';
 	}
 
-	public function cptSanitize( $input )
+	public function areaSanitize( $input )
 	{
-		$output = get_option('careerist_plugin_cpt');
+		$output = get_option('careerist_plugin_area');
 
 		if ( count($output) == 0 ) {
 			$output[$input['post_type']] = $input;

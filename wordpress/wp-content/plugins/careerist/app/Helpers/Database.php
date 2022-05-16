@@ -12,9 +12,12 @@ class Database {
    */
   protected $wpdb;
 
+	private $tables;
+
 	
-	public function __construct($wpdb) {
+	public function __construct($wpdb, $tables) {
 		$this->wpdb = $wpdb;
+		$this->tables = $tables;
 	}
 	
 	/**
@@ -25,6 +28,11 @@ class Database {
 	*/
 	private function __clone()
 	{
+	}
+
+	public function getAllAreas() {
+		$arr = $App->database->get_results("SELECT * FROM {$this->tables['areas']}");
+		return $arr;
 	}
 
 	public function create_settings() {
@@ -45,35 +53,44 @@ class Database {
 
 		delete_option( 'careerist_plugin' );
 		delete_option( 'careerist_plugin_cpt_settings' );
+		delete_option( 'careerist_plugin_area' );
 
 		return $this;
 	}
 
 	public function create_tables() {
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 		$careerist_db_version = '1.0';
-		$table_name = $this->wpdb->prefix . "careerist_areas"; 
 		$charset_collate = $this->wpdb->get_charset_collate();
 
-		$sql = "CREATE TABLE $table_name (
+		$sql = "CREATE TABLE {$this->tables['areas']} (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			created timestamp NOT NULL default CURRENT_TIMESTAMP,
 			name tinytext NULL,
-			custom_field varchar(255) DEFAULT '' NOT NULL,
-			email varchar(255) DEFAULT '' NOT NULL,
+			adam_id mediumint(9) NULL,
 			UNIQUE KEY id (id)
 		) $charset_collate;";
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
+
+		$sql = "CREATE TABLE {$this->tables['categories']} (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			created timestamp NOT NULL default CURRENT_TIMESTAMP,
+			name tinytext NULL,
+			adam_id mediumint(9) NULL,
+			adam_parent_id mediumint(9) default 0 NOT NULL,
+			UNIQUE KEY id (id)
+		) $charset_collate;";
+		dbDelta( $sql );
+
 		add_option( 'careerist_db_version', $careerist_db_version );
 
 		return $this;
 	}
 
 	public function delete_tables() {
-		$table_name = $this->wpdb->prefix . "careerist_areas"; 
-
-		$this->wpdb->query("DROP TABLE $table_name;");
+		$this->wpdb->query("DROP TABLE {$this->tables['areas']};");
+		$this->wpdb->query("DROP TABLE {$this->tables['categories']};");
 		delete_option( 'careerist_db_version' );
 
 		return $this;

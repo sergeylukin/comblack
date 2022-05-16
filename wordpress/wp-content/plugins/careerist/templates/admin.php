@@ -15,7 +15,7 @@
 
 					<div class="field-container u-relative">
 						<div>
-										<button type="stubmit" class="button-cta" role="button">Trigger sync</button>
+										<button type="submit" class="button-modern" role="button">Trigger sync</button>
 								</div>
 					</div>
 					<div>

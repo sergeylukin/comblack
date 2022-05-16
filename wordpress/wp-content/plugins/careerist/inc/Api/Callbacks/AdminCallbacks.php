@@ -13,48 +13,24 @@ class AdminCallbacks extends BaseController
 		return require_once( "$this->plugin_path/templates/admin.php" );
 	}
 
-	public function adminCpt()
+	public function adminArea()
 	{
-		return require_once( "$this->plugin_path/templates/cpt.php" );
+		return require_once( "$this->plugin_path/templates/area.php" );
 	}
 
-	public function adminTaxonomy()
+	public function adminCategory()
 	{
-		return require_once( "$this->plugin_path/templates/taxonomy.php" );
+		return require_once( "$this->plugin_path/templates/category.php" );
 	}
 
-	public function adminWidget()
+	public function adminJob()
 	{
-		return require_once( "$this->plugin_path/templates/widget.php" );
+		return require_once( "$this->plugin_path/templates/job.php" );
 	}
 
-	public function adminGallery()
+	public function adminLogs()
 	{
-		echo "<h1>Gallery Manager</h1>";
+		return require_once( "$this->plugin_path/templates/logs.php" );
 	}
 
-	public function adminTestimonial()
-	{
-		echo "<h1>Testimonial Manager</h1>";
-	}
-
-	public function adminTemplates()
-	{
-		echo "<h1>Templates Manager</h1>";
-	}
-
-	public function adminAuth()
-	{
-		echo "<h1>Templates Manager</h1>";
-	}
-
-	public function adminMembership()
-	{
-		echo "<h1>Membership Manager</h1>";
-	}
-
-	public function adminChat()
-	{
-		echo "<h1>Chat Manager</h1>";
-	}
 }

@@ -8,12 +8,23 @@ class DatabaseProvider extends Provider {
   public function register() {
 
     global $wpdb;
-    $Database = new Database($wpdb);
+
+    $tables = [
+      "areas" => "{$wpdb->prefix}careerist_plugin_areas",
+      "categories" => "{$wpdb->prefix}careerist_plugin_categories",
+      "jobs" => "{$wpdb->prefix}careerist_plugin_jobs",
+    ];
+
+    $Database = new Database($wpdb, $tables);
 
     $this->App->singleton('Database', $Database);
+    foreach ( $tables as $alias => $fullname)
+    {
+      $this->App->singleton("table.{$alias}", $fullname);
+    }
+
     // Register shortcut Alias
     Alias::add('Database', '\Careerist\Facades\Database');
-
   }
 
   public function unregister() {
