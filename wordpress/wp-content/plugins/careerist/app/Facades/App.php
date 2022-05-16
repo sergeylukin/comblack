@@ -1,4 +1,4 @@
-<?php namespace Facades;
+<?php namespace Careerist\Facades;
 
 class App extends Facade {
 
