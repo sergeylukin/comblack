@@ -12,7 +12,7 @@ use Inc\Api\Callbacks\AdminCallbacks;
 /**
 * 
 */
-class CustomPostTypeController extends BaseController
+class JobAreaEntityController extends BaseController
 {
 	public $settings;
 
@@ -44,10 +44,10 @@ class CustomPostTypeController extends BaseController
 
 		$this->settings->addSubPages( $this->subpages )->register();
 
-		$this->storeCustomPostTypes();
+		$this->storeJobAreaEntitys();
 
 		if ( ! empty( $this->custom_post_types ) ) {
-			add_action( 'init', array( $this, 'registerCustomPostTypes' ) );
+			add_action( 'init', array( $this, 'registerJobAreaEntitys' ) );
 		}
 	}
 
@@ -56,8 +56,8 @@ class CustomPostTypeController extends BaseController
 		$this->subpages = array(
 			array(
 				'parent_slug' => 'careerist_plugin', 
-				'page_title' => 'Custom Post Types', 
-				'menu_title' => 'CPT Manager', 
+				'page_title' => 'Job Area entity', 
+				'menu_title' => 'Areas', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'careerist_cpt', 
 				'callback' => array( $this->callbacks, 'adminCpt' )
@@ -165,7 +165,7 @@ class CustomPostTypeController extends BaseController
 		$this->settings->setFields( $args );
 	}
 
-	public function storeCustomPostTypes()
+	public function storeJobAreaEntitys()
 	{
 		$options = get_option( 'careerist_plugin_cpt' ) ?: array();
 
@@ -220,7 +220,7 @@ class CustomPostTypeController extends BaseController
 		}
 	}
 
-	public function registerCustomPostTypes()
+	public function registerJobAreaEntitys()
 	{
 		foreach ($this->custom_post_types as $post_type) {
 			register_post_type( $post_type['post_type'],

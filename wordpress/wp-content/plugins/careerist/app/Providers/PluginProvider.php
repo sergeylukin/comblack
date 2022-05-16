@@ -5,7 +5,7 @@ use Careerist\Helpers\Plugin;
 use AdminDashboard;
 use AdminEnqueue;
 use AdminSettingsLinks;
-use AdminCustomPostTypeController;
+use JobAreaEntityController;
 
 class PluginProvider extends Provider {
 
@@ -18,7 +18,7 @@ class PluginProvider extends Provider {
     AdminDashboard::register();
     AdminEnqueue::register();
     AdminSettingsLinks::register();
-		AdminCustomPostTypeController::register();
+		JobAreaEntityController::register();
 
 
     // Register shortcut Alias
