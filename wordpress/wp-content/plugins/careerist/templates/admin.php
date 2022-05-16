@@ -3,9 +3,9 @@
 	<?php settings_errors(); ?>
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="#tab-1">Manage Settings</a></li>
-		<li><a href="#tab-2">Updates</a></li>
-		<li><a href="#tab-3">About</a></li>
+		<li class="active"><a href="#tab-1">Settings</a></li>
+		<li><a href="#tab-2">Monitoring</a></li>
+		<li><a href="#tab-3">Docs</a></li>
 	</ul>
 
 	<div class="tab-content u-relative">
@@ -41,11 +41,11 @@
 		</div>
 
 		<div id="tab-2" class="tab-pane">
-			<h3>Updates</h3>
+			<h3>Monitoring</h3>
 		</div>
 
 		<div id="tab-3" class="tab-pane">
-			<h3>About</h3>
+			<h3>Documentation</h3>
 		</div>
 	</div>
 </div>
