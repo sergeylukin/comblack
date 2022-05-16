@@ -2,6 +2,10 @@
 
 use Alias;
 use Careerist\Helpers\Plugin;
+use AdminDashboard;
+use AdminEnqueue;
+use AdminSettingsLinks;
+use AdminCustomPostTypeController;
 
 class PluginProvider extends Provider {
 
@@ -10,6 +14,12 @@ class PluginProvider extends Provider {
     $Plugin = new Plugin($this->App['Database'], $this->App['Logger']);
     // Register IOC record
     $this->App->singleton('Plugin', $Plugin);
+
+    AdminDashboard::register();
+    AdminEnqueue::register();
+    AdminSettingsLinks::register();
+		AdminCustomPostTypeController::register();
+
 
     // Register shortcut Alias
     Alias::add('Plugin', '\Careerist\Facades\Plugin');

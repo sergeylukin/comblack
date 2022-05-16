@@ -14,6 +14,9 @@
         "monolog/monolog": "2.x-dev"
     },
     "autoload": {
-        "psr-4": {"Careerist\\": "./app"}
+        "psr-4": {
+            "Careerist\\": "./app",
+            "Inc\\": "./inc"
+        }
     }
 }
