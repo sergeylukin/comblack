@@ -30,8 +30,8 @@ class Database {
 	public function create_settings() {
 		$default = array();
 
-		if ( ! get_option( 'careerist_plugin_settings' ) ) {
-			update_option( 'careerist_plugin_settings', $default );
+		if ( ! get_option( 'careerist_plugin' ) ) {
+			update_option( 'careerist_plugin', $default );
 		}
 
 		if ( ! get_option( 'careerist_plugin_cpt_settings' ) ) {
@@ -43,7 +43,7 @@ class Database {
 
 	public function delete_settings() {
 
-		delete_option( 'careerist_plugin_settings' );
+		delete_option( 'careerist_plugin' );
 		delete_option( 'careerist_plugin_cpt_settings' );
 
 		return $this;

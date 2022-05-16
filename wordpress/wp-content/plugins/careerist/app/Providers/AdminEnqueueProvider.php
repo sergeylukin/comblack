@@ -10,11 +10,8 @@ class AdminEnqueueProvider extends Provider {
 
     $root = dirname(__DIR__, 2);
 
-		$instance = new Enqueue;
-    $instance->register();
-
     // Register IOC records
-    $this->App->singleton('AdminEnqueue', $instance);
+    $this->App->singleton('AdminEnqueue', new Enqueue);
 
 
     // Register shortcut Alias

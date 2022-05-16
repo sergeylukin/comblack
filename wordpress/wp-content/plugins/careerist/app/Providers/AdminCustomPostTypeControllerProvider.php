@@ -10,11 +10,8 @@ class AdminCustomPostTypeControllerProvider extends Provider {
 
     $root = dirname(__DIR__, 2);
 
-		$instance = new CustomPostTypeController;
-    $instance->register();
-
     // Register IOC records
-    $this->App->singleton('AdminCustomPostTypeController', $instance);
+    $this->App->singleton('AdminCustomPostTypeController', new CustomPostTypeController);
 
 
     // Register shortcut Alias

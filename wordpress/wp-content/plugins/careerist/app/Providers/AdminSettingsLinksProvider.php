@@ -10,12 +10,8 @@ class AdminSettingsLinksProvider extends Provider {
 
     $root = dirname(__DIR__, 2);
 
-		$instance = new SettingsLinks;
-    $instance->register();
-
-    // Register IOC records
-    $this->App->singleton('AdminSettingsLinks', $instance);
-
+    // Register IOC recordsd
+    $this->App->singleton('AdminSettingsLinks', new SettingsLinks);
 
     // Register shortcut Alias
     Alias::add('AdminSettingsLinks', '\Careerist\Facades\AdminSettingsLinks');
