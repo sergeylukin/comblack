@@ -31,7 +31,7 @@ class Database {
 	}
 
 	public function getAllAreas() {
-		$arr = $App->database->get_results("SELECT * FROM {$this->tables['areas']}");
+		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}");
 		return $arr;
 	}
 

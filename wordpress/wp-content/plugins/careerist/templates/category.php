@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h1>Job areas manager</h1>
+	<h1>c areas manager</h1>
 	<?php settings_errors(); ?>
 
 	<ul class="nav nav-tabs">
@@ -39,7 +39,6 @@
 		</div>
 
 		<div id="tab-2" class="tab-pane">
-			<h3>Add/Edit</h3>
 		</div>
 
 		<div id="tab-3" class="tab-pane">

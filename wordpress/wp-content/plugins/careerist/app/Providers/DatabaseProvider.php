@@ -29,7 +29,7 @@ class DatabaseProvider extends Provider {
 
   public function unregister() {
 
-    unset($this->App['Database']);
+    // unset($this->App['Database']);
 
   }
 
