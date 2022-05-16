@@ -3,6 +3,7 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,400';
 
 #wpbody-content {
+  padding-top: 2rem;
   width: 80%;
   max-width: 1200px;
   margin: auto;
@@ -72,9 +73,35 @@ $content-selector: "~ .content > section";
     text-align: center;
     color: $accent;
     font-weight: bold;
-    font-size: 54px;
-    padding: 40px 0 20px 0;
+    padding: 40px 0 0px 0;
+    margin: 0 0 -15px;
+    position: relative;
+    z-index: 1;;
+    font-size: 34px;
+    @media (min-width: map-get($breakpoints, medium)) { font-size: 54px; }
+  }
+
+  figure.illustration {
     margin: 0;
+    padding: 0;
+    position: absolute;
+    svg {
+      height: auto;
+    }
+  }
+  figure.cutie {
+    top: -110px;
+    left: -39px;
+    svg {
+      width: 100px;
+    }
+  }
+  figure.resume {
+    top: -120px;
+        left: 4px;
+    svg {
+      width: 140px;
+    }
   }
 }
 
