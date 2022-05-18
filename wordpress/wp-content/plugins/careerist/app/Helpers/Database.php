@@ -36,14 +36,15 @@ class Database {
 	}
 
 	public function create_settings() {
-		$default = array();
+		$default = array(
+			'jobs_manager' => 1,
+			'areas_manager' => 1,
+			'categories_manager' => 1,
+			'logs_manager' => 0,
+		);
 
 		if ( ! get_option( 'careerist_plugin' ) ) {
 			update_option( 'careerist_plugin', $default );
-		}
-
-		if ( ! get_option( 'careerist_plugin_cpt_settings' ) ) {
-			update_option( 'careerist_plugin_cpt_settings', $default );
 		}
 
 		return $this;
@@ -52,8 +53,6 @@ class Database {
 	public function delete_settings() {
 
 		delete_option( 'careerist_plugin' );
-		delete_option( 'careerist_plugin_cpt_settings' );
-		delete_option( 'careerist_plugin_area' );
 
 		return $this;
 	}

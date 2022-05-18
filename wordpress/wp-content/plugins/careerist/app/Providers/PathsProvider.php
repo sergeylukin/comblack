@@ -50,6 +50,8 @@ class PathsProvider extends Provider {
 
       'logs' => $root.'/logs',
 
+      'templates' => $root.'/templates',
+
     );
 
     // Register IOC records

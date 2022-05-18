@@ -8,8 +8,6 @@ class JobAreaEntityControllerProvider extends Provider {
 
   public function register() {
 
-    $root = dirname(__DIR__, 2);
-
     // Register IOC records
     $this->App->singleton('JobAreaEntityController', new JobAreaEntityController);
 

@@ -23,11 +23,6 @@ class AdminCallbacks extends BaseController
 		return require_once( "$this->plugin_path/templates/category.php" );
 	}
 
-	public function adminJob()
-	{
-		return require_once( "$this->plugin_path/templates/job.php" );
-	}
-
 	public function adminLogs()
 	{
 		return require_once( "$this->plugin_path/templates/logs.php" );
