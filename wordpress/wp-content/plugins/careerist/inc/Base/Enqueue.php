@@ -5,6 +5,7 @@
 namespace Inc\Base;
 
 use Inc\Base\BaseController;
+use Path;
 
 /**
 * 
@@ -21,7 +22,7 @@ class Enqueue extends BaseController
 		wp_enqueue_style( 'tablestyle', '//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css');
 		wp_enqueue_script( 'jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js');
 		wp_enqueue_script( 'tablescript', '//cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js');
-		wp_enqueue_style( 'mypluginstyle', $this->plugin_url . 'assets/mystyle.css' );
-		wp_enqueue_script( 'mypluginscript', $this->plugin_url . 'assets/myscript.js' );
+		wp_enqueue_style( 'careerist_style', $this->plugin_url . 'assets/mystyle.css', array(), filemtime(Path::assets() . '/mystyle.css'));
+		wp_enqueue_script( 'careerist_script', $this->plugin_url . 'assets/myscript.js', array(), filemtime(Path::assets() . '/myscript.js'), true );
 	}
 }
