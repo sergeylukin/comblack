@@ -29,38 +29,76 @@ class SyncJobController extends BaseController
 	}
 
 	public function sync() {
-		global $App;
-
-		global $wpdb;
 
 			header("Content-Type: application/json");
-			$existing_ids = $wpdb->get_col("SELECT adam_id FROM {$App['table.areas']}");
-
-			$areas = $App->AdamAPI->getAreas();
-			$inserts = true;
-			foreach($areas as $area) {
-				if (in_array($area['AreaId'], $existing_ids)) continue;
-
-				$table_name = $App['table.areas'];;
-				$episode_title = sanitize_text_field($_POST['episode_title']);
-				$episode_desc = sanitize_text_field($_POST['episode_desc']);
-				$air_date = sanitize_text_field($_POST['air_date']);
-
-				$insert = $wpdb->insert(
-					$table_name,
-					array(
-						'name' => $area['AreaName'],
-						'adam_id' => $area['AreaId'],
-					)
-				);
-				if (!$insert) $inserts = false;
-			}
+			if ($this->activated('areas_manager')) $this->sync_areas();
+			if ($this->activated('categories_manager')) $this->sync_categories();
+			if ($this->activated('jobs_manager')) $this->sync_jobs();
 			$result = [
-					'success' => (!$insert ? false : true),
-					'foo' => 'barrrr'
+					'success' => true,
 			];
 			echo json_encode($result);
 			die();
+	}
+
+
+	private function sync_areas() {
+		global $App, $wpdb;
+		$existing_ids = $wpdb->get_col("SELECT adam_id FROM {$App['table.areas']}");
+
+		$areas = $App->AdamAPI->getAreas();
+		foreach($areas as $area) {
+			if (in_array($area['adam_id'], $existing_ids)) continue;
+
+			$insert = $wpdb->insert(
+				$App['table.areas'],
+				array(
+					'name' => $area['name'],
+					'adam_id' => $area['adam_id'],
+				)
+			);
+		}
+	}
+
+	private function sync_categories() {
+		global $App, $wpdb;
+		$existing_categories = $wpdb->get_results("SELECT id, adam_id FROM {$App['table.categories']}");
+		$existing_ids = array_map(function($o) { return $o->adam_id;}, $existing_categories);
+
+		$categories = $App->AdamAPI->getCategories();
+		$force_sync = $this->activated('force_sync');
+		foreach($categories as $category) {
+			$exists = in_array($category['adam_id'], $existing_ids);
+
+			if (!$exists) {
+				$insert = $wpdb->insert(
+					$App['table.categories'],
+					array(
+						'name' => $category['name'],
+						'adam_id' => $category['adam_id'],
+						'adam_parent_id' => $category['adam_parent_id'],
+					)
+				);
+			}
+
+			if ($exists && $force_sync) {
+				$index = array_search($category['adam_id'], array_column($existing_categories, 'adam_id'));
+				$row = $existing_categories[$index];
+				$insert = $wpdb->update(
+					$App['table.categories'],
+					array(
+						'name' => $category['name'],
+						'adam_id' => $category['adam_id'],
+						'adam_parent_id' => $category['adam_parent_id'],
+					),
+					array('id' => $row->id)
+				);
+			}
+		}
+	}
+
+	private function sync_jobs() {
+		global $App, $wpdb;
 	}
 
 }

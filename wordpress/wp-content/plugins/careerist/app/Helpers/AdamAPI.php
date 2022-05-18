@@ -23,14 +23,23 @@ class AdamAPI
 
   public function getAreas()
   {
-    return $this->request($this->buildURL(['Career', 'GetArea']));
+    return array_map('self::normalizeArea', $this->request($this->buildURL(['Career', 'GetArea'])));
   }
 
   public function getCategories() {
-    $categories = $this->request($this->buildURL(['Career', 'GetProfession']));
-    $subCategories = $this->request($this->buildURL(['Career', 'GetSubProfession']));
-    if (!$categories || !$subCategories) return false;
-    return array_merge(array_map('self::normalizeCategory', $categories), array_map('self::normalizeCategory', $subCategories));
+    $data = [];
+    $this->useMocks = false;
+    $categories = array_map('self::normalizeCategory', $this->request($this->buildURL(['Career', 'GetProfession'])));
+    foreach ($categories as $category) {
+      array_push($data, $category);
+      $url = $this->buildURL(['Career', 'GetSubProfession']);
+      $subCategories = array_map('self::normalizeCategory', $this->request($url, ['profID' => $category['adam_id']]));
+      foreach ($subCategories as $subCategory) {
+        array_push($data, $subCategory);
+      }
+    }
+    $this->useMocks = trup;
+    return $data;
   }
 
   /*
@@ -56,17 +65,17 @@ class AdamAPI
       $decoded = json_decode($json, true);
       return $decoded;
     } else {
-      $body = json_encode(array_merge(['token' => TOKEN], $params));
+      $body = json_encode(array_merge(['token' => $this->access_token], $params));
       $this->last_response = $this->Http->post($url, [
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
       ], $body);
-      $statusCode = $response->getStatusCode();
+      $statusCode = $this->last_response->status_code;
       if ($statusCode != 200) {
         return false;
       }
 
-      $json = $response->getContent();
+      $json = $this->last_response->body;
     }
     $this->last_response = json_decode($json, true);
     $this->last_request = $url;
@@ -101,7 +110,10 @@ class AdamAPI
 
   static function normalizeCategory($category)
   {
-    $id = (isset($category['SubProfessionID'])) ? $category['SubProfessionID'] : $category['ProfessionID'];
+    /* subprofession gets following format: 9{SubprofessionID}{ParentProfessionID}
+       for example subprofession with ID 4 and parent ID 4 gets transalted to 944
+     */
+    $id = (isset($category['SubProfessionID'])) ? '9'.$category['SubProfessionID'].$category['ProfessionID'] : $category['ProfessionID'];
     $name = (isset($category['SubProfessionName'])) ? $category['SubProfessionName'] : $category['ProfessionName'];
     $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $name))))), $delimiter));
     $parent_id = (isset($category['SubProfessionID'])) ? $category['ProfessionID'] : 0;
@@ -109,8 +121,18 @@ class AdamAPI
     return [
       'name' => $name,
       'slug' => $slug,
-      'adam_api_id' => $id,
-      'parent_adam_api_id' => $parent_id,
+      'adam_id' => $id,
+      'adam_parent_id' => $parent_id,
+    ];
+  }
+
+  static function normalizeArea($area)
+  {
+    $name = (isset($area['AreaName'])) ? $area['AreaName'] : null;
+    $id = (isset($area['AreaId'])) ? $area['AreaId'] : null;
+    return [
+      'name' => $name,
+      'adam_id' => $id,
     ];
   }
 

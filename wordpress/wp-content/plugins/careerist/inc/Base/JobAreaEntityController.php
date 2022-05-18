@@ -6,8 +6,6 @@ namespace Inc\Base;
 
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-use Inc\Api\Callbacks\AreaCallbacks;
-use Inc\Api\Callbacks\AdminCallbacks;
 use Logger;
 
 /**
@@ -16,8 +14,6 @@ use Logger;
 class JobAreaEntityController extends BaseController
 {
 	public $settings;
-
-	public $callbacks;
 
 	public $subpages = array();
 
@@ -28,8 +24,6 @@ class JobAreaEntityController extends BaseController
 		if ( ! $this->activated( 'areas_manager' ) ) return;
 
 		$this->settings = new SettingsApi();
-
-		$this->callbacks = new AdminCallbacks();
 		$logger = \App::resolve('Logger');
 
 		$this->setSubpages();
@@ -46,10 +40,16 @@ class JobAreaEntityController extends BaseController
 				'menu_title' => 'Areas', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'careerist_area', 
-				'callback' => array( $this->callbacks, 'adminArea' )
+				'callback' => array( $this, 'render' )
 			)
 		);
 	}
+
+	public function render()
+	{
+		return require_once( "$this->plugin_path/templates/areas.php" );
+	}
+
 
 
 }

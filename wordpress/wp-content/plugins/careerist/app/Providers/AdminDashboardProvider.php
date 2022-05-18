@@ -7,11 +7,10 @@ use Alias;
 class AdminDashboardProvider extends Provider {
 
   public function register() {
-
-    $root = dirname(__DIR__, 2);
+    global $wpdb;
 
     // Register IOC records
-    $this->App->singleton('AdminDashboard', new Dashboard);
+    $this->App->singleton('AdminDashboard', new Dashboard($this->App, $wpdb));
 
 
     // Register shortcut Alias

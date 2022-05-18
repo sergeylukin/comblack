@@ -6,10 +6,10 @@ use Alias;
 class SyncJobControllerProvider extends Provider {
 
   public function register() {
-
+    global $wpdb;
 
     // Register IOC records
-    $this->App->singleton('SyncJobController', new SyncJobController);
+    $this->App->singleton('SyncJobController', new SyncJobController($this->App, $wpdb));
 
 
     // Register shortcut Alias

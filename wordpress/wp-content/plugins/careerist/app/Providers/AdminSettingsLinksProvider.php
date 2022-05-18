@@ -7,11 +7,10 @@ use Alias;
 class AdminSettingsLinksProvider extends Provider {
 
   public function register() {
-
-    $root = dirname(__DIR__, 2);
+    global $wpdb;
 
     // Register IOC recordsd
-    $this->App->singleton('AdminSettingsLinks', new SettingsLinks);
+    $this->App->singleton('AdminSettingsLinks', new SettingsLinks($this->App, $wpdb));
 
     // Register shortcut Alias
     Alias::add('AdminSettingsLinks', '\Careerist\Facades\AdminSettingsLinks');

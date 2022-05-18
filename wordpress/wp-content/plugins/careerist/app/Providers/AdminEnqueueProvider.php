@@ -7,11 +7,10 @@ use Alias;
 class AdminEnqueueProvider extends Provider {
 
   public function register() {
-
-    $root = dirname(__DIR__, 2);
+    global $wpdb;
 
     // Register IOC records
-    $this->App->singleton('AdminEnqueue', new Enqueue);
+    $this->App->singleton('AdminEnqueue', new Enqueue($this->App, $wpdb));
 
 
     // Register shortcut Alias

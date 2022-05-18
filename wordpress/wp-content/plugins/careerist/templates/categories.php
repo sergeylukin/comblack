@@ -67,21 +67,18 @@
     <section>
 			<h2>Job Categories</h2>
 			<?php 
-			global $App;
-			$DB = $App['Database'];
-			$areas = $DB->getAllAreas();
 
 			echo '<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>';
 
-			foreach ($areas[0] as $k => $v) {
+			foreach ($data[0] as $k => $v) {
 				echo "<td>".$k."</td>";
 			}
 
 			echo '</tr></thead><tbody>';
 
-			foreach($areas as $i=>$j){
+			foreach($data as $i=>$j){
 				echo "<tr>";
-				foreach ($areas[$i] as $k => $v) {
+				foreach ($data[$i] as $k => $v) {
 					echo "<td>".$v."</td>";
 				}
 				echo "</tr>";

@@ -6,14 +6,11 @@ namespace Inc\Pages;
 
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-use Inc\Api\Callbacks\AdminCallbacks;
 use Inc\Api\Callbacks\ManagerCallbacks;
 
 class Dashboard extends BaseController
 {
 	public $settings;
-
-	public $callbacks;
 
 	public $callbacks_mngr;
 
@@ -23,9 +20,7 @@ class Dashboard extends BaseController
 	{
 		$this->settings = new SettingsApi();
 
-		$this->callbacks = new AdminCallbacks();
-
-		$this->callbacks_mngr = new ManagerCallbacks();
+		$this->callbacks_mngr = new ManagerCallbacks($this->App, $this->wpdb);
 
 		$this->setPages();
 
@@ -44,7 +39,7 @@ class Dashboard extends BaseController
 				'menu_title' => 'Careerist', 
 				'capability' => 'manage_options', 
 				'menu_slug' => 'careerist_plugin', 
-				'callback' => array( $this->callbacks, 'adminDashboard' ), 
+				'callback' => array( $this, 'render' ), 
 				'icon_url' => 'dashicons-store', 
 				'position' => 110
 			)
@@ -98,5 +93,9 @@ class Dashboard extends BaseController
 		}
 
 		$this->settings->setFields( $args );
+	}
+
+	public function render() {
+		return require_once( "$this->plugin_path/templates/admin.php" );
 	}
 }

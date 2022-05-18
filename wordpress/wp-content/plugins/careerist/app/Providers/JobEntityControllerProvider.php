@@ -7,9 +7,10 @@ use Alias;
 class JobEntityControllerProvider extends Provider {
 
   public function register() {
+    global $wpdb;
 
     // Register IOC records
-    $this->App->singleton('JobEntityController', new JobEntityController);
+    $this->App->singleton('JobEntityController', new JobEntityController($this->App, $wpdb));
 
 
     // Register shortcut Alias

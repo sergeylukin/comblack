@@ -35,8 +35,15 @@ class Database {
 		return $arr;
 	}
 
+	public function getAllCategories($id = 0) {
+		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['categories']} WHERE adam_parent_id = {$id} ORDER BY adam_id;");
+		return $arr;
+	}
+
 	public function create_settings() {
 		$default = array(
+			'force_sync' => 0,
+			'adam_api_token' => 'ecb8e17c-2acd-413d-a977-12a41b68480a',
 			'jobs_manager' => 1,
 			'areas_manager' => 1,
 			'categories_manager' => 1,

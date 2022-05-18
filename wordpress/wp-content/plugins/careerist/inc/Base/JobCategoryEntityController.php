@@ -50,6 +50,16 @@ class JobCategoryEntityController extends BaseController
 
 	public function render()
 	{
+		$data = [];
+		$DB = $this->App['Database'];
+		$categories = $DB->getAllCategories();
+		foreach ($categories as $category) {
+			array_push($data, $category);
+			$subcategories = $DB->getAllCategories($category->adam_id);
+			foreach ($subcategories as $subcategory) {
+				array_push($data, $subcategory);
+			}
+		}
 		return require_once( Path::templates() . "/categories.php" );
 	}
 
