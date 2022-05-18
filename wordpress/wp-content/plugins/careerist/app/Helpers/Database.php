@@ -44,7 +44,7 @@ class Database {
 		$default = array(
 			'force_sync' => 0,
 			'adam_api_token' => 'ecb8e17c-2acd-413d-a977-12a41b68480a',
-			'jobs_manager' => 1,
+			'jobs_manager' => 0,
 			'areas_manager' => 1,
 			'categories_manager' => 1,
 			'logs_manager' => 0,
@@ -93,6 +93,20 @@ class Database {
 		) $charset_collate;";
 		dbDelta( $sql );
 
+		$sql = "CREATE TABLE {$this->tables['jobs']} (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			created timestamp NOT NULL default CURRENT_TIMESTAMP,
+      adam_updated_date timestamp NULL,
+			adam_description tinytext NULL,
+			adam_id mediumint(9) NULL,
+			adam_category1 mediumint(9) NULL,
+			adam_subcategory1 mediumint(9) NULL,
+			adam_area1 mediumint(9) NULL,
+			UNIQUE KEY id (id),
+			UNIQUE KEY adam_id (adam_id)
+		) $charset_collate;";
+		dbDelta( $sql );
+
 		add_option( 'careerist_db_version', $careerist_db_version );
 
 		return $this;
@@ -101,6 +115,7 @@ class Database {
 	public function delete_tables() {
 		$this->wpdb->query("DROP TABLE {$this->tables['areas']};");
 		$this->wpdb->query("DROP TABLE {$this->tables['categories']};");
+		$this->wpdb->query("DROP TABLE {$this->tables['jobs']};");
 		delete_option( 'careerist_db_version' );
 
 		return $this;

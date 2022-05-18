@@ -21,6 +21,11 @@ class AdamAPI
     $this->useMocks = true;
   }
 
+  public function getJobs()
+  {
+    return array_map('self::normalizeArea', $this->request($this->buildURL(['Career', 'GetOrdersDetails'])));
+  }
+
   public function getAreas()
   {
     return array_map('self::normalizeArea', $this->request($this->buildURL(['Career', 'GetArea'])));
