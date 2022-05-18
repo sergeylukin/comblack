@@ -88,10 +88,12 @@ $nonce = wp_create_nonce("careerist_wire_taxonomy");
 					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='categories' data-careerist_id='{$category->id}'>";
 
 				echo "<option value='0'></option>";
-			foreach($taxonomy_items as $item){
-				$selected = false;
-				if ($category->local_taxonomy_id == $item->term_id) $selected = true;
-				echo "<option " . ($selected ? 'selected' : '') . " value='{$item->term_id}'>{$item->name}</option>";
+			foreach($taxonomy_items as $items){
+				foreach ($items as $item) {
+					$selected = false;
+					if ($category->local_taxonomy_id == $item->term_id) $selected = true;
+					echo "<option " . ($selected ? 'selected' : '') . " value='{$item->term_id}'>{$item->name}</option>";
+				}
 			}
 echo "</select></td>
 				</tr>";

@@ -65,7 +65,18 @@ class JobCategoryEntityController extends BaseController
 				'hide_empty' => false, // also retrieve terms which are not used yet
 				'taxonomy'  => 'categories',
 		);
-		$taxonomy_items = get_terms( $args );
+		$items = get_terms( $args );
+		$taxonomy_items = [];
+		foreach($items as $item) {
+		  if ($item->parent == 0) {
+				if (!isset($taxonomy_items[$item->term_id])) $taxonomy_items[$item->term_id] = [];
+				array_unshift($taxonomy_items[$item->term_id], $item);
+			} else {
+				if (!isset($taxonomy_items[$item->parent])) $taxonomy_items[$item->parent] = [];
+				$taxonomy_items[$item->parent][] = $item;
+
+			}
+		}
 
 		return require_once( Path::templates() . "/categories.php" );
 	}
