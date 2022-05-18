@@ -51,7 +51,7 @@ class SyncJobController extends BaseController
 		foreach($areas as $area) {
 			if (in_array($area['adam_id'], $existing_ids)) continue;
 
-			$insert = $wpdb->insert(
+			$wpdb->insert(
 				$App['table.areas'],
 				array(
 					'name' => $area['name'],
@@ -72,7 +72,7 @@ class SyncJobController extends BaseController
 			$exists = in_array($category['adam_id'], $existing_ids);
 
 			if (!$exists) {
-				$insert = $wpdb->insert(
+				$wpdb->insert(
 					$App['table.categories'],
 					array(
 						'name' => $category['name'],
@@ -85,7 +85,7 @@ class SyncJobController extends BaseController
 			if ($exists && $force_sync) {
 				$index = array_search($category['adam_id'], array_column($existing_categories, 'adam_id'));
 				$row = $existing_categories[$index];
-				$insert = $wpdb->update(
+				$wpdb->update(
 					$App['table.categories'],
 					array(
 						'name' => $category['name'],
@@ -108,10 +108,11 @@ class SyncJobController extends BaseController
 			$exists = in_array($job['adam_id'], $existing_ids);
 
 			if (!$exists) {
-				$insert = $this->wpdb->insert(
+				$this->wpdb->insert(
 					$this->App['table.jobs'],
 					$job
 				);
+				$job_id = $this->wpdb->insert_id;
 
 
 				$post_array = [
@@ -121,7 +122,6 @@ class SyncJobController extends BaseController
 					"post_status"=>"publish",
 				];
 				$post_id = wp_insert_post($post_array);
-				update_field( 'job_id', $insert, $post_id );
 				update_post_meta( $post_id, 'careerist_id', $job_id );
 
 				$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
@@ -139,12 +139,18 @@ class SyncJobController extends BaseController
 					$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
 					wp_set_post_terms( $post_id, [$term_id], 'area' );        
 				}
+
+				$this->wpdb->update(
+					$this->App['table.jobs'],
+					['local_post_id' => $post_id],
+					['id' => $job_id]
+				);
 			}
 
 			if ($exists && $force_sync) {
 				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
 				$row = $existing_jobs[$index];
-				$insert = $this->wpdb->update(
+				$this->wpdb->update(
 					$this->App['table.jobs'],
 					$job,
 					array('id' => $row->id)

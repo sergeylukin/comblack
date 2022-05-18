@@ -93,7 +93,7 @@ class Database {
 	public function create_tables() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$careerist_db_version = '1.3';
+		$careerist_db_version = '1.4';
 		if (get_option('careerist_plugin')) {
 			update_option( 'careerist_db_version', $careerist_db_version );
 		} else {
@@ -132,6 +132,7 @@ class Database {
 			adam_id mediumint(9) NULL,
       category_id mediumint(9) NULL,
       subcategory_id mediumint(9) NULL,
+			local_post_id mediumint(9) NULL,
 			adam_close_date tinytext NULL,
 			adam_closeDate_ddmmyyy tinytext NULL,
 			adam_description text NULL,
