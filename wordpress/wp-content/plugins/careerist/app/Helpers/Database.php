@@ -30,6 +30,20 @@ class Database {
 	{
 	}
 
+	public function adamAreaIdToTaxonomyId($id = 0) {
+		$sql = $this->wpdb->prepare( "SELECT local_taxonomy_id FROM {$this->tables['areas']} WHERE adam_id = %d", $id );
+		$results = $this->wpdb->get_results( $sql , ARRAY_A );
+		if (count($results) > 0) return $results[0]['local_taxonomy_id'];
+		return 0;
+	}
+
+	public function categoryIdToTaxonomyId($id = 0) {
+		$sql = $this->wpdb->prepare( "SELECT local_taxonomy_id FROM {$this->tables['categories']} WHERE id = %d", $id );
+		$results = $this->wpdb->get_results( $sql , ARRAY_A );
+		if (count($results) > 0) return $results[0]['local_taxonomy_id'];
+		return 0;
+	}
+
 	public function getCategoryIdByAdamProfessionId($id) {
 		$sql = $this->wpdb->prepare( "SELECT id FROM {$this->tables['categories']} WHERE adam_id = %d ORDER BY created DESC", $id );
 		$results = $this->wpdb->get_results( $sql , ARRAY_A );

@@ -112,6 +112,33 @@ class SyncJobController extends BaseController
 					$this->App['table.jobs'],
 					$job
 				);
+
+
+				$post_array = [
+					"post_title" => $job['description'],
+					"post_type" => "careers",
+					"post_content" => $job['adam_notes'],
+					"post_status"=>"publish",
+				];
+				$post_id = wp_insert_post($post_array);
+				update_field( 'job_id', $insert, $post_id );
+				update_post_meta( $post_id, 'careerist_id', $job_id );
+
+				$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
+				$wp_subcat_id = $this->App['Database']->categoryIdToTaxonomyId($job['subcategory_id']);
+
+				// attaching the category
+				if($wp_cat_id){
+					$tag = [$wp_cat_id];
+					if ($wp_subcat_id) $tag[] = $wp_subcat_id;
+					wp_set_post_terms( $post_id, $tag, 'categories' );    
+				}  
+
+
+				if ($areaId = $job['adam_order_def_area1']) {
+					$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
+					wp_set_post_terms( $post_id, [$term_id], 'area' );        
+				}
 			}
 
 			if ($exists && $force_sync) {
