@@ -1,6 +1,7 @@
 <?php namespace Careerist\Helpers;
 
 use Requests_Session as Http;
+use Database;
 
 class AdamAPI
 {
@@ -23,7 +24,10 @@ class AdamAPI
 
   public function getJobs()
   {
-    return array_map('self::normalizeArea', $this->request($this->buildURL(['Career', 'GetOrdersDetails'])));
+    return array_filter(array_map('self::normalizeJob', $this->request($this->buildURL(['Career', 'GetOrdersDetails']))), function($i) {
+      if ($i['category_id'] == 0 || $i['subcategory_id'] == 0) return false;
+      return true;
+    });
   }
 
   public function getAreas()
@@ -139,6 +143,23 @@ class AdamAPI
       'name' => $name,
       'adam_id' => $id,
     ];
+  }
+
+  static function normalizeJob($job)
+  {
+    $item = [];
+    foreach ($job as $k=>$v) $item["adam_{$k}"] = $v;
+
+    $catId = Database::getCategoryIdByAdamProfessionId($job['ProffesionID']);
+    $subCatId = Database::getCategoryIdByAdamProfessionId($job['SubProffesionID']);
+
+
+    return array_merge($item, [
+			'description' => $job['description'],
+			'adam_id' => $job['order_id'],
+      'category_id' => $catId,
+      'subcategory_id' => $subCatId,
+    ]);
   }
 
 }

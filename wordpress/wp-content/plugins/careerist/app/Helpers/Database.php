@@ -30,6 +30,13 @@ class Database {
 	{
 	}
 
+	public function getCategoryIdByAdamProfessionId($id) {
+		$sql = $this->wpdb->prepare( "SELECT id FROM {$this->tables['categories']} WHERE adam_id = %d ORDER BY created DESC", $id );
+		$results = $this->wpdb->get_results( $sql , ARRAY_A );
+		if (count($results) > 0) return $results[0]['id'];
+		return 0;
+	}
+
 	public function getAllAreas() {
 		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}");
 		return $arr;
@@ -67,7 +74,7 @@ class Database {
 	public function create_tables() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$careerist_db_version = '1.1';
+		$careerist_db_version = '1.3';
 		if (get_option('careerist_plugin')) {
 			update_option( 'careerist_db_version', $careerist_db_version );
 		} else {
@@ -101,8 +108,8 @@ class Database {
 		$sql = "CREATE TABLE {$this->tables['jobs']} (
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			created timestamp NOT NULL default CURRENT_TIMESTAMP,
-      adam_updated_date timestamp NULL,
-			adam_description tinytext NULL,
+      updated_date timestamp NULL,
+			description tinytext NULL,
 			adam_id mediumint(9) NULL,
       category_id mediumint(9) NULL,
       subcategory_id mediumint(9) NULL,

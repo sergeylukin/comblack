@@ -99,39 +99,30 @@ class SyncJobController extends BaseController
 	}
 
 	private function sync_jobs() {
-		global $App, $wpdb;
-		$existing_ids = $wpdb->get_col("SELECT adam_id FROM {$App['table.jobs']}");
+		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id FROM {$this->App['table.jobs']}");
+		$existing_ids = array_map(function($o) { return $o->adam_id;}, $existing_jobs);
 
-		$jobs = $App->AdamAPI->getJobs();
-		print_r($jobs);
-		// foreach($jobs as $job) {
-		// 	$exists = in_array($job['adam_id'], $existing_ids);
+		$jobs = $this->App->AdamAPI->getJobs();
+		foreach($jobs as $job) {
+			$exists = in_array($job['adam_id'], $existing_ids);
 
-		// 	if (!$exists) {
-		// 		$insert = $wpdb->insert(
-		// 			$App['table.jobs'],
-		// 			array(
-		// 				'name' => $job['name'],
-		// 				'adam_id' => $job['adam_id'],
-		// 				'adam_parent_id' => $job['adam_parent_id'],
-		// 			)
-		// 		);
-		// 	}
+			if (!$exists) {
+				$insert = $this->wpdb->insert(
+					$this->App['table.jobs'],
+					$job
+				);
+			}
 
-		// 	if ($exists && $force_sync) {
-		// 		$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
-		// 		$row = $existing_jobs[$index];
-		// 		$insert = $wpdb->update(
-		// 			$App['table.jobs'],
-		// 			array(
-		// 				'name' => $job['name'],
-		// 				'adam_id' => $job['adam_id'],
-		// 				'adam_parent_id' => $job['adam_parent_id'],
-		// 			),
-		// 			array('id' => $row->id)
-		// 		);
-		// 	}
-		// }
+			if ($exists && $force_sync) {
+				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
+				$row = $existing_jobs[$index];
+				$insert = $this->wpdb->update(
+					$this->App['table.jobs'],
+					$job,
+					array('id' => $row->id)
+				);
+			}
+		}
 	  
 	}
 
