@@ -75,7 +75,11 @@
 			foreach($data as $i=>$j){
 				echo "<tr>";
 				foreach ($data[$i] as $k => $v) {
-					echo "<td>".$v."</td>";
+					if ($k == 'category_id' || $k == 'subcategory_id') {
+						echo "<td>".$categories[$v]->name."</td>";
+					} else {
+						echo "<td>".$v."</td>";
+					}
 				}
 				echo "</tr>";
 			}
