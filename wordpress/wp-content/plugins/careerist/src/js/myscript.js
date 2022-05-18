@@ -67,6 +67,12 @@ console.log(selects)
 			})
 		}
 	);
+
+
+
+
+
+
 });
 
 
@@ -132,3 +138,6 @@ function validateEmail(email) {
 
 
 
+jQuery(document).ready( function () {
+	    jQuery('#myTable').DataTable();
+} );

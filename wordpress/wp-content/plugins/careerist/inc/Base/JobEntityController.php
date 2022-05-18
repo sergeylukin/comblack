@@ -50,6 +50,25 @@ class JobEntityController extends BaseController
 
 	public function render()
 	{
+		$DB = $this->App['Database'];
+		$data = $DB->getAllJobs();
+
+		$args = array(
+				'hide_empty' => false, // also retrieve terms which are not used yet
+				'taxonomy'  => 'categories',
+		);
+		$items = get_terms( $args );
+		$taxonomy_items = [];
+		foreach($items as $item) {
+		  if ($item->parent == 0) {
+				if (!isset($taxonomy_items[$item->term_id])) $taxonomy_items[$item->term_id] = [];
+				array_unshift($taxonomy_items[$item->term_id], $item);
+			} else {
+				if (!isset($taxonomy_items[$item->parent])) $taxonomy_items[$item->parent] = [];
+				$taxonomy_items[$item->parent][] = $item;
+
+			}
+		}
 		return require_once( Path::templates() . "/jobs.php" );
 	}
 

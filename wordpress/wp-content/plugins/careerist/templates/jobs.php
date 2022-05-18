@@ -59,23 +59,22 @@
 			</div>
   <div class="content">
     <section>
-			<h2>Job Areas</h2>
+			<h2>Jobs</h2>
+<div class="u-xscrollable" style="">
 			<?php 
 			global $App;
-			$DB = $App['Database'];
-			$areas = $DB->getAllAreas();
 
-			echo '<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>';
+			echo '<table id="myTable" cellpadding="0" cellspacing="0" border="0" class="cpt-table display"><thead><tr>';
 
-			foreach ($areas[0] as $k => $v) {
+			foreach ($data[0] as $k => $v) {
 				echo "<td>".$k."</td>";
 			}
 
 			echo '</tr></thead><tbody>';
 
-			foreach($areas as $i=>$j){
+			foreach($data as $i=>$j){
 				echo "<tr>";
-				foreach ($areas[$i] as $k => $v) {
+				foreach ($data[$i] as $k => $v) {
 					echo "<td>".$v."</td>";
 				}
 				echo "</tr>";
@@ -83,6 +82,8 @@
 
 				echo '</table>';
 			?>
+</div>
+
 			</section>
         <section>
           <h2>Add/Edit</h2>

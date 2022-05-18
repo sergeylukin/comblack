@@ -18,6 +18,9 @@ class Enqueue extends BaseController
 	function enqueue($hook_suffix) {
 		if (strpos($hook_suffix, '_page_careerist') === false) return;
 		// enqueue all our scripts
+		wp_enqueue_style( 'tablestyle', '//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css');
+		wp_enqueue_script( 'jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js');
+		wp_enqueue_script( 'tablescript', '//cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js');
 		wp_enqueue_style( 'mypluginstyle', $this->plugin_url . 'assets/mystyle.css' );
 		wp_enqueue_script( 'mypluginscript', $this->plugin_url . 'assets/myscript.js' );
 	}

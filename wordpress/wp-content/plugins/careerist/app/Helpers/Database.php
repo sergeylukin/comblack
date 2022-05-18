@@ -37,6 +37,11 @@ class Database {
 		return 0;
 	}
 
+	public function getAllJobs() {
+		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['jobs']} ORDER BY id DESC");
+		return $arr;
+	}
+
 	public function getAllAreas() {
 		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}");
 		return $arr;
