@@ -25,7 +25,6 @@ window.addEventListener("load", function() {
 
 const spans = document.querySelectorAll('.word span');
 
-console.log(spans);
 spans.forEach((span, idx) => {
 	span.addEventListener('click', (e) => {
 		e.target.classList.add('active');
@@ -41,13 +40,10 @@ spans.forEach((span, idx) => {
 })
 
 let selects = document.querySelectorAll('.js-taxonomy-selector')
-console.log(selects)
 	selects.forEach(
 		function(el){
-			console.log(el);
 		let url = el.dataset.url;
 			el.addEventListener('change', (e) => {
-				console.log('changed to ' + e.target.value)
 			let body = {
 				taxonomy: el.dataset.taxonomy,
 				careerist_id: el.dataset.careerist_id,
@@ -56,13 +52,11 @@ console.log(selects)
 				nonce: el.dataset.nonce,
 			}
 		let params = new URLSearchParams(body);
-			console.log(params);
 				fetch(url, {
 					method: "POST",
 					body: params,
 				}).then(res => res.json())
 					.then(response => {
-						console.log(response);
 					})
 			})
 		}
@@ -138,6 +132,64 @@ function validateEmail(email) {
 
 
 
+	function format(d) {
+		// `d` is the original data object for the row
+		var str = ''
+		str += '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'
+		for (var attr in d) {
+			if (attr.slice(0, 4) == 'adam') {
+				str += '<tr>' +
+				'<td>'+attr.replace('adam_', '')+':</td>' +
+				'<td>' +
+				d[attr] +
+				'</td>' +
+				'</tr>'
+			}
+		}
+		str += '</table>'
+		return str
+		
+	}
+// function format (name, value) {
+// 	    return '<div>Name: ' + name + '<br />Value: ' + value + '</div>';
+// }
 jQuery(document).ready( function () {
-	    jQuery('#myTable').DataTable();
+	// jQuery('#myTable').DataTable();
+	/* Formatting function for row details - modify as you need */
+
+	var jobsTable = jQuery('#myTable')
+		var table = jQuery('#myTable').DataTable({
+			ajax: jobsTable[0].dataset.fetchUrl,
+			columns: [
+				{
+					className: 'dt-control',
+					orderable: false,
+					data: null,
+					defaultContent: '',
+				},
+				{ data: 'adam_id' },
+				{ data: 'name' },
+				{ data: 'category' },
+				{ data: 'subcategory' },
+				{ data: 'post' },
+			],
+			order: [[1, 'desc']],
+		});
+
+		// Add event listener for opening and closing details
+		jQuery('#myTable tbody').on('click', 'td.dt-control', function () {
+			var tr = jQuery(this).parent();
+			var row = table.row(tr);
+
+			// row.child(format(tr.data('child-name'), tr.data('child-value'))).show();
+			if (row.child.isShown()) {
+				// This row is already open - close it
+				row.child.hide();
+				tr.removeClass('shown');
+			} else {
+				// Open this row
+				row.child(format(row.data())).show();
+				tr.addClass('shown');
+			}
+		});
 } );

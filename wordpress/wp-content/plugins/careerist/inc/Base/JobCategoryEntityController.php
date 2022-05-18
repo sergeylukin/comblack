@@ -52,10 +52,10 @@ class JobCategoryEntityController extends BaseController
 	{
 		$data = [];
 		$DB = $this->App['Database'];
-		$categories = $DB->getAllCategories();
+		$categories = $DB->getAllCategories(0);
 		foreach ($categories as $category) {
 			array_push($data, $category);
-			$subcategories = $DB->getAllCategories($category->adam_id);
+			$subcategories = $DB->getAllCategories($category['adam_id']);
 			foreach ($subcategories as $subcategory) {
 				array_push($data, $subcategory);
 			}

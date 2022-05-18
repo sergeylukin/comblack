@@ -27,6 +27,7 @@ class SyncJobController extends BaseController
 	{
     add_action("wp_ajax_careerist_sync_trigger", array($this, "sync"));
     add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
+		add_action('wp_ajax_careerist_list_jobs', array($this, 'list_jobs'));
 	}
 
 	public function sync() {
@@ -177,6 +178,33 @@ class SyncJobController extends BaseController
 					'success' => true,
 			];
 			echo json_encode($result);
+		die();
+	}
+
+	public function list_jobs2() {
+      $mock_path = __DIR__ . '/jobs.json';
+      $json = file_get_contents($mock_path);
+			echo $json;
+			die();
+	}
+
+	public function list_jobs() {
+		$DB = $this->App['Database'];
+		$data = $DB->getAllJobs();
+
+		$categories = [];
+		$categories_raw = $DB->getAllCategories();
+		foreach ($categories_raw as $category) {
+			$categories[$category['id']] = $category;
+		}
+		echo json_encode(['data' => array_map(function ($job) use ($categories) {
+			return array_merge($job, [
+				'name' => $job['adam_description'],
+				'category' => $categories[$job['category_id']]['name'],
+				'subcategory' => $categories[$job['subcategory_id']]['name'],
+				'post' => $job['local_post_id'],
+			]);
+		}, $data)]);
 		die();
 	}
 

@@ -79,19 +79,19 @@ $url = admin_url('admin-ajax.php');
 $nonce = wp_create_nonce("careerist_wire_taxonomy");
 			foreach($data as $category){
 				$category_name_style = "";
-				if ($category->adam_parent_id == 0) {
+				if ($category['adam_parent_id'] == 0) {
 					$category_name_style = "background: #CEDBEB";
 				}
 				echo "<tr>
-					<td>{$category->id}</td>
-					<td style='{$category_name_style}'>{$category->name}</td>
-					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='categories' data-careerist_id='{$category->id}'>";
+					<td>{$category['id']}</td>
+					<td style='{$category_name_style}'>{$category['name']}</td>
+					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='categories' data-careerist_id='{$category['id']}'>";
 
 				echo "<option value='0'></option>";
 			foreach($taxonomy_items as $items){
 				foreach ($items as $item) {
 					$selected = false;
-					if ($category->local_taxonomy_id == $item->term_id) $selected = true;
+					if ($category['local_taxonomy_id'] == $item->term_id) $selected = true;
 					echo "<option " . ($selected ? 'selected' : '') . " value='{$item->term_id}'>{$item->name}</option>";
 				}
 			}

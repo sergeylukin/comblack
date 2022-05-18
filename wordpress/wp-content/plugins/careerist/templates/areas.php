@@ -74,14 +74,14 @@ $url = admin_url('admin-ajax.php');
 $nonce = wp_create_nonce("careerist_wire_taxonomy");
 			foreach($data as $area){
 				echo "<tr>
-					<td>{$area->id}</td>
-					<td>{$area->name}</td>
-					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='areas' data-careerist_id='{$area->id}'>";
+					<td>{$area['id']}</td>
+					<td>{$area['name']}</td>
+					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='areas' data-careerist_id='{$area['id']}'>";
 
 				echo "<option value='0'></option>";
 			foreach($taxonomy_items as $item){
 				$selected = false;
-				if ($area->local_taxonomy_id == $item->term_id) $selected = true;
+				if ($area['local_taxonomy_id'] == $item->term_id) $selected = true;
 				echo "<option " . ($selected ? 'selected' : '') . " value='{$item->term_id}'>{$item->name}</option>";
 			}
 echo "</select></td>

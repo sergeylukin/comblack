@@ -52,17 +52,19 @@ class Database {
 	}
 
 	public function getAllJobs() {
-		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['jobs']} ORDER BY id DESC");
+		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['jobs']} ORDER BY id DESC", ARRAY_A);
 		return $arr;
 	}
 
 	public function getAllAreas() {
-		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}");
+		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}", ARRAY_A);
 		return $arr;
 	}
 
-	public function getAllCategories($id = 0) {
-		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['categories']} WHERE adam_parent_id = {$id} ORDER BY adam_id;");
+	public function getAllCategories($id = null) {
+		$where = ($id === null) ? '' : "WHERE adam_parent_id = {$id}";
+		$sql = "SELECT * FROM {$this->tables['categories']} {$where} ORDER BY adam_id;";
+		$arr = $this->wpdb->get_results($sql, ARRAY_A);
 		return $arr;
 	}
 

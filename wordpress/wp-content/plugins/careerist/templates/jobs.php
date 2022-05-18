@@ -60,33 +60,20 @@
   <div class="content">
     <section>
 			<h2>Jobs</h2>
-<div class="u-xscrollable" style="">
-			<?php 
-			global $App;
-
-			echo '<table id="myTable" cellpadding="0" cellspacing="0" border="0" class="cpt-table display"><thead><tr>';
-
-			foreach ($data[0] as $k => $v) {
-				echo "<td>".$k."</td>";
-			}
-
-			echo '</tr></thead><tbody>';
-
-			foreach($data as $i=>$j){
-				echo "<tr>";
-				foreach ($data[$i] as $k => $v) {
-					if ($k == 'category_id' || $k == 'subcategory_id') {
-						echo "<td>".$categories[$v]->name."</td>";
-					} else {
-						echo "<td>".$v."</td>";
-					}
-				}
-				echo "</tr>";
-			}
-
-				echo '</table>';
-			?>
-</div>
+			<div class="u-xscrollable" style="">
+				<table id="myTable" cellpadding="0" cellspacing="0" border="0" class="cpt-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_list_jobs'], admin_url('admin-ajax.php')) ?>">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Adam Id</th>
+							<th>Name</th>
+							<th>Category</th>
+							<th>Subcategory</th>
+							<th>Post ID</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
 
 			</section>
         <section>
