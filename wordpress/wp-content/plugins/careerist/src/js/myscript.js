@@ -153,13 +153,15 @@ function validateEmail(email) {
 // function format (name, value) {
 // 	    return '<div>Name: ' + name + '<br />Value: ' + value + '</div>';
 // }
-jQuery(document).ready( function () {
-	// jQuery('#myTable').DataTable();
+document.addEventListener("DOMContentLoaded", function() {
 	/* Formatting function for row details - modify as you need */
 
-	var jobsTable = jQuery('#myTable')
-		var table = jQuery('#myTable').DataTable({
-			ajax: jobsTable[0].dataset.fetchUrl,
+	var jobsTable = document.getElementById('myTable')
+	let table = new DataTable('#myTable', {
+			ajax: jobsTable.dataset.fetchUrl,
+			// scrollY:        200,
+			// deferRender:    true,
+			// scroller:       true,
 			columns: [
 				{
 					className: 'dt-control',
@@ -174,22 +176,28 @@ jQuery(document).ready( function () {
 				{ data: 'post' },
 			],
 			order: [[1, 'desc']],
+			"initComplete": function(settings, json) {
+				let togglers = document.querySelectorAll('#myTable td.dt-control')
+				for (let i = 0; i < togglers.length; i++) {
+					togglers[i].addEventListener('click', function (evt) {
+						var tr = evt.target.parentNode;
+						var row = table.row(tr);
+
+						// row.child(format(tr.data('child-name'), tr.data('child-value'))).show();
+						if (row.child.isShown()) {
+							// This row is already open - close it
+							row.child.hide();
+							tr.classList.remove('shown');
+						} else {
+							// Open this row
+							row.child(format(row.data())).show();
+							tr.classList.add('shown');
+						}
+					});
+				}
+			},
 		});
 
 		// Add event listener for opening and closing details
-		jQuery('#myTable tbody').on('click', 'td.dt-control', function () {
-			var tr = jQuery(this).parent();
-			var row = table.row(tr);
 
-			// row.child(format(tr.data('child-name'), tr.data('child-value'))).show();
-			if (row.child.isShown()) {
-				// This row is already open - close it
-				row.child.hide();
-				tr.removeClass('shown');
-			} else {
-				// Open this row
-				row.child(format(row.data())).show();
-				tr.addClass('shown');
-			}
-		});
 } );
