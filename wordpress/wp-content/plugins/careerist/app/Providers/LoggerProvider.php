@@ -20,7 +20,7 @@ class LoggerProvider extends Provider {
         $path = '/tmp/';
       }
       $log = new Logger('main');
-      $log->pushHandler(new StreamHandler($path.'/main.log', Logger::DEBUG));
+      $log->pushHandler(new StreamHandler($path.'/main.log', Logger::WARNING));
 
       // Add extra stuff like IP, HOST, REFERER, etc.
       $log->pushProcessor(new \Monolog\Processor\WebProcessor);

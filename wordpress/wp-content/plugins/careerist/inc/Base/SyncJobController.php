@@ -102,6 +102,7 @@ class SyncJobController extends BaseController
 		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id FROM {$this->App['table.jobs']}");
 		$existing_ids = array_map(function($o) { return $o->adam_id;}, $existing_jobs);
 
+		$force_sync = $this->activated('force_sync');
 		$jobs = $this->App->AdamAPI->getJobs();
 		foreach($jobs as $job) {
 			$exists = in_array($job['adam_id'], $existing_ids);
