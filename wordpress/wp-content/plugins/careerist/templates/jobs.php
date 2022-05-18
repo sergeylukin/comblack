@@ -61,7 +61,7 @@
     <section>
 			<h2>Jobs</h2>
 			<div class="u-xscrollable" style="">
-				<table id="myTable" cellpadding="0" cellspacing="0" border="0" class="cpt-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_list_jobs'], admin_url('admin-ajax.php')) ?>">
+				<table id="myTable" cellpadding="0" cellspacing="0" border="0" class="careerist-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_list_jobs'], admin_url('admin-ajax.php')) ?>">
 					<thead>
 						<tr>
 							<th></th>

@@ -66,7 +66,7 @@
   <div class="content">
     <section>
 			<h2>Job Categories</h2>
-			<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>
+			<table cellpadding="0" cellspacing="0" border="0" class="careerist-simple-table display" id="example"><thead><tr>
 
 			<td>id</td>
 			<td>name</td>

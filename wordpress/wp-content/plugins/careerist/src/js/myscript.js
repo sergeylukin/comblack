@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	var jobsTable = document.getElementById('myTable')
 	let table = new DataTable('#myTable', {
 			ajax: jobsTable.dataset.fetchUrl,
-			// scrollY:        200,
-			// deferRender:    true,
-			// scroller:       true,
+			scrollY:        700,
+			deferRender:    true,
+			scroller:       true,
 			columns: [
 				{
 					className: 'dt-control',
