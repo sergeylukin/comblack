@@ -61,29 +61,35 @@
   <div class="content">
     <section>
 			<h2>Job Areas</h2>
-			<?php 
-			global $App;
-			$DB = $App['Database'];
-			$areas = $DB->getAllAreas();
+			<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>
 
-			echo '<table cellpadding="0" cellspacing="0" border="0" class="cpt-table display" id="example"><thead><tr>';
+			<td>id</td>
+			<td>name</td>
+			<td>taxonomy</td>
 
-			foreach ($areas[0] as $k => $v) {
-				echo "<td>".$k."</td>";
+			</tr></thead><tbody>
+
+<?php
+$url = admin_url('admin-ajax.php');
+$nonce = wp_create_nonce("careerist_wire_taxonomy");
+			foreach($data as $area){
+				echo "<tr>
+					<td>{$area->id}</td>
+					<td>{$area->name}</td>
+					<td><select data-nonce='{$nonce}' data-url='{$url}' data-action='careerist_wire_taxonomy' class='js-taxonomy-selector' data-taxonomy='areas' data-careerist_id='{$area->id}'>";
+
+				echo "<option value='0'></option>";
+			foreach($taxonomy_items as $item){
+				$selected = false;
+				if ($area->local_taxonomy_id == $item->term_id) $selected = true;
+				echo "<option " . ($selected ? 'selected' : '') . " value='{$item->term_id}'>{$item->name}</option>";
 			}
-
-			echo '</tr></thead><tbody>';
-
-			foreach($areas as $i=>$j){
-				echo "<tr>";
-				foreach ($areas[$i] as $k => $v) {
-					echo "<td>".$v."</td>";
-				}
-				echo "</tr>";
+echo "</select></td>
+				</tr>";
 			}
+?>
 
-				echo '</table>';
-			?>
+</table>
 			</section>
         <section>
           <h2>Add/Edit</h2>

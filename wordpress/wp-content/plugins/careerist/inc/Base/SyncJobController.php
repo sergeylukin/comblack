@@ -26,6 +26,7 @@ class SyncJobController extends BaseController
 	public function register()
 	{
     add_action("wp_ajax_careerist_sync_trigger", array($this, "sync"));
+    add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
 	}
 
 	public function sync() {
@@ -99,6 +100,26 @@ class SyncJobController extends BaseController
 
 	private function sync_jobs() {
 		global $App, $wpdb;
+	}
+
+	public function wire_taxonomy() {
+		$taxonomy = $_POST['taxonomy'];
+		$careerist_id = $_POST['careerist_id'];
+		$id = $_POST['id'];
+
+		Logger::warning('UPDATING ' . $taxonomy . ' ' . $careerist_id . ' to ' . $id, $_POST);
+		$this->wpdb->update(
+					$this->App["table.{$taxonomy}"],
+					array(
+						'local_taxonomy_id' => $id,
+					),
+					array('id' => $careerist_id)
+				);
+			$result = [
+					'success' => true,
+			];
+			echo json_encode($result);
+		die();
 	}
 
 }

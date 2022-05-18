@@ -60,6 +60,13 @@ class JobCategoryEntityController extends BaseController
 				array_push($data, $subcategory);
 			}
 		}
+
+		$args = array(
+				'hide_empty' => false, // also retrieve terms which are not used yet
+				'taxonomy'  => 'categories',
+		);
+		$taxonomy_items = get_terms( $args );
+
 		return require_once( Path::templates() . "/categories.php" );
 	}
 

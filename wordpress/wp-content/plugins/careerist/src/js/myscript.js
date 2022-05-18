@@ -39,6 +39,34 @@ spans.forEach((span, idx) => {
 		span.classList.add('active');
 	}, 750 * (idx+1))
 })
+
+let selects = document.querySelectorAll('.js-taxonomy-selector')
+console.log(selects)
+	selects.forEach(
+		function(el){
+			console.log(el);
+		let url = el.dataset.url;
+			el.addEventListener('change', (e) => {
+				console.log('changed to ' + e.target.value)
+			let body = {
+				taxonomy: el.dataset.taxonomy,
+				careerist_id: el.dataset.careerist_id,
+				id: e.target.value,
+				action: el.dataset.action,
+				nonce: el.dataset.nonce,
+			}
+		let params = new URLSearchParams(body);
+			console.log(params);
+				fetch(url, {
+					method: "POST",
+					body: params,
+				}).then(res => res.json())
+					.then(response => {
+						console.log(response);
+					})
+			})
+		}
+	);
 });
 
 
@@ -86,6 +114,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
 				testimonialForm.reset();
 			})
 	});
+
+
+
+//wp_ajax_careerist_wire_taxonomy
 });
   
 function resetMessages() {

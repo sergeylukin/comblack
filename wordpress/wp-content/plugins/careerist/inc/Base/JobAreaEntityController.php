@@ -7,6 +7,7 @@ namespace Inc\Base;
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
 use Logger;
+use Path;
 
 /**
 * 
@@ -47,7 +48,17 @@ class JobAreaEntityController extends BaseController
 
 	public function render()
 	{
-		return require_once( "$this->plugin_path/templates/areas.php" );
+		$data = [];
+		$DB = $this->App['Database'];
+		$data = $DB->getAllAreas();
+
+		$args = array(
+				'hide_empty' => false, // also retrieve terms which are not used yet
+				'taxonomy'  => 'area',
+		);
+		$taxonomy_items = get_terms( $args );
+
+		return require_once( Path::templates() . "/areas.php" );
 	}
 
 
