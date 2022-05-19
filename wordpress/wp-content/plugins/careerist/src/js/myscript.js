@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				{ data: 'post' },
 			],
 			order: [[1, 'desc']],
-			"initComplete": function(settings, json) {
+			"drawCallback": function(settings, json) {
 				let togglers = document.querySelectorAll('#myTable td.dt-control')
 				for (let i = 0; i < togglers.length; i++) {
 					togglers[i].addEventListener('click', function (evt) {
