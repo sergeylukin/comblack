@@ -45,6 +45,24 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
 function searchjobsformtest_func($atts) { 
 	$categories = Database::getCategoriesWithTaxonomy();
+	$category = get_queried_object();
+	  $careeristCategory = ['adam_id' => 0];
+	  $careeristMainCategory = ['adam_id' => 0];
+	if ($category) {
+	  $careeristCategory = Database::getCategoryByTermId($category->term_id);
+		if ($careeristCategory['adam_parent_id'] == 0) {
+			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_id']);
+			foreach ($categories as $cat) {
+				if ($cat['adam_parent_id'] == $careeristMainCategory['adam_id']) {
+
+					$careeristCategory = $cat;
+					break;
+				}
+			}
+		} else {
+			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_parent_id']);
+		}
+	}
 	$areas = Database::getAreasWithTaxonomy();
      ob_start(); ?>
 <form name="careeristJobSearchForm" class="searchjobsformtest" method="GET" action="/">
@@ -53,20 +71,25 @@ function searchjobsformtest_func($atts) {
 			<select id="careeristCategorySelect">
 				<option value="0">תחום</option>
 				<?php foreach($categories as $category): if (!$category['is_parent']) continue; ?>
-				<option value="<?php echo $category['adam_id'] ?>"><?php echo $category['name'] ?></option>
+				<option value="<?php echo $category['adam_id'] ?>" <?php echo $category['adam_id'] != $careeristMainCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
 		<div class="rowform1">
 			<select id="careeristSubcategorySelect">
 				<option value="0">מקצוע</option>
+        <?php if ($careeristMainCategory): ?>
+				<?php foreach($categories as $category): if ($category['adam_parent_id'] != $careeristMainCategory['adam_id']) continue; ?>
+				<option value="<?php echo $category['slug'] ?>" <?php echo $category['adam_id'] != $careeristCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
+				<?php endforeach ?>
+				<?php endif ?>
 			</select>
 		</div>
 		<div class="rowform1">
 			<select id="careeristAreaSelect">
 				<option value="0">איזור</option>
 				<?php foreach($areas as $area): ?>
-				<option value="<?php echo $area['slug'] ?>"><?php echo $area['name'] ?></option>
+				<option value="<?php echo $area['slug'] ?>" <?php echo $_GET['area'] != $area['slug'] ?: 'selected' ?>><?php echo $area['name'] ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
