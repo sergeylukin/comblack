@@ -89,7 +89,18 @@
 				</section>
 				<section>
           <h2>Introduction</h2>
-					Documentation will be supplied once MVP is ready.
+         
+					<p>Congratulations on installing Careerist plugin developed personally for your project by <a href="https://sergeylukin.com/">Sergey Lukin</a></p>
+
+<h2>Scheduled task</h2>
+
+<p>In order to set up a scheduled sync task in uPress follow these steps:</p>
+
+<p>- Log in to your account, navigate to `https://my.upress.co.il/account/websites/comblack.s553.upress.link?tab=settings`</p>
+  <p>- Press Advanced settings</p>
+  <p>- Press Manage Cron Jobs</p>
+  <p>- Add a task with following command: `curl --silent "http://comblack.s553.upress.link/wp-admin/admin-ajax.php?action=careerist_sync_trigger"`</p>
+<p>Of course replace URLs with yours if they are different :)</p>
 				</section>
   </div>
 </div>
