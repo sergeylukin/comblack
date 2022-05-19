@@ -10,7 +10,7 @@ class AdamAPIProvider extends Provider {
 
     // Register IOC record
     $AdamAPI = new AdamAPI(new Http);
-    $AdamAPI->useMocks();
+    // $AdamAPI->useMocks();
     $this->App->register('AdamAPI', $AdamAPI);
 
     // Register shortcut Alias
