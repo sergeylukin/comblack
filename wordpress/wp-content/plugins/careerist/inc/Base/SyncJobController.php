@@ -28,6 +28,7 @@ class SyncJobController extends BaseController
     add_action("wp_ajax_careerist_sync_trigger", array($this, "sync"));
     add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
 		add_action('wp_ajax_careerist_list_jobs', array($this, 'list_jobs'));
+		add_action('wp_ajax_careerist_export_jobs', array($this, 'export_jobs'));
 	}
 
 	public function sync() {
@@ -188,7 +189,7 @@ class SyncJobController extends BaseController
 			die();
 	}
 
-	public function list_jobs() {
+	private function _getJobs() {
 		$DB = $this->App['Database'];
 		$data = $DB->getAllJobs();
 
@@ -197,15 +198,46 @@ class SyncJobController extends BaseController
 		foreach ($categories_raw as $category) {
 			$categories[$category['id']] = $category;
 		}
-		echo json_encode(['data' => array_map(function ($job) use ($categories) {
+		return array_map(function ($job) use ($categories) {
 			return array_merge($job, [
 				'name' => $job['adam_description'],
 				'category' => $categories[$job['category_id']]['name'],
 				'subcategory' => $categories[$job['subcategory_id']]['name'],
 				'post' => $job['local_post_id'],
 			]);
-		}, $data)]);
+		}, $data);
+	}
+
+	public function list_jobs() {
+		echo json_encode(['data' => $this->_getJobs()]);
 		die();
+	}
+
+	public function export_jobs() {
+		$jobs = $this->_getJobs();
+		$this->array_to_csv_download($jobs);
+		die();
+	}
+
+	function array_to_csv_download($array = [], $filename = "comblack_jobs.csv", $delimiter="\t") {
+		// open raw memory as file so no temp files needed, you might run out of memory though
+		$f = fopen('php://memory', 'w'); 
+		// loop over the input array
+		if (count($array) > 0) {
+			fputcsv($f, array_keys($array[0]), $delimiter); 
+		}
+		foreach ($array as $line) { 
+			// generate csv lines from the inner arrays
+			fputcsv($f, $line, $delimiter); 
+		}
+		// reset the file pointer to the start of the file
+		fseek($f, 0);
+		// tell the browser it's going to be a csv file
+		header('Content-Type: text/csv');
+		// tell the browser we want to save it instead of displaying it
+		header('Content-Disposition: attachment; filename="'.$filename.'";');
+		// make php send the generated csv lines to the browser
+		fpassthru($f);
 	}
 
 }

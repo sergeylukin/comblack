@@ -82,7 +82,7 @@
 				</section>
 				<section>
           <h2>Export</h2>
-					Under development
+				<a href="<?php echo add_query_arg(['action' => 'careerist_export_jobs'], admin_url('admin-ajax.php')) ?>">Generate CSV export</a>
 				</section>
   </div>
 </div>
