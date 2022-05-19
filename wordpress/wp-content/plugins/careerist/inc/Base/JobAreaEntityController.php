@@ -6,8 +6,10 @@ namespace Inc\Base;
 
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
+use CSV;
 use Logger;
 use Path;
+use Database;
 
 /**
 * 
@@ -30,6 +32,8 @@ class JobAreaEntityController extends BaseController
 		$this->setSubpages();
 
 		$this->settings->addSubPages( $this->subpages )->register();
+
+		add_action('wp_ajax_careerist_export_areas', array($this, 'export'));
 	}
 
 	public function setSubpages()
@@ -61,6 +65,10 @@ class JobAreaEntityController extends BaseController
 		return require_once( Path::templates() . "/areas.php" );
 	}
 
+	public function export() {
+		CSV::from(Database::getAllAreas(), 'comblack_areas.csv');
+		die();
+	}
 
 
 }

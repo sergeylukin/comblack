@@ -157,6 +157,13 @@ $App->registerProviders(array(
 
   'DatabaseProvider',
 
+  /*
+   | CSV exporter
+   |
+   */
+
+  'CSVProvider',
+
 
 ));
 

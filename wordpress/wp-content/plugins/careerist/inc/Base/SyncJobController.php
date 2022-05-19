@@ -8,6 +8,8 @@ use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
 use Inc\Api\Callbacks\AreaCallbacks;
 use Inc\Api\Callbacks\AdminCallbacks;
+use CSV;
+use Database;
 use Logger;
 
 /**
@@ -189,55 +191,14 @@ class SyncJobController extends BaseController
 			die();
 	}
 
-	private function _getJobs() {
-		$DB = $this->App['Database'];
-		$data = $DB->getAllJobs();
-
-		$categories = [];
-		$categories_raw = $DB->getAllCategories();
-		foreach ($categories_raw as $category) {
-			$categories[$category['id']] = $category;
-		}
-		return array_map(function ($job) use ($categories) {
-			return array_merge($job, [
-				'name' => $job['adam_description'],
-				'category' => $categories[$job['category_id']]['name'],
-				'subcategory' => $categories[$job['subcategory_id']]['name'],
-				'post' => $job['local_post_id'],
-			]);
-		}, $data);
-	}
-
 	public function list_jobs() {
-		echo json_encode(['data' => $this->_getJobs()]);
+		echo json_encode(['data' => Database::getJobsWithCategories()]);
 		die();
 	}
 
 	public function export_jobs() {
-		$jobs = $this->_getJobs();
-		$this->array_to_csv_download($jobs);
+		CSV::from(Database::getJobsWithCategories(), 'comblack_jobs.csv');
 		die();
-	}
-
-	function array_to_csv_download($array = [], $filename = "comblack_jobs.csv", $delimiter="\t") {
-		// open raw memory as file so no temp files needed, you might run out of memory though
-		$f = fopen('php://memory', 'w'); 
-		// loop over the input array
-		if (count($array) > 0) {
-			fputcsv($f, array_keys($array[0]), $delimiter); 
-		}
-		foreach ($array as $line) { 
-			// generate csv lines from the inner arrays
-			fputcsv($f, $line, $delimiter); 
-		}
-		// reset the file pointer to the start of the file
-		fseek($f, 0);
-		// tell the browser it's going to be a csv file
-		header('Content-Type: text/csv');
-		// tell the browser we want to save it instead of displaying it
-		header('Content-Disposition: attachment; filename="'.$filename.'";');
-		// make php send the generated csv lines to the browser
-		fpassthru($f);
 	}
 
 }

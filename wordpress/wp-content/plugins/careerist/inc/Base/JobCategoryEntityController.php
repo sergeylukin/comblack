@@ -5,6 +5,8 @@
 namespace Inc\Base;
 
 use Path;
+use CSV;
+use Database;
 use Inc\Api\SettingsApi;
 use Logger;
 
@@ -32,6 +34,8 @@ class JobCategoryEntityController extends BaseController
 		$this->setSubpages();
 
 		$this->settings->addSubPages( $this->subpages )->register();
+
+		add_action('wp_ajax_careerist_export_categories', array($this, 'export'));
 	}
 
 	public function setSubpages()
@@ -79,6 +83,11 @@ class JobCategoryEntityController extends BaseController
 		}
 
 		return require_once( Path::templates() . "/categories.php" );
+	}
+
+	public function export() {
+		CSV::from(Database::getAllCategories(), 'comblack_categories.csv');
+		die();
 	}
 
 }

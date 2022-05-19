@@ -56,6 +56,24 @@ class Database {
 		return $arr;
 	}
 
+	public function getJobsWithCategories() {
+		$data = $this->getAllJobs();
+
+		$categories = [];
+		$categories_raw = $this->getAllCategories();
+		foreach ($categories_raw as $category) {
+			$categories[$category['id']] = $category;
+		}
+		return array_map(function ($job) use ($categories) {
+			return array_merge($job, [
+				'name' => $job['adam_description'],
+				'category' => $categories[$job['category_id']]['name'],
+				'subcategory' => $categories[$job['subcategory_id']]['name'],
+				'post' => $job['local_post_id'],
+			]);
+		}, $data);
+	}
+
 	public function getAllAreas() {
 		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['areas']}", ARRAY_A);
 		return $arr;
