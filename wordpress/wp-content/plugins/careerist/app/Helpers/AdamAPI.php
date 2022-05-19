@@ -151,7 +151,7 @@ class AdamAPI
     foreach ($job as $k=>$v) $item["adam_{$k}"] = $v;
 
     $catId = Database::getCategoryIdByAdamProfessionId($job['ProffesionID']);
-    $subCatId = Database::getCategoryIdByAdamProfessionId($job['SubProffesionID']);
+    $subCatId = Database::getCategoryIdByAdamProfessionId('9'.$job['SubProffesionID'].$job['ProffesionID']);
 
 
     return array_merge($item, [
