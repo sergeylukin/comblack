@@ -86,6 +86,29 @@ class Database {
 		return $arr;
 	}
 
+	public function getCategoriesHierarchy() {
+		$data = [];
+		$categories = $this->getAllCategories(0);
+		foreach ($categories as $category) {
+			array_push($data, $category);
+			$subcategories = $this->getAllCategories($category['adam_id']);
+			foreach ($subcategories as $subcategory) {
+				array_push($data, $subcategory);
+			}
+		}
+		return $data;
+	}
+
+	public function getCategoriesWithTaxonomy() {
+		return array_map(function($category) {
+			$term = get_term( $category['local_taxonomy_id'], 'categories' );
+			return array_merge($category, [
+				'is_parent' => !!$category['adam_parent_id'] == 0,
+				'slug' => $term->slug
+			]);
+		}, $this->getCategoriesHierarchy());
+	}
+
 	public function create_settings() {
 		$default = array(
 			'force_sync' => 0,

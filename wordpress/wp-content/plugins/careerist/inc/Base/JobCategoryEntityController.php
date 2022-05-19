@@ -54,16 +54,8 @@ class JobCategoryEntityController extends BaseController
 
 	public function render()
 	{
-		$data = [];
 		$DB = $this->App['Database'];
-		$categories = $DB->getAllCategories(0);
-		foreach ($categories as $category) {
-			array_push($data, $category);
-			$subcategories = $DB->getAllCategories($category['adam_id']);
-			foreach ($subcategories as $subcategory) {
-				array_push($data, $subcategory);
-			}
-		}
+		$data = $DB->getCategoriesHierarchy();
 
 		$args = array(
 				'hide_empty' => false, // also retrieve terms which are not used yet
