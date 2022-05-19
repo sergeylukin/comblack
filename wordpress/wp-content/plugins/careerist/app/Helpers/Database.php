@@ -118,6 +118,21 @@ class Database {
 		}, $this->getAllAreas());
 	}
 
+	public function getCategoryByAdamId($id = 0) {
+		$sql = "SELECT * FROM {$this->tables['categories']} WHERE adam_id = {$id};";
+		$results = $this->wpdb->get_results($sql, ARRAY_A);
+		if (count($results) > 0) return $results[0];
+		return $results;
+	}
+
+	public function getCategoryByTermId($id = 0) {
+		$where = ($id === null) ? '' : "WHERE local_taxonomy_id = {$id}";
+		$sql = "SELECT * FROM {$this->tables['categories']} {$where};";
+		$results = $this->wpdb->get_results($sql, ARRAY_A);
+		if (count($results) > 0) return $results[0];
+		return $results;
+	}
+
 	public function create_settings() {
 		$default = array(
 			'force_sync' => 0,
