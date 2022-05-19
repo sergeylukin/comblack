@@ -44,17 +44,31 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 //
 add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
 function searchjobsformtest_func($atts) { 
+	$categories = Database::getCategoriesWithTaxonomy();
+	$areas = Database::getAllAreas();
      ob_start(); ?>
-<form class="searchjobsformtest" >
+<form name="careeristJobSearchForm" class="searchjobsformtest" method="GET" action="/">
     <div class="rowform1all99">
 		<div class="rowform1">
-			 <input type="text" placeholder="תחום" />
+			<select id="careeristCategorySelect">
+				<option value="0">תחום</option>
+				<?php foreach($categories as $category): if (!$category['is_parent']) continue; ?>
+				<option value="<?php echo $category['adam_id'] ?>"><?php echo $category['name'] ?></option>
+				<?php endforeach ?>
+			</select>
 		</div>
 		<div class="rowform1">
-			 <input type="text" placeholder="מקצוע" />
+			<select id="careeristSubcategorySelect">
+				<option value="0">מקצוע</option>
+			</select>
 		</div>
 		<div class="rowform1">
-			 <input type="text" placeholder="איזור" />
+			<select id="careeristAreaSelect">
+				<option value="0">איזור</option>
+				<?php foreach($areas as $area): ?>
+				<option value="<?php echo $area['local_taxonomy_id'] ?>"><?php echo $area['name'] ?></option>
+				<?php endforeach ?>
+			</select>
 		</div>
 	</div><!-- mz rowform1all-->
     <div class="rowform2">
@@ -62,6 +76,32 @@ function searchjobsformtest_func($atts) {
 	</div>
 
 </form>
+<script>
+var careerist_categories = <?php echo json_encode($categories) ?>;
+console.log(careerist_categories);
+let careeristCategorySelect = document.getElementById('careeristCategorySelect')
+let careeristSubcategorySelect = document.getElementById('careeristSubcategorySelect')
+let careeristJobSearchForm = document.getElementById('careeristJobSearchForm');
+careeristCategorySelect.addEventListener('change', function(evt) {
+  let catId = evt.target.value
+	let subCategories = careerist_categories.filter((cat) => cat.adam_parent_id === catId)
+	var i, L = careeristSubcategorySelect.options.length - 1;
+	for(i = L; i >= 0; i--) {
+		careeristSubcategorySelect.remove(i);
+	}
+	subCategories.forEach((category) => {
+		var option = document.createElement("option");
+		option.text = category.name;
+		option.value = category.slug;
+		careeristSubcategorySelect.appendChild(option);
+	})
+});
+let careeristAreaSelect = document.getElementById('careeristAreaSelect');
+careeristAreaSelect.addEventListener('change', function(evt) {
+let selectedCategorySlug = careeristSubcategorySelect.value
+document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/?area=' + evt.target.value;
+});
+</script>
 
 
  
