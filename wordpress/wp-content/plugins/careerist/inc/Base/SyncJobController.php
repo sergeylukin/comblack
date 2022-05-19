@@ -28,6 +28,8 @@ class SyncJobController extends BaseController
 	public function register()
 	{
     add_action("wp_ajax_careerist_sync_trigger", array($this, "sync"));
+		// Allow non-logged in visitors run this script
+    add_action("wp_ajax_nopriv_careerist_sync_trigger", array($this, "sync"));
     add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
 		add_action('wp_ajax_careerist_list_jobs', array($this, 'list_jobs'));
 		add_action('wp_ajax_careerist_export_jobs', array($this, 'export_jobs'));
