@@ -109,6 +109,15 @@ class Database {
 		}, $this->getCategoriesHierarchy());
 	}
 
+	public function getAreasWithTaxonomy() {
+		return array_map(function($area) {
+			$term = get_term( $area['local_taxonomy_id'], 'area' );
+			return array_merge($area, [
+				'slug' => $term->slug
+			]);
+		}, $this->getAllAreas());
+	}
+
 	public function create_settings() {
 		$default = array(
 			'force_sync' => 0,

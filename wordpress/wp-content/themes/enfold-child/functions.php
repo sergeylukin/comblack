@@ -45,7 +45,7 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
 function searchjobsformtest_func($atts) { 
 	$categories = Database::getCategoriesWithTaxonomy();
-	$areas = Database::getAllAreas();
+	$areas = Database::getAreasWithTaxonomy();
      ob_start(); ?>
 <form name="careeristJobSearchForm" class="searchjobsformtest" method="GET" action="/">
     <div class="rowform1all99">
@@ -66,7 +66,7 @@ function searchjobsformtest_func($atts) {
 			<select id="careeristAreaSelect">
 				<option value="0">איזור</option>
 				<?php foreach($areas as $area): ?>
-				<option value="<?php echo $area['local_taxonomy_id'] ?>"><?php echo $area['name'] ?></option>
+				<option value="<?php echo $area['slug'] ?>"><?php echo $area['name'] ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
