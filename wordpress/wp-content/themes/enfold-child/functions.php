@@ -71,6 +71,7 @@ function searchjobsformtest_func($atts) {
 			</select>
 		</div>
 	</div><!-- mz rowform1all-->
+		<input id="careeristAreaInput" type="hidden" name="area" value="" />
     <div class="rowform2">
 	     <input type="submit" placeholder=" " value="חפש" />
 	</div>
@@ -99,7 +100,9 @@ careeristCategorySelect.addEventListener('change', function(evt) {
 let careeristAreaSelect = document.getElementById('careeristAreaSelect');
 careeristAreaSelect.addEventListener('change', function(evt) {
 let selectedCategorySlug = careeristSubcategorySelect.value
-document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/?area=' + evt.target.value;
+let areaInput = document.getElementById('careeristAreaInput');
+areaInput.value = evt.target.value
+document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/';
 });
 </script>
 
