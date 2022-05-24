@@ -51,6 +51,11 @@ class Database {
 		return 0;
 	}
 
+	public function getAdamIdByJobId($id) {
+		$adam_id = $this->wpdb->get_col( "SELECT adam_id FROM {$this->tables['jobs']} WHERE local_post_id = %d", $id );
+		return $adam_id;
+	}
+
 	public function getAllJobs() {
 		$arr = $this->wpdb->get_results("SELECT * FROM {$this->tables['jobs']} ORDER BY id DESC", ARRAY_A);
 		return $arr;
