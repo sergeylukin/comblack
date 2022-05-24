@@ -13,7 +13,9 @@ Text Domain: enfold-child
 body , body p , body p a , h1 , h2 , h3 , h4 , h5 , h6 , select {
 	font-family:'Heebo' !important;
 }
-
+.html_header_top.html_header_topbar_active.html_header_sticky #top #main {
+    padding-top: 140px;
+}
 
 #top #wrap_all .header_color.av_header_transparency, #top #wrap_all .header_color.av_header_transparency .phone-info.with_nav span, #top #header.header_color.av_header_transparency .av-main-nav > li > a .avia-menu-text, #top #header.header_color.av_header_transparency .av-main-nav > li > a .avia-menu-subtext {
     color: #fff !important;
@@ -66,6 +68,23 @@ body#top #wrap_all .all_colors .sidebararchive11 h2.widgettitle  {
 	font-size:20px;
 	line-height:29px;
 }
+html #top .all_colors .sidebararchive11 ul li a {
+	font-size:20px;
+	line-height:29px;
+	color:#444;
+}
+html #top .all_colors .sidebararchive11 ul li a:hover {
+	color:#000;
+	text-decoration:underline !important;
+}
+.sidebararchive11 ul {
+    list-style: disc outside;
+    margin-right: 21px !important;
+	overflow: visible;
+}
+.sidebararchive11 ul li::marker  {
+	margin-left:3px;
+}
 .entry-content-wrapper .sidebararchive1  div li .textwidget li ,
 .entry-content-wrapper .sidebararchive11 li .textwidget li {
 	list-style:disc;
@@ -89,6 +108,9 @@ body#top #wrap_all .all_colors .sidebararchive11 h2.widgettitle  {
 }
 .rowform1 {
 	position:relative;
+}
+#top .rowform1 select {
+	background:none !important;
 }
 .rowform1:after {
     content: '';
@@ -141,7 +163,14 @@ body#top #wrap_all .all_colors .sidebararchive11 h2.widgettitle  {
 #top #wrap_all .av-social-link-facebook a   {
     color: #fff !important;
 }
-
+.singlepostwrapall {
+	padding:35px 0 ;
+}
+.singlepostwrapall .termconteinerri , 
+.singlepostwrapall .termconteinerri p {
+	font-size:20px;
+	line-height:32px;
+}
 @media (max-width: 4770px) and (min-width: 1000px) {
 #top #header .av-main-nav > li > a  {
 	 position:relative;
@@ -478,12 +507,12 @@ float: right;
 	float:none;
 }
 .misratestall {
-border-width: 2px;
+border-width: 1px;
     border-style: solid;
-    border-radius: 30px 30px 30px 30px;
-    -webkit-border-radius: 30px 30px 30px 30px;
-    -moz-border-radius: 30px 30px 30px 30px;
-    padding: 50px 50px 50px 50px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    padding: 12px 17px 20px;
     background-color: #f6f6f6;
 }
 .termconteinerri .misratestall {
@@ -492,6 +521,17 @@ border-width: 2px;
 .misratestrow1 {
 font-size: 15px;
     color: #569391;
+	padding-bottom:5px;
+}
+.misratestrow1 span {
+	color:#000;
+	color: #569391;
+	white-space:nowrap;
+}
+.misratestrow1 a {
+	color: #000;
+	display:inline-block;
+	white-space:nowrap;
 }
 .misratestrow2 {
 	font-weight:700;
@@ -501,7 +541,7 @@ font-size: 15px;
 }
 .misratestrow3 {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.35;
     color: #000;
     padding-bottom: 10px;
@@ -509,13 +549,13 @@ font-size: 15px;
 .misratestrow4 {
     text-align: left;
 }
-.misratestrow4 a {
+.misratestrow4 a , a.tuirreadmoremob {
 	border-radius: 30px;
     border-width: 0px;
     padding-left: 24px;
     padding-right: 24px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 3px;
+    padding-bottom: 2px;
     font-family: 'heebo', Helvetica, Arial, sans-serif;
     font-size: 17px;
     font-weight: 500;
@@ -530,6 +570,11 @@ background-color: #569391;
     -o-transition: all 0.4s ease-in-out;
     margin-bottom: 5px;
     margin-right: 5px;
+}
+a.tuirreadmoremob {
+	float:left;
+	padding-top:0;
+	padding-bottom:0;
 }
 /*test*/
 .topsectioncareer    {
@@ -756,6 +801,44 @@ body .home11 h1 {
 	-webkit-filter: grayscale(0) !important;  
      filter: none !important;  
 }
+.yesmobile {
+	display:none;
+}
+.catsallarea .rowform1all99 {
+	width: 80%;
+	float:right;
+}
+.catsallarea .rowform1all99 .rowform1 {
+	width:33.33%;
+	float:right;
+	padding-left:20px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+.catsallarea .rowform2 {
+	width: 20%;
+	float:right;
+}
+#top .catsallarea .rowform1 select {
+    height: 40px;
+    font-size: 20px;
+    color: #000;
+    line-height: 1;
+    background: #fff !important;
+    border-radius: 8px;
+}
+.catsallarea .rowform1:after {
+    left: 34px;
+    border-top9: 7px solid #fff;
+}
+ #top .catsallarea form.searchjobsformtest .rowform2 input {
+    font-size: 20px;
+    line-height: 1;
+}
+.alldatareturnsingle {
+	padding-bottom:30px;
+}
 
 @media (max-width: 1150px) and (min-width: 300px) {
 .mobileonlyselect , .mobileonlyselect2 {
@@ -844,6 +927,12 @@ body .home11	 {
 	display:none !important;
 }
 @media (max-width: 770px) and (min-width: 300px) {
+.yesmobile {
+	display:block;
+}
+#top .nomobile {
+	display:none !important;
+}
 .side-tabs-wrp {
     top: 280px;
 }
@@ -867,10 +956,13 @@ body .home11	 {
 .misratestall {
     border-width: 1px;
     border-style: solid;
-    border-radius: 30px 30px 30px 30px;
-    -webkit-border-radius: 30px 30px 30px 30px;
-    -moz-border-radius: 30px 30px 30px 30px;
-    padding: 20px;
+}
+.misratestall h2 {
+    font-size: 24px;
+    line-height: 1.2em;
+}
+.tiurmoremob {
+	display:inline-block;
 }
 body .home11 h1 , body .home11 h1 span {
 	font-size:50px !important;
@@ -914,6 +1006,23 @@ a.webstudiotext {
 }
 .boxmisrothitech2 {
     min-height: 73px;
+}
+.termconteinerri .misratestall {
+    margin-bottom: 15px;
+}
+.misratestall {
+	padding-bottom:5px;
+}
+.catsallarea .rowform1all99 , .catsallarea .rowform2 {
+	width:100%;
+}
+.catsallarea .rowform1all99 .rowform1 {
+    width: 100%;
+    padding-left:  0px;
+}
+.catsallarea .searchjobsformtest {
+	width:100%;
+	float:left;
 }
 
 }
