@@ -239,7 +239,12 @@
 				$('.side-tabs-wrp, .mobile-contact-tab').addClass('hideMe');
 				$('.side-form').removeClass('hideMe');
 			}
-		});          
+		}); 
+        //
+        $('.tiurmoremob').on('click' , function(){
+			    $('.misratestrow3').hide();
+			   $(this).parent().parent().next().removeClass('nomobile').show() ;
+		});		
 	});
 	//
 	var parentid = $('.subcatsallcareermenu .classactive1').attr('parent-id');

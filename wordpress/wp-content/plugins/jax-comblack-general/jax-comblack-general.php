@@ -19,7 +19,6 @@ define('CLIENT_USERNAME', 'comblackadmin');
 define('CLIENT_PASSWORD', 'Comblack3iX5WVZACLKqww9XN');
 define('CATEGORIES_PAGE_SLUG', 'job-category');
 define('BASE_PLUGIN_DIR', __DIR__);
-define('DEBUG', true);
 
 $jobCategories = [];
 /**
@@ -87,7 +86,7 @@ add_action( 'init', 'my_script_enqueuer' );
 
 function my_script_enqueuer() {
    wp_register_script( "my_user_apply", plugin_dir_url(__FILE__) . 'assets/js/makeJobApplication.js', array('jquery') );
-   wp_localize_script( 'my_user_apply', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+   wp_localize_script( 'my_user_apply', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
 
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script( 'my_user_apply' );

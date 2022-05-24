@@ -29,19 +29,13 @@ if($image['url']) {
 		   </h1>
 	</div><!-- mz wrapperin1-->
 </div><!-- mz topsectioncareer-->
-       <?php 
-		   if(isset($_GET['area']) && strlen($_GET['area']) > 2 ) { ?>
-			    <div id="catsallcareerid" class="catsallcareer catsallarea">
-					<div class="wrapperin2">
-			           <?php   echo do_shortcode('[searchjobsformtest]'); ?>
-					</div><!-- mz wrapperin1-->
-				</div><!-- mz catsallcareer-->
-				<?php
-		   } else { 
-				  include('help-filter-categories.php'); 				 
-				
-		   } 
-	   ?>
+ <div id="catsallcareerid" class="catsallcareer catsallarea">
+    <div class="wrapperin2">
+	        <?php echo do_shortcode('[searchjobsformtest]') ?>
+			 
+	</div><!-- mz wrapperin1-->
+</div><!-- mz catsallcareer-->
+ 
 <div class="termconteinerall1 wrapperallmain">
     <div class="wrapperin2">
            <h2>
@@ -58,38 +52,26 @@ if($image['url']) {
 
 <div class="termconteinerall2 wrapperallmain">
     <div class="wrapperin2">
-           <div class="termconteinerri"> 
+           <div class="termconteinerri">
 		   <p style="text-align: right;"><span style="font-size: 14pt;"><strong> 
-						<?php  echo 'נמצאו '. $wp_query->found_posts.' משרות:'; ?>
-						</strong></span></p>
-		    <?php if( have_posts() ) :
+		   <?php  echo 'נמצאו '. $wp_query->found_posts.' משרות:'; ?>
+		   </strong></span></p>
+		   <?php if( have_posts() ) :
 	          while( have_posts() ) : the_post();
-                   $id = get_the_ID();
-			    
+               $id = get_the_ID();
 			  ?> 
-		  
- 
+			  
 			  	<div class="misratestall">
 				   <div class="misratestrow1"><?php 
-				   
-				   
 				   $alldatareturn = ParentOrChildCategoryOfJob($id , 'noparent' , 'alldatareturn');
 				   echo $alldatareturn ;
-				   //var_dump($mycat);
-				   
-				  /* $areas = get_the_terms( $id , array('area' , 'categories' ) );
-				   foreach($areas as $a) {
-					   $termid = $a->term_id;
-					   echo '<a href="'.get_term_link($termid).'">#'.$a->name.'</a>';
-					   echo ' ';
-					  // echo '<br>';
-				   }*/
-				  // var_dump($areas); 
 				   
 				   ?>
-				   </div> 	    
+				   </div> 
+				   
+                   				   
 				   <h2><a href="<?php echo get_permalink($id) ; ?>" ><?php the_title()  ; ?></a></h2> 
-				   <div class="misratestrow2">
+					<div class="misratestrow2">
 				   <?php if(!wp_is_mobile()) : ?>
 					   <div class="tiurrow nomobile">
 					       תיאור המשרה:
@@ -110,7 +92,7 @@ if($image['url']) {
 				   echo mb_strimwidth($temp, 0, 400, "..."); ;
 				   ?>
 				   </div> 
-				   <div class="misratestrow4"><a class="nomobile" href="<?php echo get_permalink($id) ; ?>" ><span >קרא עוד</span></a></div>    
+				   <div class="misratestrow4"><a  class="nomobile" href="<?php echo get_permalink($id) ; ?>" ><span >קרא עוד</span></a></div>    
 			</div> 
  
 		  <?php endwhile ; 
@@ -122,7 +104,7 @@ if($image['url']) {
 		   
 		   </div><!-- mz termconteinerri-->
            <div class="termconteinerle">
-		   <?php echo do_shortcode('[sidebarNew1]') ?>
+		   <?php  echo do_shortcode('[sidebarNew1]') ?>
 		   
 		   </div><!-- mz termconteinerle-->
 		   

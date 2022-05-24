@@ -52,13 +52,6 @@ function searchjobsformtest_func($atts) {
 	  $careeristCategory = Database::getCategoryByTermId($category->term_id);
 		if ($careeristCategory['adam_parent_id'] == 0) {
 			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_id']);
-			foreach ($categories as $cat) {
-				if ($cat['adam_parent_id'] == $careeristMainCategory['adam_id']) {
-
-					$careeristCategory = $cat;
-					break;
-				}
-			}
 		} else {
 			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_parent_id']);
 		}
@@ -244,9 +237,58 @@ $args = [
 		return $out2;
 } 
 //
-function boxmisrothitecBox(){
+function ParentOrChildCategoryOfJob($post_id = null , $parent = 'yes' , $datacat_and_sun_and_area_return_bytext = false , $datacat_and_child_ids_return_array = false) {
+    $terms = get_the_terms($post_id, 'categories');
+	$parentcatid = 0;
+	$chilrencatids = array();
+	foreach($terms as $key => $term){
+		if($term->parent != 0){
+			$chilrencatids[] = $term->term_id; 
+		}
+		if($term->parent == 0){
+			$parentcatid = $term->term_id; 
+		}
+	}
+	// area
+	$areaterms = get_the_terms($post_id, 'area');
+	$araeidarr = array();
+	foreach($areaterms as $key => $terma){
+		$araeidarr[] = $terma ;
+	}
+	if($datacat_and_sun_and_area_return_bytext == false){ // return id of parent or child
+	    if($datacat_and_child_ids_return_array){
+			$dataarr = array();
+			$dataarr['parentcat'] = $parentcatid;
+			$dataarr['chilrencatids'] = $chilrencatids;
+			return $dataarr ;
+		}
+		if($parent == 'yes') {
+			 return $parentcatid;
+		} else {
+			return $chilrencatids ;
+		}
+	} else { // return full data : cat , subs , area 
+        	
+		$data1 = '<span>תחום:</span> ' . linktotermbyid($parentcatid) . ' <span>|</span> '; 
+		$data2 = '<span>מקצוע:</span> ' . linktotermbyid($chilrencatids) . ' <span>|</span> '; 
+		$data3 = '<span>איזור:</span> ' . linktotermbyid($araeidarr); 
+		$data = $data1 . $data2 . $data3;
+		return $data ;
+	}
 	
-	
+}
+// 
+function linktotermbyid($termid){
+	if(!is_array($termid)) {
+		return '<a href="'.get_term_link($termid).'">'.get_term( $termid )->name.'</a>' ; 
+	} else {
+		$temp = '';
+		foreach($termid as $t) {
+			$temp .= '<a href="'.get_term_link($t).'">'.get_term( $t )->name.'</a> ';
+		}
+		return $temp;
+	}
+	return ;
 }
 
 
