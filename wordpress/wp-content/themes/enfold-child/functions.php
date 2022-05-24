@@ -100,6 +100,7 @@ let careeristCategorySelect = document.getElementById('careeristCategorySelect')
 let careeristSubcategorySelect = document.getElementById('careeristSubcategorySelect')
 let careeristJobSearchForm = document.getElementById('careeristJobSearchForm');
 careeristCategorySelect.addEventListener('change', function(evt) {
+console.log('changed')
   let catId = evt.target.value
 	let subCategories = careerist_categories.filter((cat) => cat.adam_parent_id === catId)
 	var i, L = careeristSubcategorySelect.options.length - 1;
@@ -279,7 +280,7 @@ function ParentOrChildCategoryOfJob($post_id = null , $parent = 'yes' , $datacat
 }
 // 
 function linktotermbyid($termid){
-	if(!is_array($termid)) {
+	if($termid && !is_array($termid)) {
 		return '<a href="'.get_term_link($termid).'">'.get_term( $termid )->name.'</a>' ; 
 	} else {
 		$temp = '';
