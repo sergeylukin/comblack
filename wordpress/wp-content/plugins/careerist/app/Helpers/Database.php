@@ -51,9 +51,11 @@ class Database {
 		return 0;
 	}
 
-	public function getAdamIdByJobId($id) {
-		$adam_id = $this->wpdb->get_col( "SELECT adam_id FROM {$this->tables['jobs']} WHERE local_post_id = %d", $id );
-		return $adam_id;
+	public function getAdamIdByJobId($id = 0) {
+		$sql = $this->wpdb->prepare( "SELECT adam_id FROM {$this->tables['jobs']} WHERE local_post_id = '%d'", intval($id) );
+		$results = $this->wpdb->get_results( $sql , ARRAY_A );
+		if (count($results) > 0) return $results[0]['adam_id'];
+		return 0;
 	}
 
 	public function getAllJobs() {
@@ -124,14 +126,14 @@ class Database {
 	}
 
 	public function getCategoryByAdamId($id = 0) {
-		$sql = "SELECT * FROM {$this->tables['categories']} WHERE adam_id = {$id};";
+		$sql = "SELECT * FROM {$this->tables['categories']} WHERE adam_id = '{$id}';";
 		$results = $this->wpdb->get_results($sql, ARRAY_A);
 		if (count($results) > 0) return $results[0];
 		return $results;
 	}
 
 	public function getCategoryByTermId($id = 0) {
-		$where = ($id === null) ? '' : "WHERE local_taxonomy_id = {$id}";
+		$where = ($id === null) ? '' : "WHERE local_taxonomy_id = '{$id}'";
 		$sql = "SELECT * FROM {$this->tables['categories']} {$where};";
 		$results = $this->wpdb->get_results($sql, ARRAY_A);
 		if (count($results) > 0) return $results[0];

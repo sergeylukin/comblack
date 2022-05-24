@@ -23,6 +23,7 @@
 			  <div class="alldatareturnsingle misratestrow1">
 			  <?php   
 				   $alldatareturn = ParentOrChildCategoryOfJob($id , 'noparent' , 'alldatareturn');
+					 $adam_id = Database::getAdamIdByJobId($id);
 				   echo $alldatareturn ;
 			   ?>
 			   </div><!-- mz alldatareturnsingle-->

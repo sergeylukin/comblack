@@ -49,11 +49,36 @@ function searchjobsformtest_func($atts) {
 	  $careeristCategory = ['adam_id' => 0];
 	  $careeristMainCategory = ['adam_id' => 0];
 	if ($category) {
+		$id = 0;
+		if( have_posts() ) :
+			while( have_posts() ) : the_post();
+				$id = get_the_ID();
+			endwhile ; 
+		endif;
+
+
 	  $careeristCategory = Database::getCategoryByTermId($category->term_id);
-		if ($careeristCategory['adam_parent_id'] == 0) {
-			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_id']);
+		if ($id)  {
+			$mainCategoryId = 0;
+			$categories_terms = wp_get_object_terms( $id,  'categories' );
+			if ( ! empty( $categories_terms ) ) {
+				if ( ! is_wp_error( $categories_terms ) ) {
+					foreach( $categories_terms as $term ) {
+						// echo $term->parent . ' === ';
+						if($term->parent == 0) {
+							// echo "UYESSSS FOUND IT " . $term->term_id;
+							$mainCategoryId = $term->term_id;
+						}
+					}
+				}
+			}
+			$careeristMainCategory = Database::getCategoryByTermId($mainCategoryId);
+		} else if ($careeristCategory['adam_parent_id'] != 0) {
+			$cagegory_adam_id = $careeristCategory['adam_parent_id'];
+			$careeristMainCategory = Database::getCategoryByAdamId($category_adam_id);
 		} else {
-			$careeristMainCategory = Database::getCategoryByAdamId($careeristCategory['adam_parent_id']);
+			$category_adam_id = $careeristCategory['adam_id'];
+			$careeristMainCategory = Database::getCategoryByAdamId($category_adam_id);
 		}
 	}
 	$areas = Database::getAreasWithTaxonomy();
@@ -61,7 +86,7 @@ function searchjobsformtest_func($atts) {
 <form name="careeristJobSearchForm" class="searchjobsformtest" method="GET" action="/">
     <div class="rowform1all99">
 		<div class="rowform1">
-			<select id="careeristCategorySelect">
+			<select class="js-careeristCategorySelect">
 				<option value="0">תחום</option>
 				<?php foreach($categories as $category): if (!$category['is_parent']) continue; ?>
 				<option value="<?php echo $category['adam_id'] ?>" <?php echo $category['adam_id'] != $careeristMainCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
@@ -69,17 +94,17 @@ function searchjobsformtest_func($atts) {
 			</select>
 		</div>
 		<div class="rowform1">
-			<select id="careeristSubcategorySelect">
+			<select class="js-careeristSubcategorySelect">
 				<option value="0">מקצוע</option>
         <?php if ($careeristMainCategory): ?>
-				<?php foreach($categories as $category): if ($category['adam_parent_id'] != $careeristMainCategory['adam_id']) continue; ?>
+				<?php foreach($categories as $category): print_r($category); if ($category['adam_parent_id'] != $careeristMainCategory['adam_id']) continue; ?>
 				<option value="<?php echo $category['slug'] ?>" <?php echo $category['adam_id'] != $careeristCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
 				<?php endforeach ?>
 				<?php endif ?>
 			</select>
 		</div>
 		<div class="rowform1">
-			<select id="careeristAreaSelect">
+			<select class="js-careeristAreaSelect">
 				<option value="0">איזור</option>
 				<?php foreach($areas as $area): ?>
 				<option value="<?php echo $area['slug'] ?>" <?php echo $_GET['area'] != $area['slug'] ?: 'selected' ?>><?php echo $area['name'] ?></option>
@@ -87,7 +112,7 @@ function searchjobsformtest_func($atts) {
 			</select>
 		</div>
 	</div><!-- mz rowform1all-->
-		<input id="careeristAreaInput" type="hidden" name="area" value="" />
+		<input class="js-careeristAreaInput" type="hidden" name="area" value="" />
     <div class="rowform2">
 	     <input type="submit" placeholder=" " value="חפש" />
 	</div>
@@ -96,9 +121,9 @@ function searchjobsformtest_func($atts) {
 <script>
 var careerist_categories = <?php echo json_encode($categories) ?>;
 console.log(careerist_categories);
-let careeristCategorySelect = document.getElementById('careeristCategorySelect')
-let careeristSubcategorySelect = document.getElementById('careeristSubcategorySelect')
-let careeristJobSearchForm = document.getElementById('careeristJobSearchForm');
+let careeristCategorySelect = document.querySelector('.js-careeristCategorySelect')
+let careeristSubcategorySelect = document.querySelector('.js-careeristSubcategorySelect')
+let careeristJobSearchForm = document.querySelector('.js-careeristJobSearchForm');
 careeristCategorySelect.addEventListener('change', function(evt) {
 console.log('changed')
   let catId = evt.target.value
@@ -114,13 +139,17 @@ console.log('changed')
 		careeristSubcategorySelect.appendChild(option);
 	})
 });
-let careeristAreaSelect = document.getElementById('careeristAreaSelect');
-careeristAreaSelect.addEventListener('change', function(evt) {
-let selectedCategorySlug = careeristSubcategorySelect.value
-let areaInput = document.getElementById('careeristAreaInput');
-areaInput.value = evt.target.value
-document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/';
-});
+let careeristAreaSelect = document.querySelector('.js-careeristAreaSelect');
+const formChangeClb = function(evt) {
+	let selectedCategorySlug = careeristSubcategorySelect.value
+	let areaInput = document.querySelector('.js-careeristAreaInput');
+	areaInput.value = careeristAreaSelect.value
+	document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/';
+console.log(document.careeristJobSearchForm.action)
+};
+careeristCategorySelect.addEventListener('change', formChangeClb);
+careeristSubcategorySelect.addEventListener('change', formChangeClb);
+careeristAreaSelect.addEventListener('change', formChangeClb);
 </script>
 
 
