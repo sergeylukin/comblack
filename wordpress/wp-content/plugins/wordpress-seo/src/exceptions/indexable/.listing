@@ -1,7 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           171 Mar  9 04:13 .
-drwxr-xr-x   5 ftp      ftp            88 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp           164 Mar  9 04:13 indexable-exception.php
--rw-r--r--   1 ftp      ftp           747 Mar  9 04:13 invalid-term-exception.php
--rw-r--r--   1 ftp      ftp           451 Mar  9 04:13 post-not-found-exception.php
--rw-r--r--   1 ftp      ftp           153 Mar  9 04:13 source-exception.php
--rw-r--r--   1 ftp      ftp           451 Mar  9 04:13 term-not-found-exception.php

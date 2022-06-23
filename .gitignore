@@ -2,3 +2,4 @@
 /*.tmp/*/
 /*!.tmp/wordpress/.gitkeep*/
 /*!.tmp/mysql/.gitkeep*/
+wordpress/wp-content/uploads/*

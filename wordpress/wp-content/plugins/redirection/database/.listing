@@ -1,6 +1,0 @@
-drwxr-xr-x   3 ftp      ftp            96 Feb  7 04:01 .
-drwxr-xr-x  11 ftp      ftp          4096 Feb  7 04:01 ..
--rw-r--r--   1 ftp      ftp          3806 Feb  7 04:01 database.php
--rw-r--r--   1 ftp      ftp         10080 Feb  7 04:01 database-status.php
--rw-r--r--   1 ftp      ftp          2684 Feb  7 04:01 database-upgrader.php
-drwxr-xr-x   2 ftp      ftp           174 Feb  7 04:01 schema

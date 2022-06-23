@@ -1,9 +1,0 @@
-drwxr-xr-x   6 ftp      ftp           127 Mar  9 04:13 .
-drwxr-xr-x   3 ftp      ftp            17 Mar  9 04:13 ..
-drwxr-xr-x   2 ftp      ftp           210 Mar  9 04:13 Data
-drwxr-xr-x   2 ftp      ftp            49 Mar  9 04:13 Helpers
-drwxr-xr-x   2 ftp      ftp           155 Mar  9 04:13 Output
--rw-r--r--   1 ftp      ftp           370 Mar  9 04:13 QRCodeException.php
--rw-r--r--   1 ftp      ftp          9711 Mar  9 04:13 QRCode.php
--rw-r--r--   1 ftp      ftp          6321 Mar  9 04:13 QROptions.php
-drwxr-xr-x   2 ftp      ftp            50 Mar  9 04:13 Traits

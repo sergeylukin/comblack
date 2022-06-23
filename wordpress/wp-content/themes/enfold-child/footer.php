@@ -272,11 +272,20 @@
 	$(window).scroll(function() {
 		var screenwidth = $(window).width();
 		if( screenwidth > 750 ) {
-			if($(window).scrollTop() > 350) {
-				$('.catsallcareer').addClass('mefixed');
+			if($('body').hasClass('single-careers')) {
+				if($(window).scrollTop() > 10) {
+					$('.catsallcareer').addClass('mefixed');
+				} else {
+					$('.catsallcareer').removeClass('mefixed');
+				}
 			} else {
-				$('.catsallcareer').removeClass('mefixed');
+				if($(window).scrollTop() > 350) {
+					$('.catsallcareer').addClass('mefixed');
+				} else {
+					$('.catsallcareer').removeClass('mefixed');
+				}
 			}
+			
 		}
 	});
 })(jQuery);

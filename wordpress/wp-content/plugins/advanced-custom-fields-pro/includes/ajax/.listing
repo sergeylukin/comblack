@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           256 Apr 14 07:09 .
-drwxr-xr-x  11 ftp      ftp          4096 Apr 14 07:09 ..
--rw-r--r--   1 ftp      ftp          2663 Apr 14 07:09 class-acf-ajax-check-screen.php
--rw-r--r--   1 ftp      ftp          2771 Apr 14 07:09 class-acf-ajax-local-json-diff.php
--rw-r--r--   1 ftp      ftp          4575 Apr 14 07:09 class-acf-ajax.php
--rw-r--r--   1 ftp      ftp          3309 Apr 14 07:09 class-acf-ajax-query.php
--rw-r--r--   1 ftp      ftp          7539 Apr 14 07:09 class-acf-ajax-query-users.php
--rw-r--r--   1 ftp      ftp          1122 Apr 14 07:09 class-acf-ajax-upgrade.php
--rw-r--r--   1 ftp      ftp           916 Apr 14 07:09 class-acf-ajax-user-setting.php

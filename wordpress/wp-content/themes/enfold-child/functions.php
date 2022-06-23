@@ -243,7 +243,7 @@ $args = [
 					$topsectioncareerstyle = "11";
 				}
 				 ?>
-                 <a class="boxmisrothiteclink" href="<?php echo get_term_link($t->term_id) ; ?>">
+                 <a class="boxmisrothiteclink" href="<?php if ($t->term_id) { echo get_term_link($t->term_id); } ?>">
 				<div class="widgetimagetitleall boxmisrothitec av-animated-generic bottom-to-top avia_start_delayed_animation99" <?php echo  $topsectioncareerstyle ; ?>>
 				      <div class="boxmisrothitech2">
 					        <h2><?php echo  $t->name; ?></h2> 
@@ -301,7 +301,7 @@ function ParentOrChildCategoryOfJob($post_id = null , $parent = 'yes' , $datacat
         	
 		$data1 = '<span>תחום:</span> ' . linktotermbyid($parentcatid) . ' <span>|</span> '; 
 		$data2 = '<span>מקצוע:</span> ' . linktotermbyid($chilrencatids) . ' <span>|</span> '; 
-		$data3 = '<span>איזור:</span> ' . linktotermbyid($araeidarr); 
+		$data3 = '<span class="eizorspan"><span>איזור:</span> ' . linktotermbyid($araeidarr).'</span>'; 
 		$data = $data1 . $data2 . $data3;
 		return $data ;
 	}
@@ -320,5 +320,431 @@ function linktotermbyid($termid){
 	}
 	return ;
 }
+//
+add_shortcode( 'lastjobs', 'lastjobs_func' ); 
+function lastjobs_func($atts) { 
+     ob_start();
+$args = array(
+    'post_type' => 'careers',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'post_status' => 'publish',
+    'posts_per_page' => 5
+     );
+$query = new WP_Query( $args ); 
+if ( $query->have_posts() ) {
+	echo '<div class="lastjobswidgetall"> ';
+    while ( $query->have_posts() ) {
+        $query->the_post();
+		$id = get_the_id(); ?>
+		 <div class="misratitlerowlast"> 
+              <?php echo '<a class="atitlew" href="'.get_permalink($id).'">'.get_the_title().'</a>'; ?>  
+		 </div><!-- mz misratitlerowlast--> 
+		 <div class="misratestrow1"> 
+			<?php
+			$ParentOrChildCategoryOfJob = ParentOrChildCategoryOfJob($id , 'yes9' , true ,false);
+			echo $ParentOrChildCategoryOfJob;
+			?>
+		 </div><!-- mz misratestrow1--> 
+		 <div class="mafridbottom"></div>
+	 <?php
+ 
+    } 
+	echo '</div><!-- mz lastjobswidgetall-->';
+}
+wp_reset_postdata();
+	 ?>
+ 
+		<?php
+		$out2 = ob_get_contents();
+		ob_end_clean();
+		return $out2;
+} 
+//   
+function relativejobs_func($postid) { 
+     ob_start();
+	 
+	  $mychildcatid =  ParentOrChildCategoryOfJob($postid ,  'yes9' ,  false  ) ;
+	 // echo $mychildcatid[0] ;
+$args = array(
+    'post_type' => 'careers',
+    'orderby' => 'date',
+    'order' => 'DESC',
+    'post_status' => 'publish',
+    'posts_per_page' => 3 , 
+	'tax_query' =>
+              array(
+                        array(
+                          'taxonomy' => 'categories',
+                          'field'    => 'id',
+                          'terms'    => $mychildcatid[0] 
+                        ),
+                      ), 
+     );
+$query = new WP_Query( $args ); 
+if ( $query->have_posts() ) {
+	echo '<div class="relativejobsboxall"> ';
+    while ( $query->have_posts() ) {
+        $query->the_post();
+		$id = get_the_id(); ?>
+		 <div class="relativejobsbox1"> 
+			   <h3>
+			   <a class="atitlewrelativ" href="<?php echo get_permalink($id); ?>">
+			   <?php echo get_the_title(); ?>
+			   </a> 
+			   </h3>
+			   <div class="atextwrelativ">
+			        <?php echo the_excerpt() ; ?>
+			   </div><!-- mz atextwrelativ-->
+			   <div class="divider1"><span></span></div><!-- mz divider1--> 
+			   <a class="atitlewrelativbutton" href="<?php echo get_permalink($id); ?>">
+			   קרא עוד
+			   </a> 
+		  <div class="misratestrow1999"> 
+			<?php
+			//$ParentOrChildCategoryOfJob = ParentOrChildCategoryOfJob($id , 'yes9' , true ,false);
+			//echo $ParentOrChildCategoryOfJob;
+			?>
+		 </div><!-- mz misratestrow1-->   
+		 </div><!-- mz relativejobsbox1--> 
+		  
+		  
+	 <?php
+ 
+    } 
+	echo '</div><!-- mz relativejobsboxall-->';
+}
+wp_reset_postdata();
+	 ?>
+ 
+		<?php
+		$out2 = ob_get_contents();
+		ob_end_clean();
+		return $out2;
+} 
+
+
+
+
+// crm form [crmformNew courceid=""]
+add_shortcode( 'crmformNew', 'crmformNew_func' ); 
+function crmformNew_func($atts) { 
+     ob_start(); 
+		 $formclasslang = 'crmformhe';
+		 $fullnamelang = 'שם מלא';
+		 $fullnamelangerror = 'יש להקליד שם מלא';
+		 $phonelang = 'נייד';
+		 $phonelangerror = 'יש להקליד מספר טלפון';
+		 $emaillang ="דוא&quot;ל";
+		 $emaillangerror ="ש להקליד כתובת מייל תקנית";
+		 $sendbutton = "שלח";
+		 $checkboxlang = 'אני מאשר קבלת חומר פרסומי, שיווקי ואחר לפרטים אלה';
+		 
+		 $courceid = 9236 ;
+	      
+	 ?>
+    <form    class="crmform <?php echo $formclasslang   ?>"  enctype="multipart/form-data" name="form" id="crmformnewid" method="POST" action="<?php echo get_page_link(get_the_ID());?>"   onsubmit="return validateFormSimple1(this);">
+
+		<div class="formcrmall">
+		<div class="formcrmrow">
+		 <input type="hidden" name="courceid" value="<?php echo $courceid ; ?>" />
+		 <input type="text" placeholder="Company" name="malkodetdvash"    class="malkodetdvash" >
+			<div class="formcrmcell formcrmcellright"> 
+					 <input class="must1"  type="text" placeholder="שם" name="firstname9"    >
+					 <div class="erroritem"></div> 
+			</div>
+			<div class="formcrmcell formcrmcellleft"> 
+					<div class="_input ">
+					<input class="must1" type="tel" placeholder="טלפון" name="phone9" >
+					<div class="erroritem"></div> 
+				 
+				</div>			
+			</div>
+			<div class="formcrmcell formcrmcellright"> 
+					<div class="_input ">
+						<input class="must1"  type="email" placeholder="אימייל" name="email9"  >
+						<div class="erroritem"></div> 
+					</div>				
+				</div>
+			<?php if(  false): ?>
+			<div class="formcrmcell formcrmcellleft"> 
+					<div class="_input ">
+					<input  class="must1" type="text"  placeholder="תעודת זהות" name="teze9" >
+					<div class="erroritem"></div> 
+				</div>			
+			</div>
+			<?php endif ; ?>
+			<?php if(true): ?>
+            <div class="formcrmrow">
+		
+				<div class="formcrmcell formcrmcellfull formcrmcell50centered">
+				  <div class="_input">
+                         <input  class="must1no" type="file" placeholder="קורות חיים" id="file" name="file" />
+						 <div class="erroritem"></div>
+                  </div>
+               </div>
+		    </div>
+			<?php endif ; ?>
+		</div>
+		<div class="formcrmrow">
+				
+				<div class="formcrmcell formcrmcellleft"> 
+				<div class="_input _submit">
+                    <div id="submitdiv"><?php echo $sendbutton ; ?></div>
+					<button style="display:none;" type="submit"><?php echo $sendbutton ; ?></button>
+				</div>
+				
+				</div>
+				<div class="sendsuccessmsg">הודעה נשלחה בהצלחה</div> 
+		</div>
+		
+		 
+</div> 
+ 
+    </form>
+
+ 
+<script type="text/javascript">
+(function($){
+$(window).load(function() {
+    $('#submitdiv').on('click' , function(){
+		 //
+		 if(validateFormSimple1()) {  console.log('submitdiv');
+			  //send_api_data_theme();
+			  $('.sendsuccessmsg').show();
+			   //window.location.href = 'https://comblack.co.il/thank-you/';
+		 }
+	});
+});
+})(jQuery);
+
+function send_api_data_theme(){ 
+console.log('send_api_data_theme');
+        var fname , lname ,  email , phone ,  city , teze , cvfile ;
+		if (document.getElementById("apiamail") || true) {
+			 
+              if(jQuery("#file" ).length != 0) {
+				cvfile = jQuery("#file").val();
+				// var files = jQuery('#file')[0].files;
+				var file_data = jQuery('#file').prop('files')[0];
+			  } else {
+				  cvfile = '';
+				  var file_data = '';
+			  }
+			  var form_data = new FormData();
+			  form_data.append('file', file_data);
+              form_data.append('action', 'review_vote_ajax_request'); 
+              form_data.append('fname', jQuery('#crmformnewid').find('input[name=firstname9]').val()); 
+              form_data.append('lname', jQuery('#crmformnewid').find('input[name=lastname9]').val()); 
+              form_data.append('email', jQuery('#crmformnewid').find('input[name=email9]').val()); 
+              form_data.append('phone', jQuery('#crmformnewid').find('input[name=phone9]').val()); 
+              form_data.append('city', jQuery('#crmformnewid').find('input[name=city9]').val()); 
+              //form_data.append('teze', jQuery('#crmformnewid').find('input[name=teze9]').val()); 
+              form_data.append('courceid', jQuery('#crmformnewid').find('input[name=courceid]').val()); 
+			jQuery.ajax({
+				type:"POST",
+				url: ajaxurl,
+				contentType: false,
+                processData: false,
+                data: form_data,
+				success:function(data){
+				     console.log(data);
+				},
+				error: function(errorThrown){
+				     console.log(errorThrown);
+				}
+			});
+       } //if
+ 
+     return false;
+    }  
+function validateFormSimple1(form) {   	 
+	var myform =  jQuery('form#crmformnewid');
+	var mustinputs = myform.find('.must1'); console.log()
+	var labeltext = '';
+	var errors = 0;
+	mustinputs.each(function(index, el) {  
+		jQuery(el).on('keypress click' , function(){
+				jQuery(el).removeClass('notvalid');
+				jQuery(el).next().text('');
+			});	
+        if(jQuery(el).val() == '' || jQuery(el).val() == null) { 
+			 jQuery(el).focus(); 
+			 jQuery(el).addClass('notvalid');
+			labeltext = jQuery(el).attr("placeholder");
+			 jQuery(el).parent().children('.erroritem').text('נא למלא שדה חובה -  ' + labeltext);
+			errors = 1;	
+		}
+		if(jQuery(el).attr('type') == 'email' ) {  //alert('2');
+			var email = jQuery(el).val();
+			 var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+			if (!filter.test(email)) {
+				jQuery(el).focus();
+				 jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('נא למלא שדה אימייל בצורה תקינה' );
+				
+				 errors = 1; 
+				 // return false; 
+			}
+ 			
+		}
+		//
+		if(jQuery(el).attr('type') == 'tel' ) {  //alert('2');
+			var phone = jQuery(el).val();
+			 var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+			 if (!filter.test(phone)) {
+				jQuery(el).focus();
+				 jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('נא למלא שדה טלפון בצורה תקינה' );
+				
+				 errors = 1; 
+				 // return false; 
+			}
+			if(phone.length == 10 || phone.length == 9){
+				
+			} else {
+				jQuery(el).focus();
+				jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('נא למלא שדה טלפון בצורה תקינה' );
+				
+				 errors = 1; 
+			}
+ 			
+		}
+		if(jQuery(el).attr('name') == 'teze9' ) {   //alert('3');
+			var teze = jQuery(el).val();
+			 var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+			 if (!filter.test(teze)) {
+				jQuery(el).focus();
+				 jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('נא למלא שדה תעודת זהות בצורה תקינה' );
+				
+				 errors = 1; 
+				 // return false; 
+			}
+			if(teze.length == 10 || teze.length == 9){
+				
+			} else {
+				jQuery(el).focus();
+				jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('נא למלא שדה תעודת זהות בצורה תקינה' );
+				
+				 errors = 1; 
+			}
+ 			
+		}
+		if(jQuery(el).attr('name') == 'file' ) {
+			 var korot = jQuery(el).val(); console.log(korot + '1');
+			if(korot == ''){
+				jQuery(el).addClass('notvalid');
+			         jQuery(el).parent().children('.erroritem').text('יש להעלות קובץ קורות חיים' );
+			         //jQuery(el).parent().children('.erroritem').text(korot);
+				
+				 errors = 1; 
+			}
+		}
+    });
+	if(errors == 1) {
+		return false ;
+	} else {
+		  return true;
+	}
+}	
+</script> 
+		<?php
+		$out2 = ob_get_contents();
+		ob_end_clean();
+		return $out2;
+		 
+} 
+function sendMailNew() { 
+	 $filename = $_FILES['file']['name'];
+	 
+	 /* Location */
+	$location = __DIR__."/cvuploads/".$filename;
+	//var_dump($location); echo '<hrhrh>';
+	
+	$imageFileType = pathinfo($location,PATHINFO_EXTENSION);
+	$imageFileType = strtolower($imageFileType);
+	 
+    /* Valid extensions */
+	$valid_extensions =  array('pdf', 'doc', 'docx', 'jpg', 'png', 'jpeg'); 
+    $response = 0;
+	 
+	/* Check file extension */
+	if(in_array(strtolower($imageFileType), $valid_extensions)) { //echo 'yes';
+	   	/* Upload file */
+		//var_dump(move_uploaded_file($_FILES['file']['tmp_name'],$location)) ;
+	 
+	   	if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
+	     	$response = $location;
+	   	}  
+	}
+    if($response != 0 ){
+		$response = $location;
+	}
+	// echo $response; // location uploaded to server
+ 
+/////////////////
+
+//header("Access-Control-Allow-Origin: *");
+ header("Content-Type: text/html; charset=UTF-8");
+ 
+//var_dump($_POST);
+         $fname =  $_POST['fname'];
+         $lname =  $_POST['lname'];
+         $email =  $_POST['email'];
+         $phone =  $_POST['phone'];
+         $city =  $_POST['city'];
+         $teze =  $_POST['teze'];
+         $cvfile =  $response;
+         $courceid =  $_POST['courceid'];
+		 
+$subject = "Lead from bluetech-ed.co.il ". $courceid ;
+
+$body .= "שם:  " . $fname  . "\n"; 
+if($lname != 'undefined')
+	$body .= "שם משפחה:  " . $lname  . "\n" ; 
+if($phone != 'undefined')
+	$body .= "טלפון:  " . $phone . "\n" ; 
+$body .= "אימייל/מייל:  " . $email . "\n"; 
+if($teze != 'undefined')
+	$body .= "תעודת זהות:  " . $teze . "\n";
+if($city != 'undefined')
+	$body .= "עיר:  " . $city . "\n"; 
+$body .= "נושא:  " . $courceid . "\n"; 
+//$body .= $movefile['url'] . "\n"; 
+//$body .= "נשלח מעמוד:" .  $_SERVER['HTTP_REFERER'] . "\n" . "\n";
+$body .= "\n";
+
+$attachments = array($response);
+
+   //var_dump($_POST);
+    // wp_mail( "michaelzait@gmail.com", $subject, $body, 'From: comblack.co.il website <noreply@comblack.co.il.co.il>' , $attachments );
+   
+   //wp_mail( "jobs.comblack@adamtotal.co.il", $subject, $body, 'From: com.co.il website <noreply@com.co.il.co.il>' , $attachments );
+} 
+ 
+//
+function review_vote_ajax_request() {
+       // sendMailNew();		  
+wp_die();
+}
+ 
+add_action( 'wp_ajax_nopriv_review_vote_ajax_request', 'review_vote_ajax_request' );
+add_action( 'wp_ajax_review_vote_ajax_request', 'review_vote_ajax_request' );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

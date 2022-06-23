@@ -1,8 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           158 Mar  9 04:13 .
-drwxr-xr-x   5 ftp      ftp          4096 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp          1359 Mar  9 04:13 article-helper.php
--rw-r--r--   1 ftp      ftp          2026 Mar  9 04:13 html-helper.php
--rw-r--r--   1 ftp      ftp           691 Mar  9 04:13 id-helper.php
--rw-r--r--   1 ftp      ftp          5391 Mar  9 04:13 image-helper.php
--rw-r--r--   1 ftp      ftp           818 Mar  9 04:13 language-helper.php
--rw-r--r--   1 ftp      ftp          3572 Mar  9 04:13 replace-vars-helper.php

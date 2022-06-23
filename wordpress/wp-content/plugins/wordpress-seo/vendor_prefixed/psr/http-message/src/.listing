@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           209 Mar  9 04:13 .
-drwxr-xr-x   3 ftp      ftp            17 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp          6950 Mar  9 04:13 MessageInterface.php
--rw-r--r--   1 ftp      ftp          4894 Mar  9 04:13 RequestInterface.php
--rw-r--r--   1 ftp      ftp          2639 Mar  9 04:13 ResponseInterface.php
--rw-r--r--   1 ftp      ftp         10136 Mar  9 04:13 ServerRequestInterface.php
--rw-r--r--   1 ftp      ftp          4749 Mar  9 04:13 StreamInterface.php
--rw-r--r--   1 ftp      ftp          4684 Mar  9 04:13 UploadedFileInterface.php
--rw-r--r--   1 ftp      ftp         12609 Mar  9 04:13 UriInterface.php

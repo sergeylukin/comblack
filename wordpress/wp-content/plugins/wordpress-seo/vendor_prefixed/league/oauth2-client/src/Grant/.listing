@@ -1,9 +1,0 @@
-drwxr-xr-x   3 ftp      ftp           174 Mar  9 04:13 .
-drwxr-xr-x   7 ftp      ftp            82 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp          2494 Mar  9 04:13 AbstractGrant.php
--rw-r--r--   1 ftp      ftp          1057 Mar  9 04:13 AuthorizationCode.php
--rw-r--r--   1 ftp      ftp          1050 Mar  9 04:13 ClientCredentials.php
-drwxr-xr-x   2 ftp      ftp            39 Mar  9 04:13 Exception
--rw-r--r--   1 ftp      ftp          2804 Mar  9 04:13 GrantFactory.php
--rw-r--r--   1 ftp      ftp          1087 Mar  9 04:13 Password.php
--rw-r--r--   1 ftp      ftp          1050 Mar  9 04:13 RefreshToken.php

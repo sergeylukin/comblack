@@ -1,6 +1,0 @@
-drwxrwxr-x   2 ftp      ftp           115 Jul 15  2021 .
-drwxrwxr-x   3 ftp      ftp            60 Jul 15  2021 ..
--rw-rw-r--   1 ftp      ftp           252 May 23  2020 DindentException.php
--rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
--rw-rw-r--   1 ftp      ftp           266 May 23  2020 InvalidArgumentException.php
--rw-rw-r--   1 ftp      ftp           258 May 23  2020 RuntimeException.php

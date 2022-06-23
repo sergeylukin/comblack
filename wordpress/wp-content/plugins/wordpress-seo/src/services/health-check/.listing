@@ -1,9 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           227 Mar  9 04:13 .
-drwxr-xr-x   5 ftp      ftp            61 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp          1563 Mar  9 04:13 default-tagline-check.php
--rw-r--r--   1 ftp      ftp          2665 Mar  9 04:13 default-tagline-report-builder.php
--rw-r--r--   1 ftp      ftp          1132 Mar  9 04:13 default-tagline-runner.php
--rw-r--r--   1 ftp      ftp          2384 Mar  9 04:13 health-check.php
--rw-r--r--   1 ftp      ftp           312 Mar  9 04:13 report-builder-factory.php
--rw-r--r--   1 ftp      ftp          5023 Mar  9 04:13 report-builder.php
--rw-r--r--   1 ftp      ftp           277 Mar  9 04:13 runner-interface.php

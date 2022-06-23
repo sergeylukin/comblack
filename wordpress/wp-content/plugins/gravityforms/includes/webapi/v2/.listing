@@ -1,8 +1,0 @@
-drwxr-xr-x   3 ftp      ftp           144 Apr  6 09:36 .
-drwxr-xr-x   6 ftp      ftp            88 Apr  6 09:36 ..
--rw-r--r--   1 ftp      ftp          1645 Apr  6 09:36 class-gf-rest-api.php
--rw-r--r--   1 ftp      ftp         25657 Apr  6 09:36 class-gf-rest-authentication.php
-drwxr-xr-x   3 ftp      ftp            73 Apr  6 09:36 includes
--rw-r--r--   1 ftp      ftp            27 Apr  6 09:36 index.php
--rw-r--r--   1 ftp      ftp         51055 Apr  6 09:36 README.md
--rw-r--r--   1 ftp      ftp          1922 Apr  6 09:36 restapi.php

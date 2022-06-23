@@ -1,9 +1,0 @@
-drwxr-xr-x   7 ftp      ftp           123 May 23 20:59 .
-drwxr-xr-x   6 ftp      ftp          4096 May 24 11:31 ..
--rw-r--r--   1 ftp      ftp            28 Nov 26  2018 index.php
-drwxr-xr-x   4 ftp      ftp          4096 May 10 16:23 languages
--rw-r--r--   1 ftp      ftp         14840 May 23 02:01 object-cache.php
-drwxr-xr-x  19 ftp      ftp          4096 May 24 03:00 plugins
-drwxr-xr-x   6 ftp      ftp           100 May 24 03:00 themes
-drwxr-xr-x   2 ftp      ftp             6 May 19 03:31 upgrade
-drwxr-xr-x  10 ftp      ftp           138 Apr  5 06:25 uploads

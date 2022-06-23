@@ -1,7 +1,0 @@
-drwxrwxr-x   6 ftp      ftp            87 Oct 20  2021 .
-drwxrwxr-x   4 ftp      ftp            76 Oct 20  2021 ..
-drwxrwxr-x   6 ftp      ftp            56 Jul  7  2021 assets
-drwxrwxr-x   2 ftp      ftp            72 Oct 20  2021 config
-drwxrwxr-x   3 ftp      ftp          4096 May 27  2021 images
-drwxrwxr-x   5 ftp      ftp          4096 Nov  2  2021 php
--rw-rw-r--   1 ftp      ftp           709 Oct 20  2021 template-builder.php

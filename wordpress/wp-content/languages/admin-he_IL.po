@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 5.9.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-08 18:18:46+0000\n"
+"PO-Revision-Date: 2022-06-01 11:01:33+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -8823,6 +8823,16 @@ msgstr "פתח את עורך האתר"
 msgid "Learn more about the %s version."
 msgstr "למידע נוסף על גרסת %s."
 
+#. translators: 1: post_max_size, 2: upload_max_filesize
+#: wp-admin/includes/class-wp-site-health.php:2175
+msgid "The setting for %1$s is currently configured as 0, this could cause some problems when trying to upload files through plugin or theme features that rely on various upload methods. It is recommended to configure this setting to a fixed value, ideally matching the value of %2$s, as some upload methods read the value 0 as either unlimited, or disabled."
+msgstr "ההגדרה עבור %1$s מוגדרת כעת כ-0, הדבר עלול לגרום לבעיות מסוימות בעת ניסיון להעלות קבצים באמצעות תוספים או תבניות המסתמכות על שיטות העלאה שונות. מומלץ להגדיר הגדרה זו לערך קבוע, התואם באופן אידיאלי לערך של %2$s, מכיוון ששיטות העלאה מסוימות קוראים את הערך 0 כבלתי מוגבל או כבלתי זמין."
+
+#. translators: 1: wp-config.php, 2: WP_HOME, 3: WP_SITEURL
+#: wp-admin/includes/class-wp-site-health.php:1608
+msgid "However, your WordPress Address is currently controlled by a PHP constant and therefore cannot be updated. You need to edit your %1$s and remove or update the definitions of %2$s and %3$s."
+msgstr "עם זאת, כתובת הוורדפרס של האתר נשלטת כעת על ידי קבוע PHP ולכן לא ניתן לעדכן אותה. יש לערוך את הקובץ %1$s ולהסיר או לעדכן את ההגדרות של %2$s ו-%3$s."
+
 #. translators: %d: Comment ID.
 #: wp-admin/includes/ajax-actions.php:959
 msgid "Comment %d does not exist"
@@ -13556,6 +13566,18 @@ msgstr "וורדפרס היא תוכנה חינמית המפותחת בקוד פ
 msgid "This tool helps site owners comply with local laws and regulations by exporting known data for a given user in a .zip file."
 msgstr "כלי זה מסייע לבעלי אתרים לעמוד בחוקים ותקנות מקומיות באמצעות יצוא של נתונים ידועים עבור משתמש מסוים לקובץ zip."
 
+#: wp-admin/includes/class-wp-debug-data.php:932
+msgid "Max connections number"
+msgstr "מספר חיבורים מקסימלי"
+
+#: wp-admin/includes/class-wp-debug-data.php:927
+msgid "Max allowed packet size"
+msgstr "גודל חבילה מקסימלי מותר"
+
+#: wp-admin/includes/class-wp-debug-data.php:654
+msgid "GD supported file formats"
+msgstr "פורמטי קבצים נתמכים ב-GD"
+
 #: wp-admin/admin.php:262
 msgid "Invalid plugin page."
 msgstr "עמוד התוסף שגוי."
@@ -15120,3 +15142,15 @@ msgstr "נראה שהאתר שלך עושה שימוש באימות פשוט (Ba
 #: wp-admin/customize.php:238
 msgid "The Customizer allows you to preview changes to your site before publishing them. You can navigate to different pages on your site within the preview. Edit shortcuts are shown for some editable elements. The Customizer is intended for use with non-block themes."
 msgstr "במסך ההתאמה האישית ניתן לראות תצוגה מקדימה של השינויים באתר, לפני שמחילים את השינויים בפועל. ניתן לנווט לעמודים שונים באתר בתצוגה המקדימה. ברכיבים שניתנים לעריכה, מוצגים קיצורים לעריכה. הכלי משמש תבניות שאינן תומכות בבלוקים."
+
+#: wp-admin/erase-personal-data.php:24 wp-admin/export-personal-data.php:24
+msgid "The tool associates data stored in WordPress by a supplied email address, including profile data and comments."
+msgstr "הכלי משייך נתונים המאוחסנים בוורדפרס לכתובת אימייל שסופקה, כולל נתוני פרופיל והערות."
+
+#: wp-admin/about.php:248
+msgid "A revamped List View"
+msgstr "תצוגת רשימה מחודשת"
+
+#: wp-admin/about.php:142
+msgid "Say hello to Twenty Twenty&#8209;Two"
+msgstr "תגידו שלום לתבנית Twenty Twenty Two"

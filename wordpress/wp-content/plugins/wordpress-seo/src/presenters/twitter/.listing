@@ -1,8 +1,0 @@
-drwxr-xr-x   2 ftp      ftp           174 Mar  9 04:13 .
-drwxr-xr-x   8 ftp      ftp          4096 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp           876 Mar  9 04:13 card-presenter.php
--rw-r--r--   1 ftp      ftp           491 Mar  9 04:13 creator-presenter.php
--rw-r--r--   1 ftp      ftp          1020 Mar  9 04:13 description-presenter.php
--rw-r--r--   1 ftp      ftp           987 Mar  9 04:13 image-presenter.php
--rw-r--r--   1 ftp      ftp          1670 Mar  9 04:13 site-presenter.php
--rw-r--r--   1 ftp      ftp           915 Mar  9 04:13 title-presenter.php

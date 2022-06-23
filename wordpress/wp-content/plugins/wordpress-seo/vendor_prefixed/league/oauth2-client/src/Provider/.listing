@@ -1,7 +1,0 @@
-drwxr-xr-x   3 ftp      ftp           144 Mar  9 04:13 .
-drwxr-xr-x   7 ftp      ftp            82 Mar  9 04:13 ..
--rw-r--r--   1 ftp      ftp         24318 Mar  9 04:13 AbstractProvider.php
-drwxr-xr-x   2 ftp      ftp            43 Mar  9 04:13 Exception
--rw-r--r--   1 ftp      ftp          5659 Mar  9 04:13 GenericProvider.php
--rw-r--r--   1 ftp      ftp          1512 Mar  9 04:13 GenericResourceOwner.php
--rw-r--r--   1 ftp      ftp          1026 Mar  9 04:13 ResourceOwnerInterface.php

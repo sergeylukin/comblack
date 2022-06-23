@@ -1,9 +1,0 @@
-drwxrwxr-x   2 ftp      ftp           157 Jul 15  2021 .
-drwxrwxr-x  17 ftp      ftp           224 Jul 15  2021 ..
--rw-rw-r--   1 ftp      ftp          6939 May 23  2020 closebrackets.js
--rw-rw-r--   1 ftp      ftp          7705 May 23  2020 closetag.js
--rw-rw-r--   1 ftp      ftp          1761 May 23  2020 continuelist.js
--rw-rw-r--   1 ftp      ftp            27 May 23  2020 index.php
--rw-rw-r--   1 ftp      ftp          5349 May 23  2020 matchbrackets.js
--rw-rw-r--   1 ftp      ftp          2355 May 23  2020 matchtags.js
--rw-rw-r--   1 ftp      ftp          1003 May 23  2020 trailingspace.js
