@@ -41,10 +41,10 @@ if (!function_exists('getenv_docker')) {
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv_docker('WORDPRESS_DB_NAME', 'wordpress') );
+define( 'DB_NAME', getenv_docker('WORDPRESS_DB_NAME', 'combzqz1_up1') );
 
 /** Database username */
-define( 'DB_USER', getenv_docker('WORDPRESS_DB_USER', 'example username') );
+define( 'DB_USER', getenv_docker('WORDPRESS_DB_USER', 'combzqz1_up1') );
 
 /** Database password */
 define( 'DB_PASSWORD', getenv_docker('WORDPRESS_DB_PASSWORD', 'example password') );
@@ -75,14 +75,14 @@ define( 'DB_COLLATE', getenv_docker('WORDPRESS_DB_COLLATE', '') );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         getenv_docker('WORDPRESS_AUTH_KEY',         'put your unique phrase here') );
-define( 'SECURE_AUTH_KEY',  getenv_docker('WORDPRESS_SECURE_AUTH_KEY',  'put your unique phrase here') );
-define( 'LOGGED_IN_KEY',    getenv_docker('WORDPRESS_LOGGED_IN_KEY',    'put your unique phrase here') );
-define( 'NONCE_KEY',        getenv_docker('WORDPRESS_NONCE_KEY',        'put your unique phrase here') );
-define( 'AUTH_SALT',        getenv_docker('WORDPRESS_AUTH_SALT',        'put your unique phrase here') );
-define( 'SECURE_AUTH_SALT', getenv_docker('WORDPRESS_SECURE_AUTH_SALT', 'put your unique phrase here') );
-define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   'put your unique phrase here') );
-define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       'put your unique phrase here') );
+define('AUTH_KEY',         '&G2M^7H%0Z$|/[0-`/Fz/OtZJ^o6.RQx~kQ(<`I=c-B/P%mbt{|`}GI--QwZB24(');
+define('SECURE_AUTH_KEY',  'EWZPw~k}Pw`w2(&zwZ&rG*1,+2;`qr*S-`dVqxZPyK?MUINhUPja(`nIXALWiVaB');
+define('LOGGED_IN_KEY',    'GZ6?1/X#lD^3)<E1a$>|gi?[CPX-[X3)d7I1i;2([H,yij->&YTjCeFxDu9he1(r');
+define('NONCE_KEY',        'VJ>+-7uFWq+j+MCDLEUXBPwIA2o,KTUe45gW1E(aqB}$X!MyLp*xU5<9m>1Ai0Z+');
+define('AUTH_SALT',        ']bN#U&+B&O|z<I YS/:IQq/o*7: 1<-MaA}t)|2Y~qeAQ8PzC4hs/|yFHDba?U[8');
+define('SECURE_AUTH_SALT', 't^CZ+QiaxoA0+E-|s/..*n]ce?@IA8?jy$C2i2qeV*@G5m;Tw5?5^=OJxkU|te0(');
+define('LOGGED_IN_SALT',   'gCJO]~+=cU4mEqM|u~I211+|IIB`W4-2WXC$U2d4-c.f|djbh|ZlBs4Y5-q+heZ|');
+define('NONCE_SALT',       'Mpb7j@6 CGmk(1{v5u!axqqi|H?Q+|Hjd,+{mt+XzlV<-.IU]D@pz4-8lZH&Er|s');
 // (See also https://wordpress.stackexchange.com/a/152905/199287)
 
 /**#@-*/
@@ -93,7 +93,7 @@ define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       'put you
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
+$table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'plk_');
 
 /**
  * For developers: WordPress debugging mode.
