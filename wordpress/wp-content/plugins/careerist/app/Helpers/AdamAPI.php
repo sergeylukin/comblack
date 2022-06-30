@@ -25,8 +25,7 @@ class AdamAPI
   public function getJobs()
   {
     return array_filter(array_map('self::normalizeJob', $this->request($this->buildURL(['Career', 'GetOrdersDetails']))), function($i) {
-      if ($i['category_id'] == 0 || $i['subcategory_id'] == 0) return false;
-      return true;
+      return $i['category_id'] ? true : false;
     });
   }
 
@@ -47,7 +46,7 @@ class AdamAPI
         array_push($data, $subCategory);
       }
     }
-    $this->useMocks = trup;
+    $this->useMocks = true;
     return $data;
   }
 
