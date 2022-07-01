@@ -175,6 +175,22 @@ class SyncJobController extends BaseController
 						$job,
 						array('id' => $row->id)
 					);
+					$post_id = $row->id;
+					$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
+					$wp_subcat_id = $this->App['Database']->categoryIdToTaxonomyId($job['subcategory_id']);
+
+					// attaching the category
+					if($wp_cat_id){
+						$tag = [$wp_cat_id];
+						if ($wp_subcat_id) $tag[] = $wp_subcat_id;
+						wp_set_post_terms( $post_id, $tag, 'categories' );    
+					}  
+
+
+					if ($areaId = $job['adam_order_def_area1']) {
+						$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
+						wp_set_post_terms( $post_id, [$term_id], 'area' );        
+					}
 				}
 			}
 		}
