@@ -73,7 +73,7 @@
   <div class="content">
     <section>
 			<h2>Settings</h2>
-			Personalize this dashboard by selecting only the services you're using.
+			Configure <a href="https://services.adamtotal.co.il/swagger/ui/index">ADAM API</a> jobs sync with local Wordpress database.
 
 			<form method="post" action="options.php">
 				<?php 

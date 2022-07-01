@@ -41,115 +41,158 @@ function wpdocs_theme_slug_widgets_init() {
     ) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
-//
-add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
-function searchjobsformtest_func($atts) { 
-	$categories = Database::getCategoriesWithTaxonomy();
-	$category = get_queried_object();
-	  $careeristCategory = ['adam_id' => 0];
-	  $careeristMainCategory = ['adam_id' => 0];
-	if ($category) {
-		$id = 0;
-		if( have_posts() ) :
-			while( have_posts() ) : the_post();
-				$id = get_the_ID();
-			endwhile ; 
-		endif;
 
-
-	  $careeristCategory = Database::getCategoryByTermId($category->term_id);
-		if ($id)  {
-			$mainCategoryId = 0;
-			$categories_terms = wp_get_object_terms( $id,  'categories' );
-			if ( ! empty( $categories_terms ) ) {
-				if ( ! is_wp_error( $categories_terms ) ) {
-					foreach( $categories_terms as $term ) {
-						// echo $term->parent . ' === ';
-						if($term->parent == 0) {
-							// echo "UYESSSS FOUND IT " . $term->term_id;
-							$mainCategoryId = $term->term_id;
-						}
-					}
-				}
-			}
-			$careeristMainCategory = Database::getCategoryByTermId($mainCategoryId);
-		} else if ($careeristCategory['adam_parent_id'] != 0) {
-			$cagegory_adam_id = $careeristCategory['adam_parent_id'];
-			$careeristMainCategory = Database::getCategoryByAdamId($category_adam_id);
+$careerist_categories = Database::getCategoriesWithTaxonomy();
+$careerist_areas = Database::getAreasWithTaxonomy();
+function detect_category() {
+	global $wp;
+	$segments = explode('/', $wp->request);
+	if ($segments[0] === 'categories') {
+		$category = $segments[1];
+		if ($category === 'all') {
+			return 0;
 		} else {
-			$category_adam_id = $careeristCategory['adam_id'];
-			$careeristMainCategory = Database::getCategoryByAdamId($category_adam_id);
+			$term = get_term_by('slug', $category, 'categories');
+			if ($term->parent) {
+				return $term->parent;
+			} else {
+				return $term->term_id;
+			}
 		}
+	} else {
+		return 0;
 	}
-	$areas = Database::getAreasWithTaxonomy();
+}
+function detect_subcategory() {
+	global $wp;
+	$segments = explode('/', $wp->request);
+	if ($segments[0] === 'categories') {
+		$category = $segments[1];
+		if ($category === 'all') {
+			return 0;
+		} else {
+			$term = get_term_by('slug', $category, 'categories');
+			if ($term->parent) {
+				return $term->term_id;
+			} else {
+				return 0;
+			}
+		}
+	} else {
+		return 0;
+	}
+}
+function detect_area() {
+	global $wp;
+	$segments = explode('/', $wp->request);
+	if ($segments[0] === 'categories' && $area = $segments[2]) {
+		$term = get_term_by('slug', $area, 'area');
+		return $term->term_id;
+	}
+	if ($segments[0] === 'area' && $area = $segments[1]) {
+		if ($area == 'all') return 0;
+		$term = get_term_by('slug', $area, 'area');
+		return $term->term_id;
+	}
+}
+
+add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
+function searchjobsformtest_func($atts) {
+	global $careerist_categories, $careerist_areas;
+	$formUniqueHash = randomHash();
+	$selected_category = detect_category();
+	$selected_subcategory = detect_subcategory();
+	$selected_area = detect_area();
      ob_start(); ?>
-<form name="careeristJobSearchForm" class="searchjobsformtest" method="GET" action="/">
+	<form name="careeristJobSearchForm<?php echo $formUniqueHash ?>" class="js-careeristJobSearchForm<?php echo $formUniqueHash ?> searchjobsformtest" method="GET" action="/">
     <div class="rowform1all99">
 		<div class="rowform1">
-			<select class="js-careeristCategorySelect">
-				<option value="0">תחום</option>
-				<?php foreach($categories as $category): if (!$category['is_parent']) continue; ?>
-				<option value="<?php echo $category['adam_id'] ?>" <?php echo $category['adam_id'] != $careeristMainCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
+			<select class="js-careeristCategorySelect<?php echo $formUniqueHash ?>">
+<?php
+$all_areas_term = get_term_by('slug', 'all', 'area');
+$all_categories_term = get_term_by('slug', 'all', 'categories');
+$all_subcategories_term = get_term_by('slug', 'all-subcategories', 'categories');
+?>
+	<option value="0" <?php echo $selected_category == 0 ? 'selected' : '' ?>><?php echo $all_categories_term->name; ?></option>
+				<?php foreach($careerist_categories as $category): if (!$category['is_parent']) continue; ?>
+				<option value="<?php echo $category['local_taxonomy_id'] ?>" <?php echo $category['local_taxonomy_id'] == $selected_category ? 'selected' : '' ?>><?php echo $category['name'] ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
 		<div class="rowform1">
-			<select class="js-careeristSubcategorySelect">
-				<option value="0">מקצוע</option>
-        <?php if ($careeristMainCategory): ?>
-				<?php foreach($categories as $category): print_r($category); if ($category['adam_parent_id'] != $careeristMainCategory['adam_id']) continue; ?>
-				<option value="<?php echo $category['slug'] ?>" <?php echo $category['adam_id'] != $careeristCategory['adam_id'] ?: 'selected' ?>><?php echo $category['name'] ?></option>
+			<select class="js-careeristSubcategorySelect<?php echo $formUniqueHash ?>">
+			<option value="0" <?php echo $selected_subcategory == 0 ? 'selected' : '' ?>><?php echo $all_subcategories_term->name; ?></option>
+			<?php foreach($careerist_categories as $category): if ($selected_category && $category['parent_local_taxonomy_id'] != $selected_category) continue; ?>
+			<option value="<?php echo $category['local_taxonomy_id'] ?>" <?php echo $category['local_taxonomy_id'] == $selected_subcategory ? 'selected' : '' ?>><?php echo $category['name'] ?></option>
 				<?php endforeach ?>
-				<?php endif ?>
 			</select>
 		</div>
 		<div class="rowform1">
-			<select class="js-careeristAreaSelect">
-				<option value="0">איזור</option>
-				<?php foreach($areas as $area): ?>
-				<option value="<?php echo $area['slug'] ?>" <?php echo $_GET['area'] != $area['slug'] ?: 'selected' ?>><?php echo $area['name'] ?></option>
+			<select class="js-careeristAreaSelect<?php echo $formUniqueHash ?>">
+			<option value="0" <?php echo $selected_area == 0 ? 'selected' : '' ?>><?php echo $all_areas_term->name; ?></option>
+				<?php foreach($careerist_areas as $area): ?>
+				<option value="<?php echo $area['local_taxonomy_id'] ?>" <?php echo $area['local_taxonomy_id'] == $selected_area ? 'selected' : '' ?>><?php echo $area['name'] ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
 	</div><!-- mz rowform1all-->
-		<input class="js-careeristAreaInput" type="hidden" name="area" value="" />
     <div class="rowform2">
 	     <input type="submit" placeholder=" " value="חפש" />
 	</div>
 
 </form>
 <script>
-var careerist_categories = <?php echo json_encode($categories) ?>;
-console.log(careerist_categories);
-let careeristCategorySelect = document.querySelector('.js-careeristCategorySelect')
-let careeristSubcategorySelect = document.querySelector('.js-careeristSubcategorySelect')
-let careeristJobSearchForm = document.querySelector('.js-careeristJobSearchForm');
-careeristCategorySelect.addEventListener('change', function(evt) {
-console.log('changed')
-  let catId = evt.target.value
-	let subCategories = careerist_categories.filter((cat) => cat.adam_parent_id === catId)
-	var i, L = careeristSubcategorySelect.options.length - 1;
-	for(i = L; i >= 0; i--) {
-		careeristSubcategorySelect.remove(i);
-	}
-	subCategories.forEach((category) => {
-		var option = document.createElement("option");
-		option.text = category.name;
-		option.value = category.slug;
-		careeristSubcategorySelect.appendChild(option);
-	})
-});
-let careeristAreaSelect = document.querySelector('.js-careeristAreaSelect');
-const formChangeClb = function(evt) {
-	let selectedCategorySlug = careeristSubcategorySelect.value
-	let areaInput = document.querySelector('.js-careeristAreaInput');
-	areaInput.value = careeristAreaSelect.value
-	document.careeristJobSearchForm.action = '/categories/' + selectedCategorySlug + '/';
-console.log(document.careeristJobSearchForm.action)
-};
-careeristCategorySelect.addEventListener('change', formChangeClb);
-careeristSubcategorySelect.addEventListener('change', formChangeClb);
-careeristAreaSelect.addEventListener('change', formChangeClb);
+(function() {
+	var careerist_categories = <?php echo json_encode($careerist_categories) ?>;
+	var careerist_areas = <?php echo json_encode($careerist_areas) ?>;
+	var careeristCategorySelect = document.querySelector('.js-careeristCategorySelect<?php echo $formUniqueHash ?>')
+	var careeristSubcategorySelect = document.querySelector('.js-careeristSubcategorySelect<?php echo $formUniqueHash ?>')
+	var careeristAreaSelect = document.querySelector('.js-careeristAreaSelect<?php echo $formUniqueHash ?>');
+	var careeristJobSearchForm = document.querySelector('.js-careeristJobSearchForm<?php echo $formUniqueHash ?>');
+
+	careeristCategorySelect.addEventListener('change', function(evt) {
+		let catId = evt.target.value
+		let subCategories = careerist_categories.filter((cat) => cat.parent_local_taxonomy_id === '' + catId)
+		var i, L = careeristSubcategorySelect.options.length - 1;
+		for(i = L; i >= 1; i--) {
+			careeristSubcategorySelect.remove(i);
+		}
+		subCategories.forEach((category) => {
+			var option = document.createElement("option");
+			option.text = category.name;
+			option.value = category.local_taxonomy_id;
+			careeristSubcategorySelect.appendChild(option);
+		})
+	});
+
+	const formChangeClb = function() {
+		let actionUrl = ''
+		if (careeristSubcategorySelect.value == 0 && careeristCategorySelect.value == 0) {
+			if (!careeristAreaSelect.value) {
+				actionUrl = '/categories/all'
+			} else {
+				let selectedAreaSlug = careerist_areas.filter((cat) => cat.local_taxonomy_id === '' + careeristAreaSelect.value)[0].slug
+				actionUrl = '/area/' + selectedAreaSlug
+			}
+		} else {
+			let selectedCategorySlug = (careeristSubcategorySelect.value != 0
+				? careerist_categories.filter((cat) => cat.local_taxonomy_id === '' + careeristSubcategorySelect.value)[0].slug
+				: careerist_categories.filter((cat) => cat.local_taxonomy_id === '' + careeristCategorySelect.value)[0].slug
+			)
+			let selectedAreaSlug = ''
+			if (careeristAreaSelect.value != 0) {
+				selectedAreaSlug = careerist_areas.filter((cat) => cat.local_taxonomy_id === '' + careeristAreaSelect.value)[0].slug
+			}
+			actionUrl = '/categories/' + selectedCategorySlug + '/' + selectedAreaSlug;
+		}
+		careeristJobSearchForm.action = actionUrl
+	};
+
+	formChangeClb();
+	careeristCategorySelect.addEventListener('change', formChangeClb);
+	careeristSubcategorySelect.addEventListener('change', formChangeClb);
+	careeristAreaSelect.addEventListener('change', formChangeClb);
+})();
 </script>
 
 

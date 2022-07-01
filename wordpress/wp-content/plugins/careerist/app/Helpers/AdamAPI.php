@@ -29,6 +29,14 @@ class AdamAPI
     });
   }
 
+  public function getJob($id = null)
+  {
+    if (!$id) {
+      throw new Exception('no job id (adam orderno) provided');
+    }
+    return $this->request($this->buildURL(['Career', 'GetOrdersDetails']), ['orderno' => $id]);
+  }
+
   public function getAreas()
   {
     return array_map('self::normalizeArea', $this->request($this->buildURL(['Career', 'GetArea'])));

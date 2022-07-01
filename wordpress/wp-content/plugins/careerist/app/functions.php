@@ -563,3 +563,8 @@ if ( ! function_exists('get_initial_date_by_period'))
     return $initial_date;
   }
 }
+
+function randomHash()
+{
+  return md5(rand());
+}

@@ -31,6 +31,7 @@ var_dump($chilrencatids);
 			
            foreach($termsparentall as $t){
 			    //echo  $t->term_id  . ' ' . $t->name . '<br>' ;
+						 if (in_array($t->slug, array('all', 'all-subcategories'))) continue;
 				$term = get_term($t);
 				$termacf = get_term($t->term_id); //Example term ID
 			    if($currenttermid == $t->term_id) {

@@ -30,6 +30,9 @@ class SyncJobController extends BaseController
     add_action("wp_ajax_careerist_sync_trigger", array($this, "sync"));
 		// Allow non-logged in visitors run this script
     add_action("wp_ajax_nopriv_careerist_sync_trigger", array($this, "sync"));
+    add_action("wp_ajax_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
+		// Allow non-logged in visitors run this script
+    add_action("wp_ajax_nopriv_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
     add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
 		add_action('wp_ajax_careerist_list_jobs', array($this, 'list_jobs'));
 		add_action('wp_ajax_careerist_export_jobs', array($this, 'export_jobs'));
@@ -48,6 +51,15 @@ class SyncJobController extends BaseController
 			die();
 	}
 
+	public function adam_api_get_order_details() {
+			header("Content-Type: application/json");
+			$job = $this->App->AdamAPI->getJob($_GET['orderno']);
+			$result = [
+					'adam_response' => $job,
+			];
+			echo json_encode($result);
+			die();
+	}
 
 	private function sync_areas() {
 		global $App, $wpdb;
@@ -105,7 +117,7 @@ class SyncJobController extends BaseController
 	}
 
 	private function sync_jobs() {
-		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id FROM {$this->App['table.jobs']}");
+		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id, adam_update_date FROM {$this->App['table.jobs']}");
 		$existing_ids = array_map(function($o) { return $o->adam_id;}, $existing_jobs);
 
 		$force_sync = $this->activated('force_sync');
@@ -153,14 +165,17 @@ class SyncJobController extends BaseController
 				);
 			}
 
-			if ($exists && $force_sync) {
+			if ($exists) {
 				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
 				$row = $existing_jobs[$index];
-				$this->wpdb->update(
-					$this->App['table.jobs'],
-					$job,
-					array('id' => $row->id)
-				);
+				$isDirty = $job['adam_update_date'] !== $row->adam_update_date;
+				if ($isDirty || $force_sync) {
+					$this->wpdb->update(
+						$this->App['table.jobs'],
+						$job,
+						array('id' => $row->id)
+					);
+				}
 			}
 		}
 	  

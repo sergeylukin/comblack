@@ -46,7 +46,7 @@ if($image['url']) {
     <div class="wrapperin2">
            <h2>
 		   <?php $taxonomy = get_queried_object();
-            echo  'משרות דרושים '.$taxonomy->name;?>
+            echo  'משרות דרושים '.(!in_array($taxonomy->slug, array('all', 'all-subcategories')) ? $taxonomy->name : '');?>
 		   </h2>       
 		   <div class="termconteinerall1in">
 		          <?php 

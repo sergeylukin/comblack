@@ -108,9 +108,11 @@ class Database {
 
 	public function getCategoriesWithTaxonomy() {
 		return array_map(function($category) {
-			$term = get_term( $category['local_taxonomy_id'], 'categories' );
+			$term_taxonomy = $this->getTaxonomyTermById($category['local_taxonomy_id']);
+			$term = $this->getTermById($category['local_taxonomy_id']);
 			return array_merge($category, [
 				'is_parent' => !!$category['adam_parent_id'] == 0,
+				'parent_local_taxonomy_id' => $term_taxonomy->parent,
 				'slug' => $term->slug
 			]);
 		}, $this->getCategoriesHierarchy());
@@ -118,11 +120,25 @@ class Database {
 
 	public function getAreasWithTaxonomy() {
 		return array_map(function($area) {
-			$term = get_term( $area['local_taxonomy_id'], 'area' );
+			$term = $this->getTermById($area['local_taxonomy_id']);
 			return array_merge($area, [
 				'slug' => $term->slug
 			]);
 		}, $this->getAllAreas());
+	}
+
+	public function getTaxonomyTermById($id = 0) {
+		$sql = "SELECT * FROM {$this->wpdb->prefix}term_taxonomy WHERE term_id = '{$id}';";
+		$results = $this->wpdb->get_results($sql);
+		if (count($results) > 0) return $results[0];
+		return $results;
+	}
+
+	public function getTermById($id = 0) {
+		$sql = "SELECT * FROM {$this->wpdb->prefix}terms WHERE term_id = '{$id}';";
+		$results = $this->wpdb->get_results($sql);
+		if (count($results) > 0) return $results[0];
+		return $results;
 	}
 
 	public function getCategoryByAdamId($id = 0) {

@@ -26,11 +26,10 @@ class BaseController
 		$this->plugin = plugin_basename( dirname( __FILE__, 3 ) ) . '/careerist-plugin.php';
 
 		$this->managers = array(
-			'force_sync' => 'Force update values in DB during Sync',
-			'areas_manager' => 'Activate Areas entity Manager',
-			'categories_manager' => 'Activate Categories entity Manager',
-			'jobs_manager' => 'Activate Jobs entity Manager',
-			'logs_manager' => 'Activate Logs Manager',
+			'areas_manager' => 'Enable & sync areas',
+			'categories_manager' => 'Enable & sync categories',
+			'jobs_manager' => 'Enable & sync jobs',
+			'force_sync' => 'Force sync',
 		);
 	}
 
