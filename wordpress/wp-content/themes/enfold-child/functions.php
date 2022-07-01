@@ -168,7 +168,7 @@ $all_subcategories_term = get_term_by('slug', 'all-subcategories', 'categories')
 	const formChangeClb = function() {
 		let actionUrl = ''
 		if (careeristSubcategorySelect.value == 0 && careeristCategorySelect.value == 0) {
-			if (!careeristAreaSelect.value) {
+			if (careeristAreaSelect.value == 0) {
 				actionUrl = '/categories/all'
 			} else {
 				let selectedAreaSlug = careerist_areas.filter((cat) => cat.local_taxonomy_id === '' + careeristAreaSelect.value)[0].slug
