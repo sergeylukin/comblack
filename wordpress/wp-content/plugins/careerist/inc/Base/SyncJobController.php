@@ -33,6 +33,9 @@ class SyncJobController extends BaseController
     add_action("wp_ajax_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
 		// Allow non-logged in visitors run this script
     add_action("wp_ajax_nopriv_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
+    add_action("wp_ajax_careerist_get_jobs", array($this, "adam_api_get_jobs"));
+		// Allow non-logged in visitors run this script
+    add_action("wp_ajax_nopriv_careerist_get_jobs", array($this, "adam_api_get_jobs"));
     add_action("wp_ajax_careerist_wire_taxonomy", array($this, "wire_taxonomy"));
 		add_action('wp_ajax_careerist_list_jobs', array($this, 'list_jobs'));
 		add_action('wp_ajax_careerist_export_jobs', array($this, 'export_jobs'));
@@ -56,6 +59,16 @@ class SyncJobController extends BaseController
 			$job = $this->App->AdamAPI->getJob($_GET['orderno']);
 			$result = [
 					'adam_response' => $job,
+			];
+			echo json_encode($result);
+			die();
+	}
+
+	public function adam_api_get_jobs() {
+			header("Content-Type: application/json");
+			$jobs = $this->App->AdamAPI->getJobs();
+			$result = [
+					'adam_response' => $jobs,
 			];
 			echo json_encode($result);
 			die();
