@@ -18,15 +18,17 @@
 
   <ul>
     <li title="Features"><label for="tab1" role="button"><svg viewBox="0 0 24 24"><path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z"/>
-</svg><br><span>List</span></label></li>
+</svg><br><span>Local</span></label></li>
 
-<li title="Returns"><label for="tab2" role="button">
+    <li title="Features"><label for="tab2" role="button"><svg viewBox="0 0 24 24"><path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z"/>
+</svg><br><span>Adam</span></label></li>
+
+<li title="Returns"><label for="tab3" role="button">
 <svg viewBox="0 0 24 24">
     <path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4M10,6L14,10L10,14V11H4V9H10M17,9.5H19.5L21.47,12H17M6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5M18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5Z" />
 		</svg>
     <br><span>Export</span></label></li>
 
-    <li title="Delivery Contents"><label for="tab3" role="button"></label></li>
   </ul>
   
 	<div class="slider-wrapper">
@@ -75,13 +77,26 @@
 			</div>
 
 			</section>
+        <section>
+			<h2>Adam entries</h2>
+			<div class="u-xscrollable" style="">
+				<table id="myTable2" cellpadding="0" cellspacing="0" border="0" class="careerist-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_get_jobs'], 'http://comblack.s553.upress.link/wp-admin/admin-ajax.php') ?>">
+					<thead>
+						<tr>
+							<th></th>
+							<th>adam_order_id</th>
+							<th>adam_description</th>
+							<th>adam_ProffesionID</th>
+							<th>adam_SubProffesionID</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+
+				</section>
 				<section>
           <h2>Export</h2>
 				<a href="<?php echo add_query_arg(['action' => 'careerist_export_jobs'], admin_url('admin-ajax.php')) ?>">Generate CSV export</a>
-				</section>
-        <section>
-          <h2>Add/Edit</h2>
-					Under development
 				</section>
   </div>
 </div>

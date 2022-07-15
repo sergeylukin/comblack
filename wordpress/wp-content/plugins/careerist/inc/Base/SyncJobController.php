@@ -68,7 +68,7 @@ class SyncJobController extends BaseController
 			header("Content-Type: application/json");
 			$jobs = $this->App->AdamAPI->getJobs();
 			$result = [
-					'adam_response' => $jobs,
+					'data' => array_merge(array(), $jobs),
 			];
 			echo json_encode($result);
 			die();

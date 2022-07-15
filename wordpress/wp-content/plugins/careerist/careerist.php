@@ -64,6 +64,9 @@ function alter_query_so_15250127($qry) {
 }
 add_action('pre_get_posts','alter_query_so_15250127');
 
+// Allow AJAX requests from dev environment
+header("Access-Control-Allow-Origin: *"); 
+
 function category_area_template( $templates = '' ) { 
     global $wp;
     $segments = explode('/', $wp->request);
