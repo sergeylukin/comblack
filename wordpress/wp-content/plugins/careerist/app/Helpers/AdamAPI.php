@@ -1,5 +1,4 @@
 <?php namespace Careerist\Helpers;
-
 use Requests_Session as Http;
 use Database;
 
@@ -24,7 +23,7 @@ class AdamAPI
 
   public function getJobs()
   {
-    return array_filter(array_map('self::normalizeJob', $this->request($this->buildURL(['Career', 'GetOrdersDetails']))), function($i) {
+    return array_filter(array_map('self::normalizeJob', $this->request($this->buildURL(['Career', 'GetOrdersDetails']), ['advertisingDestination' => '1,3'])), function($i) {
       return $i['category_id'] ? true : false;
     });
   }
@@ -44,6 +43,7 @@ class AdamAPI
 
   public function getCategories() {
     $data = [];
+    $swapUseMocks = $this->useMocks ? true : false;
     $this->useMocks = false;
     $categories = array_map('self::normalizeCategory', $this->request($this->buildURL(['Career', 'GetProfession'])));
     foreach ($categories as $category) {
@@ -54,7 +54,9 @@ class AdamAPI
         array_push($data, $subCategory);
       }
     }
-    $this->useMocks = true;
+    if ($swapUseMocks) {
+      $this->useMocks = true;
+    }
     return $data;
   }
 
