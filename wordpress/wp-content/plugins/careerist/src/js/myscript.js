@@ -143,6 +143,7 @@ function format(d) {
 var tables = {
   table1: {},
   table2: {},
+  table3: {},
 };
 var drawCallback = function (table, id) {
   return function (settings, json) {
@@ -178,64 +179,126 @@ window.addEventListener("load", function () {
 });
 function renderTable1() {
   var jobsTable = document.getElementById("myTable");
-  tables.table1 = Object.assign(
-    tables.table1,
-    new DataTable("#myTable", {
-      ajax: jobsTable.dataset.fetchUrl,
-      scrollY: 700,
-      deferRender: true,
-      scroller: true,
-      columns: [
-        {
-          className: "dt-control",
-          orderable: false,
-          data: null,
-          defaultContent: "",
-        },
-        { data: "adam_id" },
-        { data: "name" },
-        { data: "category" },
-        { data: "subcategory" },
-        { data: "post" },
-      ],
-      order: [[1, "desc"]],
-      drawCallback: drawCallback(tables.table1, "myTable"),
-    })
-  );
+  if (jobsTable) {
+    tables.table1 = Object.assign(
+      tables.table1,
+      new DataTable("#myTable", {
+        ajax: jobsTable.dataset.fetchUrl,
+        scrollY: 700,
+        deferRender: true,
+        scroller: true,
+        columns: [
+          {
+            className: "dt-control",
+            orderable: false,
+            data: null,
+            defaultContent: "",
+          },
+          { data: "adam_id" },
+          { data: "name" },
+          { data: "category" },
+          { data: "subcategory" },
+          { data: "post" },
+        ],
+        order: [[1, "desc"]],
+        drawCallback: drawCallback(tables.table1, "myTable"),
+      })
+    );
+  }
 }
 
 function renderTable2() {
   var jobstable2 = document.getElementById("myTable2");
-  tables.table2 = Object.assign(
-    tables.table2,
-    new DataTable("#myTable2", {
-      ajax: jobstable2.dataset.fetchUrl,
-      scrollY: 700,
-      deferRender: true,
-      scroller: true,
-      columns: [
-        {
-          className: "dt-control",
-          orderable: false,
-          data: null,
-          defaultContent: "",
-        },
-        { data: "adam_id" },
-        { data: "adam_description" },
-        { data: "adam_ProffesionID" },
-        { data: "adam_SubProffesionID" },
-      ],
-      order: [[1, "desc"]],
-      drawCallback: (() => drawCallback(tables.table2, "myTable2"))(),
-    })
-  );
+  if (jobstable2) {
+    tables.table2 = Object.assign(
+      tables.table2,
+      new DataTable("#myTable2", {
+        ajax: jobstable2.dataset.fetchUrl,
+        scrollY: 700,
+        deferRender: true,
+        scroller: true,
+        columns: [
+          {
+            className: "dt-control",
+            orderable: false,
+            data: null,
+            defaultContent: "",
+          },
+          { data: "adam_id" },
+          { data: "adam_description" },
+          { data: "adam_ProffesionID" },
+          { data: "adam_SubProffesionID" },
+        ],
+        order: [[1, "desc"]],
+        drawCallback: (() => drawCallback(tables.table2, "myTable2"))(),
+      })
+    );
+  }
+}
+
+// function renderTable3() {
+//   var jobstable3 = document.getElementById("myTable3");
+//   if (jobstable3) {
+//     tables.table3 = Object.assign(
+//       tables.table3,
+//       new DataTable("#myTable3", {
+//         ajax: jobstable3.dataset.fetchUrl,
+//         scrollY: 700,
+//         deferRender: true,
+//         scroller: true,
+//         columns: [
+//           {
+//             className: "dt-control",
+//             orderable: false,
+//             data: null,
+//             defaultContent: "",
+//           },
+//           { data: "timestamp" },
+//           { data: "is_in_force_mode" },
+//           { data: "status" },
+//         ],
+//         order: [[1, "desc"]],
+//         drawCallback: (() => drawCallback(tables.table3, "myTable3"))(),
+//       })
+//     );
+//   }
+// }
+function renderTable3() {
+  var jobstable3 = document.getElementById("myTable3");
+  if (jobstable3) {
+    tables.table3 = Object.assign(
+      tables.table3,
+      new DataTable("#myTable3", {
+        ajax: jobstable3.dataset.fetchUrl,
+        scrollY: 700,
+        deferRender: true,
+        scroller: true,
+        columns: [
+          {
+            className: "dt-control",
+            orderable: false,
+            data: null,
+            defaultContent: "",
+          },
+          { data: "start_timestamp" },
+          { data: "end_timestamp" },
+          { data: "is_in_force_mode" },
+          { data: "status" },
+        ],
+        order: [[1, "desc"]],
+        drawCallback: (() => drawCallback(tables.table3, "myTable3"))(),
+      })
+    );
+  }
 }
 
 function renderTables() {
-  if (tables.table1.destroy) tables.table1.destroy();
+  if (tables.table1 && tables.table1.destroy) tables.table1.destroy();
   renderTable1();
-  if (tables.table2.destroy) tables.table2.destroy();
+  if (tables.table2 && tables.table2.destroy) tables.table2.destroy();
   renderTable2();
+  if (tables.table3 && tables.table3.destroy) tables.table3.destroy();
+  renderTable3();
 }
 
 document.addEventListener("DOMContentLoaded", function () {

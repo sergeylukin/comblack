@@ -1,8 +1,4 @@
-<?php 
-/**
- * @package  CareeristPlugin
- */
-namespace Inc\Base;
+<?php /** * @package  CareeristPlugin */ namespace Inc\Base;
 
 class BaseController
 {

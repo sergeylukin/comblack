@@ -13,6 +13,8 @@ class DatabaseProvider extends Provider {
       "areas" => "{$wpdb->prefix}careerist_plugin_areas",
       "categories" => "{$wpdb->prefix}careerist_plugin_categories",
       "jobs" => "{$wpdb->prefix}careerist_plugin_jobs",
+      "syncs" => "{$wpdb->prefix}careerist_plugin_syncs",
+      "syncs_events" => "{$wpdb->prefix}careerist_plugin_syncs_events",
     ];
 
     $Database = new Database($wpdb, $tables);

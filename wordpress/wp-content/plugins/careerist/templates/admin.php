@@ -35,11 +35,9 @@
     <li title="Features"><label for="tab1" role="button"><svg viewBox="0 0 24 24"><path d="M14,2A8,8 0 0,0 6,10A8,8 0 0,0 14,18A8,8 0 0,0 22,10H20C20,13.32 17.32,16 14,16A6,6 0 0,1 8,10A6,6 0 0,1 14,4C14.43,4 14.86,4.05 15.27,4.14L16.88,2.54C15.96,2.18 15,2 14,2M20.59,3.58L14,10.17L11.62,7.79L10.21,9.21L14,13L22,5M4.93,5.82C3.08,7.34 2,9.61 2,12A8,8 0 0,0 10,20C10.64,20 11.27,19.92 11.88,19.77C10.12,19.38 8.5,18.5 7.17,17.29C5.22,16.25 4,14.21 4,12C4,11.7 4.03,11.41 4.07,11.11C4.03,10.74 4,10.37 4,10C4,8.56 4.32,7.13 4.93,5.82Z"/>
 </svg><br><span>Settings</span></label></li>
 
-<li title="Returns"><label for="tab2" role="button"><svg viewBox="0 0 24 24">
-    <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-</svg><br><span>Help</span></label></li>
+		<li title="Logs"><label for="tab2" role="button"><svg viewBox="0 0 1000 1000"><g><path d="M851,123.3h-90.4c-12.2-30.6-42.1-52.3-77-52.3H579.1c-8.9-35-40.6-61-78.3-61c-37.7,0-69.5,26-78.3,61H317.8c-34.9,0-64.8,21.7-77,52.3H149c-33,0-59.8,26.8-59.8,59.8v747.1c0,33,26.8,59.8,59.8,59.8H851c33,0,59.8-26.8,59.8-59.8V183.1C910.9,150.1,884,123.3,851,123.3z M317.8,110.6h141.8V90.8c0-22.7,18.4-41.1,41.1-41.1c22.7,0,41.1,18.4,41.1,41.1v19.8h141.8c11.9,0,22.7,4.8,30.5,12.6c7.8,7.8,12.7,18.6,12.7,30.5c0,6.8-1.6,13.3-4.4,19c-7,14.3-21.7,24.1-38.7,24.1H317.8c-17,0-31.7-9.8-38.7-24.1c-2.8-5.7-4.4-12.2-4.4-19c0-11.9,4.8-22.7,12.7-30.5C295.2,115.5,306,110.6,317.8,110.6z M861.4,930.2c0,5.7-4.6,10.3-10.3,10.3H149c-5.7,0-10.3-4.6-10.3-10.3V183.1c0-5.7,4.6-10.3,10.3-10.3h88.3c8.6,36.5,41.5,63.8,80.6,63.8h365.8c39.1,0,72-27.3,80.6-63.8H851c5.7,0,10.3,4.6,10.3,10.3V930.2z"/><path d="M232,339.6v49.5h489.6h44.8v-49.5h-44.8H232z"/><path d="M232,454v49.5h489.6h44.8V454h-44.8H232z"/><path d="M232,568.5V618h489.6h44.8v-49.5h-44.8H232z"/><path d="M232,683v49.5h489.6h44.8V683h-44.8H232z"/><path d="M232,797.4v49.5h489.6h44.8v-49.5h-44.8H232z"/></g></svg><br><span>Logs</span></label></li>
 
-    <li title="Delivery Contents"><label for="tab3" role="button"></label></li>
+		<li title="Returns"><label for="tab3" role="button"><svg viewBox="0 0 24 24"><path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" /></svg><br><span>Help</span></label></li>
 
   </ul>
   
@@ -83,6 +81,23 @@
 				?>
 			</form>
 			</section>
+        <section>
+          <h2>Logs</h2>
+					Displaying syncs runs. Currently in development: displaying exact steps performed by the sync run.
+					<div class="u-xscrollable" style="">
+						<table id="myTable3" cellpadding="0" cellspacing="0" border="0" class="careerist-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_get_sync_logs'], '/wp-admin/admin-ajax.php') ?>">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Start</th>
+									<th>End</th>
+									<th>Using force flag?</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</section>
 				<section>
           <h2>Introduction</h2>
          
@@ -97,10 +112,6 @@
   <p>- Press Manage Cron Jobs</p>
   <p>- Add a task with following command: `curl --silent "WEBSITE_URL/wp-admin/admin-ajax.php?action=careerist_sync_trigger"` where `WEBSITE_URL` is your website URL in format of `https://example.com`</p>
 <p>Of course replace URLs with yours if they are different :)</p>
-				</section>
-        <section>
-          <h2>Monitoring</h2>
-					Under development. Here you will see all events related to careerist plugin.
 				</section>
   </div>
 </div>

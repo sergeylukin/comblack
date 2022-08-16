@@ -156,6 +156,41 @@ class Database {
 		return $results;
 	}
 
+	public function insertSync($is_in_force_mode = false) {
+		$this->wpdb->insert($this->tables['syncs'], array('status' => 'running', 'is_in_force_mode' => $is_in_force_mode));
+		return $this->wpdb->insert_id;
+	}
+
+	public function insertSyncEvent($sync_id, $type, $adam_id, $local_id, $post_id) {
+		$this->wpdb->insert($this->tables['syncs_events'], array(
+			'sync_id' => $sync_id,
+			'type' => $type,
+			'adam_id' => $adam_id,
+			'local_id' => $local_id,
+			'post_id' => $post_id,
+		));
+		return $this->wpdb->insert_id;
+	}
+
+	public function updateSync($sync_id, $data) {
+		$this->wpdb->update($this->tables['syncs'], $data, array('id' => $sync_id));
+	}
+
+
+	
+	public function getSyncs() {
+		$data = $this->wpdb->get_results("SELECT * FROM {$this->tables['syncs']} ORDER BY id DESC", ARRAY_A);
+		return array_map(function ($sync) {
+			return array_merge($sync, [
+				'status' => $sync['status'],
+				'start_timestamp' => $sync['created'],
+				'end_timestamp' => $sync['status'] == 'finished' ? $sync['updated'] : '',
+				'is_in_force_mode' => $sync['is_in_force_mode'] ? 'Yes' : 'No',
+			]);
+		}, $data);
+	}
+
+
 	public function create_settings() {
 		$default = array(
 			'force_sync' => 0,
@@ -315,6 +350,28 @@ class Database {
 		) $charset_collate;";
 		dbDelta( $sql );
 
+		$sql = "CREATE TABLE {$this->tables['syncs']} (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			status tinytext NULL,
+			is_in_force_mode tinyint UNSIGNED NULL,
+			updated timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+			created timestamp NOT NULL default CURRENT_TIMESTAMP,
+			UNIQUE KEY id (id)
+		) $charset_collate;";
+		dbDelta( $sql );
+
+		$sql = "CREATE TABLE {$this->tables['syncs_events']} (
+			id mediumint(9) NOT NULL AUTO_INCREMENT,
+			sync_id mediumint(9) NOT NULL,
+			type tinytext NULL,
+			adam_id mediumint(9) UNSIGNED NULL,
+			local_id mediumint(9) UNSIGNED NULL,
+			post_id mediumint(9) UNSIGNED NULL,
+			created timestamp NOT NULL default CURRENT_TIMESTAMP,
+			UNIQUE KEY id (id)
+		) $charset_collate;";
+		dbDelta( $sql );
+
 		return $this;
 	}
 
@@ -322,6 +379,8 @@ class Database {
 		// $this->wpdb->query("DROP TABLE {$this->tables['areas']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['categories']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['jobs']};");
+		$this->wpdb->query("DROP TABLE {$this->tables['syncs']};");
+		$this->wpdb->query("DROP TABLE {$this->tables['syncs_events']};");
 		// delete_option( 'careerist_db_version' );
 
 		return $this;

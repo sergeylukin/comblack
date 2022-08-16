@@ -11,6 +11,18 @@ use Inc\Api\Callbacks\AdminCallbacks;
 use CSV;
 use Database;
 use Logger;
+use SyncEvent;
+
+
+define(SYNC_START, 'SYNC_START');
+define(SYNC_AREAS_END, 'SYNC_AREAS_END');
+define(SYNC_CATEGORIES_END, 'SYNC_CATEGORIES_END');
+define(SYNC_JOBS_END, 'SYNC_JOBS_END');
+define(WIPE_JOBS, 'WIPE_JOBS');
+define(ADD_JOB, 'ADD_JOB');
+define(UPDATE_JOB, 'UPDATE_JOB');
+define(MOVE_JOB_TO_TRASH, 'MOVE_JOB_TO_TRASH');
+define(SYNC_END, 'SYNC_END');
 
 /**
 * 
@@ -33,6 +45,9 @@ class SyncJobController extends BaseController
     add_action("wp_ajax_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
 		// Allow non-logged in visitors run this script
     add_action("wp_ajax_nopriv_careerist_adam_api_get_order_details_as_is", array($this, "adam_api_get_order_details"));
+    add_action("wp_ajax_careerist_get_sync_logs", array($this, "get_sync_logs"));
+		// Allow non-logged in visitors run this script
+    add_action("wp_ajax_nopriv_careerist_get_sync_logs", array($this, "get_sync_logs"));
     add_action("wp_ajax_careerist_get_jobs", array($this, "adam_api_get_jobs"));
 		// Allow non-logged in visitors run this script
     add_action("wp_ajax_nopriv_careerist_get_jobs", array($this, "adam_api_get_jobs"));
@@ -43,10 +58,13 @@ class SyncJobController extends BaseController
 
 	public function sync() {
 
+			SyncEvent::log(SYNC_START);
 			header("Content-Type: application/json");
 			if ($this->activated('areas_manager')) $this->sync_areas();
 			if ($this->activated('categories_manager')) $this->sync_categories();
 			if ($this->activated('jobs_manager')) $this->sync_jobs();
+			SyncEvent::log(SYNC_END);
+			SyncEvent::end();
 			$result = [
 					'success' => true,
 			];
@@ -74,6 +92,16 @@ class SyncJobController extends BaseController
 			die();
 	}
 
+	public function get_sync_logs() {
+			header("Content-Type: application/json");
+			$logs = SyncEvent::getLogs();
+			$result = [
+					'data' => array_merge(array(), $logs),
+			];
+			echo json_encode($result);
+			die();
+	}
+
 	private function sync_areas() {
 		global $App, $wpdb;
 		$existing_ids = $wpdb->get_col("SELECT adam_id FROM {$App['table.areas']}");
@@ -90,6 +118,7 @@ class SyncJobController extends BaseController
 				)
 			);
 		}
+		SyncEvent::log(SYNC_AREAS_END);
 	}
 
 	private function sync_categories() {
@@ -127,6 +156,7 @@ class SyncJobController extends BaseController
 				);
 			}
 		}
+		SyncEvent::log(SYNC_CATEGORIES_END);
 	}
 
 	private function sync_jobs() {
@@ -141,9 +171,11 @@ class SyncJobController extends BaseController
 			$this->wpdb->delete($this->wpdb->posts, array('post_type' => 'careers'), array('%s'));
 			$this->wpdb->query("TRUNCATE TABLE `{$this->App['table.jobs']}`");
 			$existing_ids = array();
+			SyncEvent::log(WIPE_JOBS);
 		}
 
 		foreach($jobs as $job) {
+			$adam_id = $job['adam_id'];
 			array_push($adam_active_ids, $job['adam_id']);
 			
 			$exists = in_array($job['adam_id'], $existing_ids);
@@ -153,7 +185,7 @@ class SyncJobController extends BaseController
 					$this->App['table.jobs'],
 					$job
 				);
-				$job_id = $this->wpdb->insert_id;
+				$local_id = $this->wpdb->insert_id;
 
 
 				$post_array = [
@@ -164,7 +196,10 @@ class SyncJobController extends BaseController
 					"post_status"=>"publish",
 				];
 				$post_id = wp_insert_post($post_array);
-				update_post_meta( $post_id, 'careerist_id', $job_id );
+
+				SyncEvent::log(ADD_JOB, $adam_id, $local_id, $post_id);
+
+				update_post_meta( $post_id, 'careerist_id', $local_id );
 
 				$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
 				$wp_subcat_id = $this->App['Database']->categoryIdToTaxonomyId($job['subcategory_id']);
@@ -185,13 +220,16 @@ class SyncJobController extends BaseController
 				$this->wpdb->update(
 					$this->App['table.jobs'],
 					['local_post_id' => $post_id],
-					['id' => $job_id]
+					['id' => $local_id]
 				);
 			}
 
 			if ($exists) {
 				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
 				$row = $existing_jobs[$index];
+				$adam_id = $job['adam_id'];
+				$local_id = $row->id;
+				$post_id = $row->local_post_id;
 				$isDirty = $job['adam_update_date'] !== $row->adam_update_date;
 				if ($isDirty || $force_sync) {
 					$this->wpdb->update(
@@ -199,7 +237,6 @@ class SyncJobController extends BaseController
 						$job,
 						array('id' => $row->id)
 					);
-					$post_id = $row->id;
 					$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
 					$wp_subcat_id = $this->App['Database']->categoryIdToTaxonomyId($job['subcategory_id']);
 
@@ -215,25 +252,29 @@ class SyncJobController extends BaseController
 						$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
 						wp_set_post_terms( $post_id, [$term_id], 'area' );        
 					}
+					SyncEvent::log(UPDATE_JOB, $adam_id, $local_id, $post_id);
 				}
 			}
 		}
 
 		if ($jobs) {
 			$posts_to_move_to_trash = array_diff($existing_ids, $adam_active_ids);
-			foreach($posts_to_move_to_trash as $id) {
-				$index = array_search($id, array_column($existing_jobs, 'adam_id'));
+			foreach($posts_to_move_to_trash as $adam_id) {
+				$index = array_search($adam_id, array_column($existing_jobs, 'adam_id'));
 				$row = $existing_jobs[$index];
+				$local_id = $row->id;
 				$post_id = $row->local_post_id;
+				SyncEvent::log(MOVE_JOB_TO_TRASH, $adam_id, $local_id, $post_id);
 				wp_trash_post($post_id);
 				$this->wpdb->delete(
 					$this->App['table.jobs'],
-					array('adam_id' => $id),
+					array('adam_id' => $adam_id),
 					array('%d')
 				);
 			}
 		}
 	  
+		SyncEvent::log(SYNC_JOBS_END);
 	}
 
 	public function wire_taxonomy() {
