@@ -42,8 +42,8 @@ function wpdocs_theme_slug_widgets_init() {
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
-$careerist_categories = Database::getCategoriesWithTaxonomy();
-$careerist_areas = Database::getAreasWithTaxonomy();
+$careerist_categories = class_exists('Database') ? Database::getCategoriesWithTaxonomy() : array();
+$careerist_areas = class_exists('Database') ? Database::getAreasWithTaxonomy() : array();
 function detect_category() {
 	global $wp;
 	$segments = explode('/', $wp->request);
