@@ -148,6 +148,7 @@ class SyncJobController extends BaseController
 
 				$post_array = [
 					"post_title" => $job['description'],
+					"post_name" => 'position-' . $job['adam_id'],
 					"post_type" => "careers",
 					"post_content" => $job['adam_notes'],
 					"post_status"=>"publish",
