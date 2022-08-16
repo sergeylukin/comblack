@@ -130,12 +130,22 @@ class SyncJobController extends BaseController
 	}
 
 	private function sync_jobs() {
-		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id, adam_update_date FROM {$this->App['table.jobs']}");
+		$existing_jobs = $this->wpdb->get_results("SELECT id, adam_id, local_post_id, adam_update_date FROM {$this->App['table.jobs']}");
 		$existing_ids = array_map(function($o) { return $o->adam_id;}, $existing_jobs);
 
 		$force_sync = $this->activated('force_sync');
 		$jobs = array_merge(array(), $this->App->AdamAPI->getJobs());
+		$adam_active_ids = array();
+
+		if ($jobs && $force_sync) {
+			$this->wpdb->delete($this->wpdb->posts, array('post_type' => 'careers'), array('%s'));
+			$this->wpdb->query("TRUNCATE TABLE `{$this->App['table.jobs']}`");
+			$existing_ids = array();
+		}
+
 		foreach($jobs as $job) {
+			array_push($adam_active_ids, $job['adam_id']);
+			
 			$exists = in_array($job['adam_id'], $existing_ids);
 
 			if (!$exists) {
@@ -206,6 +216,21 @@ class SyncJobController extends BaseController
 						wp_set_post_terms( $post_id, [$term_id], 'area' );        
 					}
 				}
+			}
+		}
+
+		if ($jobs) {
+			$posts_to_move_to_trash = array_diff($existing_ids, $adam_active_ids);
+			foreach($posts_to_move_to_trash as $id) {
+				$index = array_search($id, array_column($existing_jobs, 'adam_id'));
+				$row = $existing_jobs[$index];
+				$post_id = $row->local_post_id;
+				wp_trash_post($post_id);
+				$this->wpdb->delete(
+					$this->App['table.jobs'],
+					array('adam_id' => $id),
+					array('%d')
+				);
 			}
 		}
 	  
