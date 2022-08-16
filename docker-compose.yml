@@ -43,3 +43,4 @@ services:
       WORDPRESS_DB_USER: comblack
       WORDPRESS_DB_PASSWORD: comblack
       WORDPRESS_DB_NAME: comblack
+      WORDPRESS_DEBUG: 1

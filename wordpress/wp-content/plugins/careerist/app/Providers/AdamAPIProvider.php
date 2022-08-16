@@ -10,7 +10,9 @@ class AdamAPIProvider extends Provider {
 
     // Register IOC record
     $AdamAPI = new AdamAPI(new Http);
-    // $AdamAPI->useMocks();
+    if (defined('WP_DEBUG') && WP_DEBUG === true) {
+      $AdamAPI->useMocks();
+    }
     $this->App->register('AdamAPI', $AdamAPI);
 
     // Register shortcut Alias
