@@ -92,10 +92,10 @@
 
 <p>In order to set up a scheduled sync task in uPress follow these steps:</p>
 
-<p>- Log in to your account, navigate to `https://my.upress.co.il/account/websites/comblack.s553.upress.link?tab=settings`</p>
+<p>- Log in to your account, navigate to `https://my.upress.co.il/account/websites` and select your website</p>
   <p>- Press Advanced settings</p>
   <p>- Press Manage Cron Jobs</p>
-  <p>- Add a task with following command: `curl --silent "http://comblack.s553.upress.link/wp-admin/admin-ajax.php?action=careerist_sync_trigger"`</p>
+  <p>- Add a task with following command: `curl --silent "WEBSITE_URL/wp-admin/admin-ajax.php?action=careerist_sync_trigger"` where `WEBSITE_URL` is your website URL in format of `https://example.com`</p>
 <p>Of course replace URLs with yours if they are different :)</p>
 				</section>
         <section>

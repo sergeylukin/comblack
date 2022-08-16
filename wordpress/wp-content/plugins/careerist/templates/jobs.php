@@ -82,7 +82,7 @@
 			<h2>Adam entries</h2>
 			<p>This page displays jobs directly from <a href="https://services.adamtotal.co.il/swagger/ui/index">ADAM API</a> (mostly for debugging purposes).</p>
 			<div class="u-xscrollable" style="">
-				<table id="myTable2" cellpadding="0" cellspacing="0" border="0" class="careerist-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_get_jobs'], 'http://comblack.s553.upress.link/wp-admin/admin-ajax.php') ?>">
+				<table id="myTable2" cellpadding="0" cellspacing="0" border="0" class="careerist-table display" data-fetch-url="<?php echo add_query_arg(['action' => 'careerist_get_jobs'], 'https://comblack.co.il/wp-admin/admin-ajax.php') ?>">
 					<thead>
 						<tr>
 							<th></th>
