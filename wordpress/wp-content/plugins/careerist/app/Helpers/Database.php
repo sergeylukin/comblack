@@ -379,8 +379,8 @@ class Database {
 		// $this->wpdb->query("DROP TABLE {$this->tables['areas']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['categories']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['jobs']};");
-		$this->wpdb->query("DROP TABLE {$this->tables['syncs']};");
-		$this->wpdb->query("DROP TABLE {$this->tables['syncs_events']};");
+		// $this->wpdb->query("DROP TABLE {$this->tables['syncs']};");
+		// $this->wpdb->query("DROP TABLE {$this->tables['syncs_events']};");
 		// delete_option( 'careerist_db_version' );
 
 		return $this;
