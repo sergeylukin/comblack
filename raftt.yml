@@ -1,0 +1,4 @@
+build:
+    workdir: .
+    dockercomposefile: docker-compose.yml
+devContainer: dev/dev-compose.yml
