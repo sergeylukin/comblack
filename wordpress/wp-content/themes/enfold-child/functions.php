@@ -267,7 +267,7 @@ function misrothitec_func($atts) {
 	 }
 //// get all parent job terms 
 // image $imagebg =  get_field('toptitle2rows', 'term_' . $t->term_id);	
-$args = [
+            $args = [
 				'taxonomy'     => 'careers',
 				'parent'        => 0,
 				'number'        => 1000,
@@ -276,7 +276,7 @@ $args = [
 			$taxonomies = get_taxonomies(['object_type' => ['careers']]);
 			$taxonomy = 'categories' ;
 			 
-			$termsparentall    = get_terms(['taxonomy' => $taxonomy , 'parent' => 0, 'hide_empty' => false]);
+			$termsparentall    = get_terms(['taxonomy' => $taxonomy , 'parent' => 0, 'hide_empty' => false , 'exclude'  => array(131 , 130) ]);
            foreach($termsparentall as $t){ 
 		         $imagebg =  get_field('topimage', 'term_' . $t->term_id);	
 				 //var_dump($imagebg);
@@ -344,7 +344,7 @@ function ParentOrChildCategoryOfJob($post_id = null , $parent = 'yes' , $datacat
         	
 		$data1 = '<span>תחום:</span> ' . linktotermbyid($parentcatid) . ' <span>|</span> '; 
 		$data2 = '<span>מקצוע:</span> ' . linktotermbyid($chilrencatids) . ' <span>|</span> '; 
-		$data3 = '<span class="eizorspan"><span>איזור:</span> ' . linktotermbyid($araeidarr).'</span>'; 
+		$data3 = '<span class="eizorspan"><span>אזור:</span> ' . linktotermbyid($araeidarr).'</span>'; 
 		$data = $data1 . $data2 . $data3;
 		return $data ;
 	}
@@ -470,6 +470,7 @@ wp_reset_postdata();
 
 
 // crm form [crmformNew courceid=""]
+// crm form [crmformNew type="singlesidebar"]
 add_shortcode( 'crmformNew', 'crmformNew_func' ); 
 function crmformNew_func($atts) { 
      ob_start(); 
@@ -483,8 +484,30 @@ function crmformNew_func($atts) {
 		 $sendbutton = "שלח";
 		 $checkboxlang = 'אני מאשר קבלת חומר פרסומי, שיווקי ואחר לפרטים אלה';
 		 
-		 $courceid = 9236 ;
-	      
+		  if(isset($atts['popupfooter'])    ) {
+			  $popupfooter = $atts['popupfooter'];
+			  //echo $popupfooter ;
+			  $courceid = 9575 ;
+	     } else {
+			 $popupfooter = false;
+		 }
+		 if(isset($atts['courceid'])    ) {
+			  $courceid = $atts['courceid'];
+	     } else {
+			 $courceid = 9575;
+		 }
+		  
+		 
+		 
+		 /*
+		 $test1 = 'test1';
+		 $test2 = '0545565567';
+		 $test3 = 'test333@jhgfg.com';
+		 */
+	     $test1 = '';
+		 $test2 = '';
+		 $test3 = '';
+ 		 
 	 ?>
     <form    class="crmform <?php echo $formclasslang   ?>"  enctype="multipart/form-data" name="form" id="crmformnewid" method="POST" action="<?php echo get_page_link(get_the_ID());?>"   onsubmit="return validateFormSimple1(this);">
 
@@ -493,23 +516,25 @@ function crmformNew_func($atts) {
 		 <input type="hidden" name="courceid" value="<?php echo $courceid ; ?>" />
 		 <input type="text" placeholder="Company" name="malkodetdvash"    class="malkodetdvash" >
 			<div class="formcrmcell formcrmcellright"> 
-					 <input class="must1"  type="text" placeholder="שם" name="firstname9"    >
+					 <input class="must1"  type="text" placeholder="שם" name="firstname9" value="<?php echo  $test1; ?>"   >
 					 <div class="erroritem"></div> 
 			</div>
+			<?php if(!$popupfooter):  // ?>
 			<div class="formcrmcell formcrmcellleft"> 
 					<div class="_input ">
-					<input class="must1" type="tel" placeholder="טלפון" name="phone9" >
+					<input class="must1" type="tel" placeholder="טלפון" name="phone9"  value="<?php echo  $test2; ?>"  >
 					<div class="erroritem"></div> 
 				 
 				</div>			
 			</div>
+			<?php endif ; ?>
 			<div class="formcrmcell formcrmcellright"> 
 					<div class="_input ">
-						<input class="must1"  type="email" placeholder="אימייל" name="email9"  >
+						<input class="must1"  type="email" placeholder="אימייל" name="email9" value="<?php echo  $test3; ?>" >
 						<div class="erroritem"></div> 
 					</div>				
 				</div>
-			<?php if(  false): ?>
+			<?php if(  false):  // !$popupfooter?>
 			<div class="formcrmcell formcrmcellleft"> 
 					<div class="_input ">
 					<input  class="must1" type="text"  placeholder="תעודת זהות" name="teze9" >
@@ -553,9 +578,9 @@ $(window).load(function() {
     $('#submitdiv').on('click' , function(){
 		 //
 		 if(validateFormSimple1()) {  console.log('submitdiv');
-			  //send_api_data_theme();
+			  send_api_data_theme();
 			  $('.sendsuccessmsg').show();
-			   //window.location.href = 'https://comblack.co.il/thank-you/';
+			 window.location.href = 'https://comblack.co.il/thank-you/';
 		 }
 	});
 });
@@ -572,16 +597,16 @@ console.log('send_api_data_theme');
 				var file_data = jQuery('#file').prop('files')[0];
 			  } else {
 				  cvfile = '';
-				  var file_data = '';
+				  var file_data = '111';
 			  }
 			  var form_data = new FormData();
 			  form_data.append('file', file_data);
               form_data.append('action', 'review_vote_ajax_request'); 
               form_data.append('fname', jQuery('#crmformnewid').find('input[name=firstname9]').val()); 
-              form_data.append('lname', jQuery('#crmformnewid').find('input[name=lastname9]').val()); 
+              //form_data.append('lname', jQuery('#crmformnewid').find('input[name=lastname9]').val()); 
               form_data.append('email', jQuery('#crmformnewid').find('input[name=email9]').val()); 
               form_data.append('phone', jQuery('#crmformnewid').find('input[name=phone9]').val()); 
-              form_data.append('city', jQuery('#crmformnewid').find('input[name=city9]').val()); 
+             // form_data.append('city', jQuery('#crmformnewid').find('input[name=city9]').val()); 
               //form_data.append('teze', jQuery('#crmformnewid').find('input[name=teze9]').val()); 
               form_data.append('courceid', jQuery('#crmformnewid').find('input[name=courceid]').val()); 
 			jQuery.ajax({
@@ -726,51 +751,53 @@ function sendMailNew() {
     if($response != 0 ){
 		$response = $location;
 	}
-	// echo $response; // location uploaded to server
+	  echo $response; // location uploaded to server
  
 /////////////////
 
 //header("Access-Control-Allow-Origin: *");
  header("Content-Type: text/html; charset=UTF-8");
  
-//var_dump($_POST);
+ //var_dump($_POST);
          $fname =  $_POST['fname'];
-         $lname =  $_POST['lname'];
+        // $lname =  $_POST['lname'];
          $email =  $_POST['email'];
          $phone =  $_POST['phone'];
-         $city =  $_POST['city'];
+        // $city =  $_POST['city'];
          $teze =  $_POST['teze'];
          $cvfile =  $response;
          $courceid =  $_POST['courceid'];
 		 
-$subject = "Lead from bluetech-ed.co.il ". $courceid ;
+$subject = "Lead from comblack.co.il ". $courceid ;
 
 $body .= "שם:  " . $fname  . "\n"; 
-if($lname != 'undefined')
-	$body .= "שם משפחה:  " . $lname  . "\n" ; 
+//if($lname != 'undefined') 	$body .= "שם משפחה:  " . $lname  . "\n" ; 
 if($phone != 'undefined')
 	$body .= "טלפון:  " . $phone . "\n" ; 
 $body .= "אימייל/מייל:  " . $email . "\n"; 
-if($teze != 'undefined')
-	$body .= "תעודת זהות:  " . $teze . "\n";
-if($city != 'undefined')
-	$body .= "עיר:  " . $city . "\n"; 
+// if($teze != 'undefined' && false) 	$body .= "תעודת זהות:  " . $teze . "\n";
+// if($city != 'undefined') 	$body .= "עיר:  " . $city . "\n"; 
 $body .= "נושא:  " . $courceid . "\n"; 
+$body .= "REFERID=510 \n"; 
 //$body .= $movefile['url'] . "\n"; 
 //$body .= "נשלח מעמוד:" .  $_SERVER['HTTP_REFERER'] . "\n" . "\n";
 $body .= "\n";
 
 $attachments = array($response);
 
-   //var_dump($_POST);
-    // wp_mail( "michaelzait@gmail.com", $subject, $body, 'From: comblack.co.il website <noreply@comblack.co.il.co.il>' , $attachments );
+   // var_dump($_POST);
+// wp_mail( "michaelzait@gmail.com", $subject, $body, 'From: comblack.co.il website <noreply@comblack.co.il>' , $attachments );
    
-   //wp_mail( "jobs.comblack@adamtotal.co.il", $subject, $body, 'From: com.co.il website <noreply@com.co.il.co.il>' , $attachments );
+      wp_mail( "yotamizakov@gmail.com", $subject, $body, 'From: comblack.co.il website <noreply@comblack.co.il>' , $attachments );
+	
+       wp_mail( "jobs@comblack.co.il", $subject, $body, 'From: comblack.co.il website <noreply@comblack.co.il>' , $attachments );
+
+   
 } 
  
 //
 function review_vote_ajax_request() {
-       // sendMailNew();		  
+        sendMailNew();		  
 wp_die();
 }
  
