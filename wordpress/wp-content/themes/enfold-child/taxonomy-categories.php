@@ -29,16 +29,26 @@ if($image && $image['url']) {
 		   </h1>
 	</div><!-- mz wrapperin1-->
 </div><!-- mz topsectioncareer-->
-       <?php 
-		   if(isset($_GET['area']) && strlen($_GET['area']) > 2 ) { ?>
+       <?php  
+	   //var_dump( Database::getTermById(detect_area())->name );
+	   $area_name = class_exists('Database') ? Database::getTermById(detect_area())->name : '';
+		   if(  isset($_GET['area']) && strlen($_GET['area']) > 2 ) { ////////////////// ?>
 			    <div id="catsallcareerid" class="catsallcareer catsallarea">
 					<div class="wrapperin2">
-			           <?php   echo do_shortcode('[searchjobsformtest]'); ?>
+			           <?php    echo do_shortcode('[searchjobsformtest]'); ?>
+					</div><!-- mz wrapperin1-->
+				</div><!-- mz catsallcareer-->
+				<?php
+		   } elseif( $area_name) {
+			   ?>
+			    <div id="catsallcareerid" class="catsallcareer catsallarea">
+					<div class="wrapperin2">
+			           <?php    echo do_shortcode('[searchjobsformtest]'); ?>
 					</div><!-- mz wrapperin1-->
 				</div><!-- mz catsallcareer-->
 				<?php
 		   } else { 
-				  include('help-filter-categories.php'); 				 
+				   include('help-filter-categories.php'); 				 
 				
 		   } 
 	   ?>

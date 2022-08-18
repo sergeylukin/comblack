@@ -31,7 +31,7 @@ if($image && $image['url']) {
 </div><!-- mz topsectioncareer-->
  <div id="catsallcareerid" class="catsallcareer catsallarea">
     <div class="wrapperin2">
-	        <?php echo do_shortcode('[searchjobsformtest]') ?>
+	        <?php echo do_shortcode('[searchjobsformtest]');  ?>
 			 
 	</div><!-- mz wrapperin1-->
 </div><!-- mz catsallcareer-->

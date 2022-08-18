@@ -37,7 +37,7 @@
 					  </div><!-- mz singlepostinri-->
 			          <div class="singlepostinle">
 					       <h2>שלח קורות חיים</h2>
-					       <?php echo do_shortcode('[crmformNew]') ?>
+					       <?php echo do_shortcode('[crmformNew courceid="'.$adam_id.'"]') ?>
 					  </div><!-- mz singlepostinle-->
 			   </div><!-- mz singlepostinall-->
  
