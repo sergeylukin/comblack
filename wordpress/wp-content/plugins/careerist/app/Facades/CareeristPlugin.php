@@ -1,12 +1,12 @@
 <?php namespace Careerist\Facades;
 
-class Plugin  extends Facade {
+class CareeristPlugin  extends Facade {
 
   /**
    * Get the registered name of the component.
    *
    * @return string
    */
-  protected static function getFacadeAccessor() { return 'Plugin'; }
+  protected static function getFacadeAccessor() { return 'CareeristPlugin'; }
 
 }

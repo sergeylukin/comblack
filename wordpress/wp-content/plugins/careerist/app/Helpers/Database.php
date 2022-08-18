@@ -195,10 +195,10 @@ class Database {
 		$default = array(
 			'force_sync' => 0,
 			'adam_api_token' => 'ecb8e17c-2acd-413d-a977-12a41b68480a',
-			'jobs_manager' => 0,
+			'jobs_manager' => 1,
 			'areas_manager' => 1,
 			'categories_manager' => 1,
-			'logs_manager' => 0,
+			'logs_manager' => 1,
 		);
 
 		if ( ! get_option( 'careerist_plugin' ) ) {
@@ -218,7 +218,7 @@ class Database {
 	public function create_tables() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$careerist_db_version = '1.4';
+		$careerist_db_version = CAREERIST_PLUGIN_VERSION;
 		if (get_option('careerist_plugin')) {
 			update_option( 'careerist_db_version', $careerist_db_version );
 		} else {
@@ -381,7 +381,7 @@ class Database {
 		// $this->wpdb->query("DROP TABLE {$this->tables['jobs']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['syncs']};");
 		// $this->wpdb->query("DROP TABLE {$this->tables['syncs_events']};");
-		// delete_option( 'careerist_db_version' );
+		delete_option( 'careerist_db_version' );
 
 		return $this;
 	}

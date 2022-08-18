@@ -1,7 +1,7 @@
 <?php namespace Careerist\Providers;
 
 use Alias;
-use Careerist\Helpers\Plugin;
+use Careerist\Helpers\CareeristPlugin;
 use AdminDashboard;
 use AdminEnqueue;
 use AdminSettingsLinks;
@@ -9,13 +9,13 @@ use JobEntityController;
 use JobAreaEntityController;
 use JobCategoryEntityController;
 
-class PluginProvider extends Provider {
+class CareeristPluginProvider extends Provider {
 
   public function register() {
 
-    $Plugin = new Plugin($this->App['Database'], $this->App['Logger']);
+    $CareeristPlugin = new CareeristPlugin($this->App['Database'], $this->App['Logger']);
     // Register IOC record
-    $this->App->singleton('Plugin', $Plugin);
+    $this->App->singleton('CareeristPlugin', $CareeristPlugin);
 
     AdminDashboard::register();
     AdminEnqueue::register();
@@ -26,12 +26,12 @@ class PluginProvider extends Provider {
 		JobCategoryEntityController::register();
 
     // Register shortcut Alias
-    Alias::add('Plugin', '\Careerist\Facades\Plugin');
+    Alias::add('CareeristPlugin', '\Careerist\Facades\CareeristPlugin');
 
   }
 
   public function unregister() {
-    unset($this->App['Plugin']);
+    unset($this->App['CareeristPlugin']);
   }
 
 }

@@ -7,7 +7,7 @@ use Monolog\Logger;
  * @package  CareeristPlugin
  */
 
-class Plugin {
+class CareeristPlugin {
 
 	
 	public function __construct(Database $db, Logger $logger) {
@@ -27,6 +27,10 @@ class Plugin {
 
 		$this->logger->debug( 'Careerist deactivated');
 		$this->db->delete_settings()->delete_tables();
+	}
+
+	public function version() {
+		return get_option( 'careerist_db_version' );
 	}
 
 }

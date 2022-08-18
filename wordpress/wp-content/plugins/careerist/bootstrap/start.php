@@ -183,7 +183,7 @@ $App->registerProviders(array(
    |
    */
 
-  'PluginProvider',
+  'CareeristPluginProvider',
 
 ));
 
