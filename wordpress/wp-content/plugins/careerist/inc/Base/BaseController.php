@@ -25,6 +25,7 @@ class BaseController
 			'areas_manager' => 'Enable & sync areas',
 			'categories_manager' => 'Enable & sync categories',
 			'jobs_manager' => 'Enable & sync jobs',
+			'logs_manager' => 'Enable logs monitoring',
 			'force_sync' => 'Force sync',
 		);
 	}
