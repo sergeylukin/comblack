@@ -15,7 +15,7 @@ $currenttermid = get_queried_object()->term_id;
  
 $image = get_field('topimage', $taxonomyacf);	
  
-if($image['url']) {
+if($image && $image['url']) {
 	$topsectioncareerstyle = 'style = "background-image: url('.$image["url"].') !important;"';
 } else {
 	$topsectioncareerstyle = "";

@@ -85,7 +85,7 @@ function detect_subcategory() {
 function detect_area() {
 	global $wp;
 	$segments = explode('/', $wp->request);
-	if ($segments[0] === 'categories' && $area = $segments[2]) {
+	if ($segments[0] === 'categories' && @$area = $segments[2]) {
 		$term = get_term_by('slug', $area, 'area');
 		return $term->term_id;
 	}
@@ -99,7 +99,7 @@ function detect_area() {
 add_shortcode( 'searchjobsformtest', 'searchjobsformtest_func' ); 
 function searchjobsformtest_func($atts) {
 	global $careerist_categories, $careerist_areas;
-	$formUniqueHash = randomHash();
+	$formUniqueHash = md5(rand());
 	$selected_category = detect_category();
 	$selected_subcategory = detect_subcategory();
 	$selected_area = detect_area();

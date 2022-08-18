@@ -23,8 +23,8 @@
 			  <div class="alldatareturnsingle misratestrow1">
 			  <?php   
 				   $alldatareturn = ParentOrChildCategoryOfJob($id , 'noparent' , 'alldatareturn');
-					 $adam_id = Database::getAdamIdByJobId($id);
-					 //echo $adam_id ;
+					 $adam_id = class_exists('Database') ? Database::getAdamIdByJobId($id) : 0;
+					// echo $adam_id ;
 					 //echo '<br>';
 				   echo $alldatareturn ;
 			   ?>
