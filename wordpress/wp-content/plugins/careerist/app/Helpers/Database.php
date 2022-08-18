@@ -200,15 +200,17 @@ class Database {
 	public function getSyncs() {
 		$data = $this->wpdb->get_results("SELECT * FROM {$this->tables['syncs']} ORDER BY id DESC", ARRAY_A);
 		return array_map(function ($sync) {
+			$sync_id = $sync['id'];
+			$events = $this->wpdb->get_results("SELECT * FROM {$this->tables['syncs_events']} events LEFT JOIN {$this->tables['posts']} jobs ON jobs.id = events.post_id WHERE sync_id = $sync_id ORDER BY events.id ASC", ARRAY_A);
 			return array_merge($sync, [
 				'status' => $sync['status'],
 				'start_timestamp' => $sync['created'],
 				'end_timestamp' => $sync['status'] == 'finished' ? $sync['updated'] : '',
 				'is_in_force_mode' => $sync['is_in_force_mode'] ? 'Yes' : 'No',
+				'events' => $events,
 			]);
 		}, $data);
 	}
-
 
 	public function create_settings() {
 		$default = array(

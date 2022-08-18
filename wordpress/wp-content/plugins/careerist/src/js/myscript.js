@@ -139,13 +139,57 @@ function format(d) {
   return str;
 }
 
+function formatLogEvents(d) {
+  // `d` is the original data object for the row
+  var str = "";
+  str +=
+    '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+  str +=
+    '<thead><td>Action</td><td>Adam ID</td><td>Post</td><td>Post ID</td></thead>';
+  str += '<tbody>';
+  for (var event of d.events) {
+    let adam_id_value = ''
+    let post_value = ''
+    let post_id_value = ''
+    switch(event.type) {
+      case 'ADD_JOB':
+      case 'UPDATE_JOB':
+      case 'MOVE_JOB_TO_TRASH':
+        adam_id_value = event.adam_id
+        post_value = '<a href="/careers/position-' + event.adam_id + '" target="_blank">'+event.post_title+'</a>';
+        post_id_value = event.post_id
+        break;
+      default:
+        break;
+    }
+      str +=
+        "<tr>" +
+        "<td>" +
+        event.type +
+        ":</td>" +
+        "<td>" +
+        adam_id_value +
+        "</td>" +
+        "<td>" +
+        post_value +
+        "</td>" +
+        "<td>" +
+        post_id_value +
+        "</td>" +
+        "</tr>";
+  }
+  str += '</tbody>';
+  str += "</table>";
+  return str;
+}
+
 // TABLES START
 var tables = {
   table1: {},
   table2: {},
   table3: {},
 };
-var drawCallback = function (table, id) {
+var drawCallback = function (table, id, formatCallback) {
   return function (settings, json) {
     let togglers = document.querySelectorAll("#" + id + " td.dt-control");
     for (let i = 0; i < togglers.length; i++) {
@@ -161,7 +205,7 @@ var drawCallback = function (table, id) {
           tr.classList.remove("shown");
         } else {
           // Open this row
-          row.child(format(row.data())).show();
+          row.child(formatCallback(row.data())).show();
           tr.classList.add("shown");
         }
       });
@@ -201,7 +245,7 @@ function renderTable1() {
           { data: "post" },
         ],
         order: [[1, "desc"]],
-        drawCallback: drawCallback(tables.table1, "myTable"),
+        drawCallback: drawCallback(tables.table1, "myTable", format),
       })
     );
   }
@@ -230,7 +274,7 @@ function renderTable2() {
           { data: "adam_SubProffesionID" },
         ],
         order: [[1, "desc"]],
-        drawCallback: (() => drawCallback(tables.table2, "myTable2"))(),
+        drawCallback: (() => drawCallback(tables.table2, "myTable2", format))(),
       })
     );
   }
@@ -286,7 +330,7 @@ function renderTable3() {
           { data: "status" },
         ],
         order: [[1, "desc"]],
-        drawCallback: (() => drawCallback(tables.table3, "myTable3"))(),
+        drawCallback: (() => drawCallback(tables.table3, "myTable3", formatLogEvents))(),
       })
     );
   }
