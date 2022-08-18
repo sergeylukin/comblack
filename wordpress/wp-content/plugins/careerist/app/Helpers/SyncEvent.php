@@ -37,4 +37,8 @@ class SyncEvent {
 		return $this->db->getSyncs();
 	}
 
+	public function removeOldLogs() {
+		$this->db->deleteLogsAfterIndex(100000);
+	}
+
 }

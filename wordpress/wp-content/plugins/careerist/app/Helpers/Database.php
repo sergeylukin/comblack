@@ -176,6 +176,25 @@ class Database {
 		$this->wpdb->update($this->tables['syncs'], $data, array('id' => $sync_id));
 	}
 
+	public function deleteLogsAfterIndex($index = 100000) {
+		$this->wpdb->query($this->wpdb->prepare(
+			"DELETE FROM plk_careerist_plugin_syncs
+			 WHERE id NOT IN (
+				SELECT * from (
+				 SELECT sync_id FROM `plk_careerist_plugin_syncs_events` ORDER BY id DESC LIMIT 0,$index
+				) temp_tab
+       );"
+		));
+		$this->wpdb->query($this->wpdb->prepare(
+			"DELETE FROM plk_careerist_plugin_syncs_events
+			 WHERE sync_id NOT IN (
+				 SELECT * from (
+					 SELECT sync_id FROM `plk_careerist_plugin_syncs_events` ORDER BY id DESC LIMIT 0,$index
+				 ) temp_tab
+       );"
+		));
+	}
+
 
 	
 	public function getSyncs() {

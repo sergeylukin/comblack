@@ -59,6 +59,7 @@ class SyncJobController extends BaseController
 	public function sync() {
 
 			SyncEvent::log(SYNC_START);
+			SyncEvent::removeOldLogs();
 			header("Content-Type: application/json");
 			if ($this->activated('areas_manager')) $this->sync_areas();
 			if ($this->activated('categories_manager')) $this->sync_categories();
