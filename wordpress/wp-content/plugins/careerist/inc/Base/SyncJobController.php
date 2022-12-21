@@ -224,6 +224,8 @@ class SyncJobController extends BaseController
 					['id' => $local_id]
 				);
 			}
+				
+			
 
 			if ($exists) {
 				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
@@ -231,6 +233,7 @@ class SyncJobController extends BaseController
 				$adam_id = $job['adam_id'];
 				$local_id = $row->id;
 				$post_id = $row->local_post_id;
+				wp_publish_post($post_id);
 				$isDirty = $job['adam_update_date'] !== $row->adam_update_date;
 				if ($isDirty || $force_sync) {
 					$this->wpdb->update(
