@@ -229,6 +229,14 @@ class Database {
 		return $this;
 	}
 
+	public function getJobsTableColumns() {
+		$sql = $this->wpdb->prepare( "SHOW COLUMNS FROM {$this->tables['jobs']}" );
+		$results = $this->wpdb->get_results( $sql , ARRAY_A );
+		if (count($results) > 0) return $results;
+		return null;
+
+	}
+
 	public function delete_settings() {
 
 		delete_option( 'careerist_plugin' );

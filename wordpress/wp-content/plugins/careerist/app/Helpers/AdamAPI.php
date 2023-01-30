@@ -156,8 +156,17 @@ class AdamAPI
 
   static function normalizeJob($job)
   {
+    $columns = Database::getJobsTableColumns();
+    $columnsFlat = array();
+    foreach ($columns as $column) {
+      array_push($columnsFlat, $column['Field']);
+    }
+
     $item = [];
-    foreach ($job as $k=>$v) $item["adam_{$k}"] = $v;
+    foreach ($job as $k=>$v) {
+      $field = "adam_{$k}";
+      if (in_array($field, $columnsFlat)) $item[$field] = $v;
+    }
 
     $catId = Database::getCategoryIdByAdamProfessionId($job['ProffesionID']);
     $subCatId = Database::getCategoryIdByAdamProfessionId('9'.$job['SubProffesionID'].$job['ProffesionID']);
