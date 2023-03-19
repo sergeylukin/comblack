@@ -328,6 +328,24 @@ function renderTable3() {
           { data: "end_timestamp" },
           { data: "is_in_force_mode" },
           { data: "status" },
+          { data: "events",
+            render: "[, ].adam_id",
+            className: "is-hidden",
+            // "render": function ( data, type, row, meta ) {
+            //     return '<a href="'+data+'">Download</a>';
+            //   }
+          },
+          // { data: function(row, type, set, meta) {
+          //   console.log(row, type, set, meat)
+          //   // return ''
+          //   // return row.events.reduce(function (curr, prev) {
+          //   //   curr += prev.adam_id + ' '
+          //   // }, '')
+          //   },
+          //   className: 'is-hidden',
+          //   orderable: false,
+          //   defaultContent: '',
+          // },
         ],
         order: [[1, "desc"]],
         drawCallback: (() => drawCallback(tables.table3, "myTable3", formatLogEvents))(),

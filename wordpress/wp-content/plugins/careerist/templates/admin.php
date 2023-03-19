@@ -93,6 +93,7 @@
 									<th>End</th>
 									<th>Using force flag?</th>
 									<th>Status</th>
+									<th class="is-hidden"></th>
 								</tr>
 							</thead>
 						</table>
