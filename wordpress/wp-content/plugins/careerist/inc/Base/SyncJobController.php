@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @package  CareeristPlugin
  */
@@ -25,7 +25,7 @@ define(MOVE_JOB_TO_TRASH, 'MOVE_JOB_TO_TRASH');
 define(SYNC_END, 'SYNC_END');
 
 /**
-* 
+*
 */
 class SyncJobController extends BaseController
 {
@@ -178,7 +178,7 @@ class SyncJobController extends BaseController
 		foreach($jobs as $job) {
 			$adam_id = $job['adam_id'];
 			array_push($adam_active_ids, $job['adam_id']);
-			
+
 			$exists = in_array($job['adam_id'], $existing_ids);
 
 			if (!$exists) {
@@ -190,6 +190,7 @@ class SyncJobController extends BaseController
 
 
 				$post_array = [
+					'post_date' => date('Y-m-d H:i:s', strtotime($job['adam_update_date'])),
 					"post_title" => $job['description'],
 					"post_name" => 'position-' . $job['adam_id'],
 					"post_type" => "careers",
@@ -209,13 +210,13 @@ class SyncJobController extends BaseController
 				if($wp_cat_id){
 					$tag = [$wp_cat_id];
 					if ($wp_subcat_id) $tag[] = $wp_subcat_id;
-					wp_set_post_terms( $post_id, $tag, 'categories' );    
-				}  
+					wp_set_post_terms( $post_id, $tag, 'categories' );
+				}
 
 
 				if ($areaId = $job['adam_order_def_area1']) {
 					$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
-					wp_set_post_terms( $post_id, [$term_id], 'area' );        
+					wp_set_post_terms( $post_id, [$term_id], 'area' );
 				}
 
 				$this->wpdb->update(
@@ -224,8 +225,8 @@ class SyncJobController extends BaseController
 					['id' => $local_id]
 				);
 			}
-				
-			
+
+
 
 			if ($exists) {
 				$index = array_search($job['adam_id'], array_column($existing_jobs, 'adam_id'));
@@ -241,6 +242,12 @@ class SyncJobController extends BaseController
 						$job,
 						array('id' => $row->id)
 					);
+
+					wp_update_post(array(
+						'ID' => $post_id,
+						'post_date' => date('Y-m-d H:i:s', strtotime($job['adam_update_date'])),
+					) );
+
 					$wp_cat_id = $this->App['Database']->categoryIdToTaxonomyId($job['category_id']);
 					$wp_subcat_id = $this->App['Database']->categoryIdToTaxonomyId($job['subcategory_id']);
 
@@ -248,13 +255,13 @@ class SyncJobController extends BaseController
 					if($wp_cat_id){
 						$tag = [$wp_cat_id];
 						if ($wp_subcat_id) $tag[] = $wp_subcat_id;
-						wp_set_post_terms( $post_id, $tag, 'categories' );    
-					}  
+						wp_set_post_terms( $post_id, $tag, 'categories' );
+					}
 
 
 					if ($areaId = $job['adam_order_def_area1']) {
 						$term_id = $this->App['Database']->adamAreaIdToTaxonomyId($areaId);
-						wp_set_post_terms( $post_id, [$term_id], 'area' );        
+						wp_set_post_terms( $post_id, [$term_id], 'area' );
 					}
 					SyncEvent::log(UPDATE_JOB, $adam_id, $local_id, $post_id);
 				}
@@ -277,7 +284,7 @@ class SyncJobController extends BaseController
 				);
 			}
 		}
-	  
+
 		SyncEvent::log(SYNC_JOBS_END);
 	}
 
